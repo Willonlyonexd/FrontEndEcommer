@@ -22,6 +22,12 @@ export class ProductoService {
     return this._http.get(this.url+'/getCategorias/'+clasificacion,{headers:headers})
   }
 
+  getSubcategorias(categoria_id: string, token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this._http.get(this.url + '/getSubcategorias/' + categoria_id, { headers });
+  }
+  
+
   cambioEstadoCategoria(id:any,data:any,token:any):Observable<any>{
     let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
     return this._http.put(this.url+'/cambioEstadoCategoria/'+id,data,{headers:headers})

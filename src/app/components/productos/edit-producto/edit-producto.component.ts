@@ -5,101 +5,100 @@ import { GLOBAL } from '../../../services/GLOBAL';
 declare var $: any;
 declare var Tagify: any;
 declare var toastr: any;
+
 @Component({
   selector: 'app-edit-producto',
   templateUrl: './edit-producto.component.html',
-  styleUrl: './edit-producto.component.css'
+  styleUrls: ['./edit-producto.component.css']
 })
 export class EditProductoComponent {
- 
-  public tagify : any;
+
+  public tagify: any;
   public token = localStorage.getItem('token');
   public active = 1;
-  public producto : any = {
+  public producto: any = {
     categoria: '',
     subcategoria: '',
     clasificacion: ''
   };
-  public categorias : Array<any> = [];
-  public subcategorias : Array<any> = [];
-  public variacion : any = {
+  public categorias: Array<any> = [];
+  public subcategorias: Array<any> = [];
+  public variacion: any = {
     color: '',
     talla: '',
     hxd: '#ccc'
   };
-  public colores : Array<any> = GLOBAL.colores;
-  public tallas : Array<any> = GLOBAL.tallas;
-  public variaciones : Array<any> = [];
-  public galeria : Array<any> = [];
-  public imagen : any = undefined;
+  public colores: Array<any> = GLOBAL.colores;
+  public tallas: Array<any> = GLOBAL.tallas;
+  public variaciones: Array<any> = [];
+  public galeria: Array<any> = [];
+  public imagen: any = undefined;
   public imagen_titulo = '';
   public btn_load = false;
   public id = '';
-
   public load_variaciones = true;
   public load_galeria = true;
   public url = GLOBAL.url;
-  public etiquetas :Array<any> = [];
+  public etiquetas: Array<any> = [];
   public btn_delete_variacion = false;
   public btn_delete_imagen = false;
-  public variedad_selected : any = {};
+  public variedad_selected: any = {};
   public btn_precio_variacion = false;
 
   constructor(
-    private _productoService:ProductoService,
-    private _route:ActivatedRoute
-  ){
+    private _productoService: ProductoService,
+    private _route: ActivatedRoute
+  ) { }
 
-  }
-
-  ngOnInit(){
+  ngOnInit() {
     this._route.params.subscribe(
-      params=>{
+      params => {
         this.id = params['id'];
-        this.init_data(); //PRODUCTO
-        this.init_variaciones();  //VARIACIONES
-        this.init_galeria();
+        this.init_data();  // Cargar Producto
+        this.init_variaciones();  // Cargar Variaciones
+        this.init_galeria();  // Cargar Galería
 
         setTimeout(() => {
           $('#colorpicker').spectrum({
             color: '#ccc',
-            
           });
         }, 50);
       }
     );
   }
 
-  init_variaciones(){
+  init_variaciones() {
     this.load_variaciones = true;
-    this._productoService.getVariacionesProducto(this.id,this.token).subscribe(
-      response=>{
+    this._productoService.getVariacionesProducto(this.id, this.token).subscribe(
+      response => {
         this.variaciones = response.data;
         console.log(this.variaciones);
-        
         this.load_variaciones = false;
       }
     );
   }
 
-  init_galeria(){
+  init_galeria() {
     this.load_galeria = true;
-    this._productoService.getGaleriaProducto(this.id,this.token).subscribe(
-      response=>{
+    this._productoService.getGaleriaProducto(this.id, this.token).subscribe(
+      response => {
         this.galeria = response.data;
         this.load_galeria = false;
       }
     );
   }
 
-  init_data(){
-    this._productoService.getProducto(this.id,this.token).subscribe(
-      response=>{
+  init_data() {
+    this._productoService.getProducto(this.id, this.token).subscribe(
+      response => {
         console.log(response);
         this.producto = response.data;
+        // Adaptar nombre del campo a lo esperado en frontend
+this.producto.subcategoria = this.producto.subcategorias; // 👈 alias temporal
+
         setTimeout(() => {
           const input = document.querySelector('#kt_tagify');
-          this.tagify = new Tagify(input,{
+          this.tagify = new Tagify(input, {
             maxTags: 10,
             dropdown: {
               maxItems: 5,
@@ -110,56 +109,77 @@ export class EditProductoComponent {
           });
           this.tagify.addTags(this.producto.labels);
         }, 150);
-        this._productoService.getCategorias(this.producto.clasificacion,this.token).subscribe(
-          response=>{
-            if(response.data != undefined){
+
+        // Obtener Categorías relacionadas con la clasificación
+        this._productoService.getCategorias(this.producto.clasificacion, this.token).subscribe(
+          response => {
+            if (response.data != undefined) {
               this.categorias = response.data;
-              this.setCategoria();
+              setTimeout(() => {
+                this.setCategoria(); // 🔁 Aseguramos que se llama después de asignar producto.categoria
+              }, 0);  // Asignar Subcategorías
+              console.log("🎯 Categorías con sus subcategorías:", this.categorias);
             }
+            console.log('📦 Producto cargado:', this.producto);
+    console.log('🎯 Subcategoría recibida del backend:', this.producto.subcategoria);
           }
         );
-        
       }
     );
   }
 
-  setClasificacion(){
-    this._productoService.getCategorias(this.producto.clasificacion,this.token).subscribe(
-      response=>{
-        if(response.data != undefined){
+  setClasificacion() {
+    this._productoService.getCategorias(this.producto.clasificacion, this.token).subscribe(
+      response => {
+        if (response.data != undefined) {
           this.categorias = response.data;
         }
       }
     );
   }
 
-  setCategoria(){
-    let categoria = this.categorias.find(item=>item._id == this.producto.categoria);
-    if(categoria) this.subcategorias = categoria.subcategorias;
+  setCategoria() {
+    const categoria = this.categorias.find(item => item._id == this.producto.categoria);
+  
+    if (categoria) {
+      this.subcategorias = categoria.subcategorias;
+  
+      const exists = this.subcategorias.includes(this.producto.subcategoria);
+  
+      if (!exists) {
+        // 👉 Asignar la primera subcategoría disponible
+        this.producto.subcategoria = this.subcategorias[0] || '';
+      }
+  
+      console.log('📦 Subcategorías disponibles:', this.subcategorias);
+      console.log('🎯 Subcategoría actual del producto:', this.producto.subcategoria);
+    }
   }
+  
+  
 
-  add_variacion(){
+  add_variacion() {
     this.variacion.hxd = $('#colorpicker').spectrum('get').toHexString();
-    
-    if(!this.variacion.hxd){
+
+    if (!this.variacion.hxd) {
       toastr.error("El color HXD es requerido");
-    }else if(!this.variacion.color){
+    } else if (!this.variacion.color) {
       toastr.error("El color es requerido");
-    }else if(!this.variacion.talla){
+    } else if (!this.variacion.talla) {
       toastr.error("La talla es requerida");
-    }else{
+    } else {
       this.variacion.producto = this.id;
-      this._productoService.addVariacion(this.variacion,this.token).subscribe(
-        response=>{
+      this._productoService.addVariacion(this.variacion, this.token).subscribe(
+        response => {
           console.log(response);
-          if(response.data != undefined){
+          if (response.data != undefined) {
             toastr.success("Variación agregada.");
             this.variacion = {
               color: '',
               talla: '',
             };
             this.init_variaciones();
-          }else{
+          } else {
             toastr.error(response.message);
           }
         }
@@ -167,109 +187,103 @@ export class EditProductoComponent {
     }
   }
 
-  remove_variacion(idx:any){
-    this.variaciones.splice(idx,1);
+  remove_variacion(idx: any) {
+    this.variaciones.splice(idx, 1);
   }
 
-  uploadImage(event:any){
-    if(event.target.files && event.target.files[0]){
+  uploadImage(event: any) {
+    if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      if(file.type == "image/jpeg" || file.type == "image/png" || file.type == "image/gif" || file.type == "image/webp"){
-        if(file.size <= (2*1024*1024)){
+      if (file.type == "image/jpeg" || file.type == "image/png" || file.type == "image/gif" || file.type == "image/webp") {
+        if (file.size <= (2 * 1024 * 1024)) {
           this.imagen = file;
           console.log(this.imagen);
-          
-        }else{
+        } else {
           toastr.error("Debe pesar menos de 2MB");
           this.imagen = undefined;
           $('#FileInput').val('');
         }
-      }else{
+      } else {
         toastr.error("Se permiten solo imagenes");
         this.imagen = undefined;
         $('#FileInput').val('');
       }
-    }else{
+    } else {
       console.log('No se selecciono nada');
     }
   }
 
-  add_imagen(){
-    if(this.imagen == undefined){
+  add_imagen() {
+    if (this.imagen == undefined) {
       toastr.error("Debe subir una imagen valida");
-    }else if(!this.imagen_titulo){
+    } else if (!this.imagen_titulo) {
       toastr.error("El titulo es requerido");
-    }else{
-      let data = {
+    } else {
+      let data: any = {
         imagen: this.imagen,
         titulo: this.imagen_titulo,
         producto: this.id
       };
 
-      this._productoService.AddImagenProducto(data,this.token).subscribe(
-        response=>{
+      this._productoService.AddImagenProducto(data, this.token).subscribe(
+        response => {
           console.log(response);
-          if(response.data != undefined){
+          if (response.data != undefined) {
             toastr.success("Imagen agregada.");
             this.imagen = undefined;
             this.imagen_titulo = '';
             $('#FileInput').val('');
             this.init_galeria();
-
-          }else{
+          } else {
             toastr.error(response.message);
           }
-          /*  */
         }
       );
-
-      
     }
   }
 
-  
-  remove_imagen(idx:any){
-    this.galeria.splice(idx,1);
+  remove_imagen(idx: any) {
+    this.galeria.splice(idx, 1);
   }
 
-  setActive(value:any){
+  setActive(value: any) {
     this.active = value;
   }
 
-  actualizar(){
+  actualizar() {
     this.etiquetas = [];
-    for(var item of this.tagify.getTagElms()){
+    for (var item of this.tagify.getTagElms()) {
       this.etiquetas.push(item.__tagifyTagData.value);
     }
 
-    if(!this.producto.titulo){
+    if (!this.producto.titulo) {
       toastr.error("El titulo es requerido");
-    }else if(!this.producto.clasificacion){
+    } else if (!this.producto.clasificacion) {
       toastr.error("La clasificacion es requerida");
-    }else if(!this.producto.categoria){
+    } else if (!this.producto.categoria) {
       toastr.error("La categoria es requerida");
-    }else if(!this.producto.subcategoria){
+    } else if (!this.producto.subcategoria) {
       toastr.error("La subcategoria es requerida");
-    }else if(!this.producto.descripcion){
+    } else if (!this.producto.descripcion) {
       toastr.error("La descripción es requerida");
-    }else if(this.etiquetas.length == 0){
+    } else if (this.etiquetas.length == 0) {
       toastr.error("Las etiquetas estan vacias");
-    }else{
-      let data : any = {
+    } else {
+      let data: any = {
         titulo: this.producto.titulo,
         clasificacion: this.producto.clasificacion,
         categoria: this.producto.categoria,
-        subcategoria: this.producto.subcategoria,
+        subcategorias: this.producto.subcategoria, 
         labels: this.etiquetas,
         descripcion: this.producto.descripcion,
       };
-      this._productoService.updateProducto(this.id,data,this.token).subscribe(
-        response=>{
+      this._productoService.updateProducto(this.id, data, this.token).subscribe(
+        response => {
           console.log(response);
-          if(response.data != undefined){
+          if (response.data != undefined) {
             toastr.success("Actualización completada.");
             this.init_data();
-          }else{
+          } else {
             toastr.error(response.message);
           }
         }
@@ -277,57 +291,56 @@ export class EditProductoComponent {
     }
   }
 
-  delete_variacion(id:any){
+  delete_variacion(id: any) {
     this.btn_delete_variacion = true;
-    this._productoService.deleteVariacion(id,this.token).subscribe(
-      response=>{
+    this._productoService.deleteVariacion(id, this.token).subscribe(
+      response => {
         console.log(response);
-        if(response.data != undefined){
+        if (response.data != undefined) {
           toastr.success("Eliminacion completada.");
           this.init_variaciones();
-        }else{
+        } else {
           toastr.error(response.message);
         }
         this.btn_delete_variacion = false;
-        $('#delete-'+id).modal('hide');
-       
+        $('#delete-' + id).modal('hide');
       }
     );
   }
 
-  select_variedad(item:any){
+  select_variedad(item: any) {
     this.variedad_selected = item;
   }
 
-  delete_imagen(id:any){
+  delete_imagen(id: any) {
     this.btn_delete_imagen = true;
-    this._productoService.deleteImagen(id,this.token).subscribe(
-      response=>{
+    this._productoService.deleteImagen(id, this.token).subscribe(
+      response => {
         console.log(response);
-        if(response.data != undefined){
+        if (response.data != undefined) {
           toastr.success("Eliminacion completada.");
           this.init_galeria();
-        }else{
+        } else {
           toastr.error(response.message);
         }
         this.btn_delete_imagen = false;
-        $('#deleteImg-'+id).modal('hide');
+        $('#deleteImg-' + id).modal('hide');
       }
     );
   }
 
-  update_precio(){
+  update_precio() {
     this.btn_precio_variacion = true;
-    this._productoService.updateVariacionPrecio(this.variedad_selected._id,{
+    this._productoService.updateVariacionPrecio(this.variedad_selected._id, {
       precio: this.variedad_selected.precio
-    },this.token).subscribe(
-      response=>{
+    }, this.token).subscribe(
+      response => {
         console.log(response);
-        if(response.data != undefined){
+        if (response.data != undefined) {
           toastr.success('Precio actualizado.');
           $('#precioModal').modal('hide');
-          this.init_variaciones(); 
-        }else{
+          this.init_variaciones();
+        } else {
           toastr.error(response.message);
         }
         this.btn_precio_variacion = false;
