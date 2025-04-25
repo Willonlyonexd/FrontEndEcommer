@@ -1,0 +1,78 @@
+<mat-card class="mb-4">
+  <!-- Sidebar (si aplica dentro del layout, usualmente va fuera del card) -->
+  <app-sidebar></app-sidebar>
+
+  <mat-card-header>
+    <mat-card-title>Resumen de Segmentación</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p><strong>Última actualización:</strong> {{ lastUpdate | date:'short':'-0400' }}</p>
+    <p><strong>Total de clientes:</strong> {{ totalClientes }}</p>
+
+    <!-- Spinner si está cargando resumen -->
+    <div *ngIf="cargandoResumen" class="spinner-container">
+      <mat-spinner diameter="60"></mat-spinner>
+    </div>
+
+    <!-- Pie Chart -->
+    <ngx-charts-pie-chart
+      *ngIf="!cargandoResumen"
+      [results]="pieData"
+      [legend]="true"
+      [labels]="true"
+      [doughnut]="true"
+      [explodeSlices]="false"
+      [animations]="true"
+      [scheme]="colorScheme"
+      [view]="[600, 300]">
+    </ngx-charts-pie-chart>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="recalcular()" [disabled]="!puedeReentrenar || cargando">
+      <mat-progress-spinner
+        *ngIf="cargando"
+        diameter="20"
+        mode="indeterminate"
+        strokeWidth="3"
+        style="margin-right: 8px">
+      </mat-progress-spinner>
+      <span *ngIf="!cargando">Recalcular Segmentación</span>
+    </button>
+    <p *ngIf="!puedeReentrenar && !cargando" style="margin-top: 10px; color: #999;">
+      ⚠️ No hay suficientes datos nuevos para recalcular la segmentación.
+    </p>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Distribución por Cliente (Recencia vs Monetario)</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Spinner si está cargando clientes -->
+    <div *ngIf="cargandoClientes" class="spinner-container">
+      <mat-spinner diameter="60"></mat-spinner>
+    </div>
+
+    <!-- Bubble Chart -->
+    <ngx-charts-bubble-chart
+      *ngIf="!cargandoClientes"
+      [results]="bubbleData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Recencia (escalado)'"
+      [yAxisLabel]="'Monetario (escalado)'"
+      [scheme]="colorScheme"
+      [autoScale]="true"
+      [animations]="true"
+      [roundDomains]="true"
+      [view]="[700, 400]">
+    </ngx-charts-bubble-chart>
+  </mat-card-content>
+</mat-card>

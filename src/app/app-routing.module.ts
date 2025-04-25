@@ -34,12 +34,16 @@ import { EditCuponComponent } from './components/cupon/edit-cupon/edit-cupon.com
 import { EgresoCreateComponent } from './components/egresos/egreso-create/egreso-create.component';
 import { EgresoDetallesComponent } from './components/egresos/egreso-detalles/egreso-detalles.component';
 import { IndexReporteComponent } from './components/reporte/index-reporte/index-reporte.component';
+import { AnalisisComponent } from './components/analisis/analisis.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'suscripcion', component: SuscripcionComponent },
   { path: 'crear/:tipo', component: CreateTenentComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+
+  { path: 'analisis', component: AnalisisComponent },
+
 
   { path: 'colaborador', component: IndexUsuarioComponent, canActivate: [AuthGuard] },
   { path: 'colaborador/create', component: CreateUsuarioComponent, canActivate: [AuthGuard] },

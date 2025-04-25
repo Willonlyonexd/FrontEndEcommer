@@ -1,0 +1,48 @@
+mat-card {
+  background-color: #fff;
+  color: #2c2c2c;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+mat-card-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+
+mat-card-content p {
+  font-size: 16px;
+  color: #333;
+}
+
+mat-card-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button[mat-raised-button] {
+  font-weight: 600;
+  padding: 10px 24px;
+  text-transform: none;
+}
+
+/* Centrar y dar tamaño máximo al gráfico */
+apx-chart {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 600px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%;
+}

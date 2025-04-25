@@ -33,6 +33,20 @@ import { DetallesVentasComponent } from './components/ventas/detalles-ventas/det
 import { IndexProveedorComponent } from './components/proveedor/index-proveedor/index-proveedor.component';
 import { CreateProveedorComponent } from './components/proveedor/create-proveedor/create-proveedor.component';
 import { CreateAlmacenComponent } from './components/almacen/create-almacen/create-almacen.component';
+
+
+import { IndexSegmentacionComponent } from './components/analisis/segmentacion/index-segmentacion.component';
+
+// Angular Material Modules
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+// Gráficos
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+// Animaciones (requerido por Angular Material)
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { IndexAlmacenComponent } from './components/almacen/index-almacen/index-almacen.component';
 import { IndexCuponComponent } from './components/cupon/index-cupon/index-cupon.component';
 import { CreateCuponComponent } from './components/cupon/create-cupon/create-cupon.component';
@@ -40,9 +54,12 @@ import { EditCuponComponent } from './components/cupon/edit-cupon/edit-cupon.com
 import { EgresoCreateComponent } from './components/egresos/egreso-create/egreso-create.component';
 import { EgresoDetallesComponent } from './components/egresos/egreso-detalles/egreso-detalles.component';
 import { IndexReporteComponent } from './components/reporte/index-reporte/index-reporte.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AnalisisComponent } from './components/analisis/analisis.component';
 
 @NgModule({
   declarations: [
+    
     AppComponent,
     SidebarComponent,
     TopbarComponent,
@@ -79,6 +96,8 @@ import { IndexReporteComponent } from './components/reporte/index-reporte/index-
     EgresoCreateComponent,
     EgresoDetallesComponent,
     IndexReporteComponent,
+    AnalisisComponent,
+    IndexSegmentacionComponent
   ],
   imports: [
     BrowserModule,
@@ -86,10 +105,17 @@ import { IndexReporteComponent } from './components/reporte/index-reporte/index-
     FormsModule,
     HttpClientModule,
     NgbPaginationModule,
+    BrowserAnimationsModule,
+    NgxChartsModule,
+    MatTabsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [
-    provideClientHydration(),
-    { provide: HttpClient, useClass: HttpClient } // Usa HttpClient directamente y proporciona la clase HttpClient
+   // provideClientHydration(),
+    { provide: HttpClient, useClass: HttpClient },
+    //provideAnimationsAsync() // Usa HttpClient directamente y proporciona la clase HttpClient
   ],
   bootstrap: [AppComponent]
 })

@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
 
   async loadStatistics() {
     try {
-      const filtro = 'mes'; // Filtro dinámico para estadísticas
+      const filtro = 'todos'; // Filtro dinámico para estadísticas
       const agruparPorMes = true; // Activar agrupación por mes para total de ventas
 
       // Llamadas a la API en paralelo
