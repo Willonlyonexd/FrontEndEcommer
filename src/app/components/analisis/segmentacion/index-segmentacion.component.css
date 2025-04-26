@@ -23,6 +23,8 @@ mat-card-actions {
   margin-top: 20px;
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 button[mat-raised-button] {
@@ -31,18 +33,24 @@ button[mat-raised-button] {
   text-transform: none;
 }
 
-/* Centrar y dar tamaño máximo al gráfico */
-apx-chart {
+/* Centrar y controlar tamaño máximo del gráfico */
+apx-chart, ngx-charts-pie-chart, ngx-charts-bubble-chart {
   display: block;
   margin: 0 auto;
   max-width: 100%;
   width: 600px;
 }
 
+/* Spinner de carga centrado en la sección */
 .spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 250px; /* un poco más alto para verse mejor */
   width: 100%;
+}
+
+/* Opcional: espaciado extra cuando hay sidebar */
+app-sidebar {
+  margin-bottom: 20px;
 }

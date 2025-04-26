@@ -13,10 +13,7 @@ export class IndexSegmentacionComponent implements OnInit {
   totalClientes: number = 0;
   lastUpdate: string = '';
   puedeReentrenar = false;
-  cargando = false;
-  cargandoClientes = false;
-  cargandoResumen = false;
-
+  cargandoGeneral = true; // 👈 NUEVO, unificado
 
   colorScheme: Color = {
     name: 'custom',
@@ -24,70 +21,101 @@ export class IndexSegmentacionComponent implements OnInit {
     group: ScaleType.Ordinal,
     domain: ['#2980b9', '#27ae60', '#f39c12', '#8e44ad']
   };
-  
 
   constructor(private segmentacionService: SegmentacionService) {}
 
   ngOnInit(): void {
-    this.cargarResumen();
-    this.cargarClientes();
-    this.verificarDatosNuevos();
+    this.cargarTodo();
   }
 
-  cargarResumen() {
-    this.cargandoResumen = true;
-    this.segmentacionService.getStatus().subscribe(res => {
-      this.pieData = Object.entries(res.segments).map(([segmento, count]) => ({
-        name: segmento,
-        value: count
-      }));
-      this.totalClientes = res.total_customers;
-      this.lastUpdate = res.last_update;
-      this.cargandoResumen = false;
+  cargarTodo(): void {
+    this.cargandoGeneral = true;
+
+    Promise.all([
+      this.cargarResumen(),
+      this.cargarClientes(),
+      this.verificarDatosNuevos()
+    ]).then(() => {
+      this.cargandoGeneral = false;
+    }).catch(() => {
+      this.cargandoGeneral = false;
+      // Aquí podrías manejar errores con un toast bonito si quieres
+      console.log("lastUpdate:", this.lastUpdate);
+
     });
   }
 
-  cargarClientes() {
-    this.cargandoClientes = true;
-    this.segmentacionService.getClientesSegmentados().subscribe(res => {
-      this.bubbleData = [];
-  
-      const agrupados: { [key: string]: any[] } = {};
-      res.clientes.forEach((cli: any) => {
-        if (!agrupados[cli.segmento]) agrupados[cli.segmento] = [];
-        agrupados[cli.segmento].push({
-          name: cli.cliente_id,
-          x: cli.recencia_dias,
-          y: cli.total_gastado,
-          r: Math.abs(cli.num_compras) + 1
-        });
+  cargarResumen(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.segmentacionService.getStatus().subscribe({
+        next: res => {
+          this.pieData = Object.entries(res.segments).map(([segmento, count]) => ({
+            name: segmento,
+            value: count
+          }));
+          this.totalClientes = res.total_customers;
+          this.lastUpdate = res.last_update;
+          console.log("🕒 lastUpdate (raw):", this.lastUpdate);
+          console.log("🕒 parsed:", new Date(this.lastUpdate));
+
+          resolve();
+        },
+        error: err => reject(err)
       });
-  
-      for (const segmento in agrupados) {
-        this.bubbleData.push({
-          name: segmento,
-          series: agrupados[segmento]
-        });
-      }
-  
-      this.cargandoClientes = false;
     });
   }
 
-  verificarDatosNuevos() {
-    this.segmentacionService.checkNewData().subscribe(res => {
-      this.puedeReentrenar = res.should_train;
+  cargarClientes(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.segmentacionService.getClientesSegmentados().subscribe({
+        next: res => {
+          const agrupados: { [key: string]: any[] } = {};
+          res.clientes.forEach((cli: any) => {
+            if (!agrupados[cli.segmento]) agrupados[cli.segmento] = [];
+            agrupados[cli.segmento].push({
+              name: cli.cliente_id,
+              x: cli.recencia_dias,
+              y: cli.total_gastado,
+              r: Math.abs(cli.num_compras) + 1
+            });
+          });
+
+          this.bubbleData = Object.entries(agrupados).map(([segmento, series]) => ({
+            name: segmento,
+            series
+          }));
+
+          resolve();
+        },
+        error: err => reject(err)
+      });
     });
   }
 
-  recalcular() {
+  verificarDatosNuevos(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.segmentacionService.checkNewData().subscribe({
+        next: res => {
+          this.puedeReentrenar = res.should_train;
+          resolve();
+        },
+        error: err => reject(err)
+      });
+    });
+  }
+
+  recalcular(): void {
     if (!this.puedeReentrenar) return;
-    this.cargando = true;
-    this.segmentacionService.runSegmentacion().subscribe(res => {
-      this.cargarResumen();
-      this.cargarClientes();
-      this.verificarDatosNuevos();
-      this.cargando = false;
+
+    this.cargandoGeneral = true;
+    this.segmentacionService.runSegmentacion().subscribe({
+      next: res => {
+        this.cargarTodo();
+      },
+      error: err => {
+        this.cargandoGeneral = false;
+        // Aquí puedes manejar error si quieres
+      }
     });
   }
 }

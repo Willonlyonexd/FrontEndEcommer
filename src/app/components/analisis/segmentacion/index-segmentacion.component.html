@@ -1,5 +1,5 @@
 <mat-card class="mb-4">
-  <!-- Sidebar (si aplica dentro del layout, usualmente va fuera del card) -->
+  <!-- Sidebar (normalmente debe ir FUERA de mat-card en layout real, pero aquí respetamos tu estructura) -->
   <app-sidebar></app-sidebar>
 
   <mat-card-header>
@@ -7,17 +7,18 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p><strong>Última actualización:</strong> {{ lastUpdate | date:'short':'-0400' }}</p>
+
+    <p><strong>Última actualización:</strong> {{ lastUpdate | date:'short' }}    </p>
     <p><strong>Total de clientes:</strong> {{ totalClientes }}</p>
 
-    <!-- Spinner si está cargando resumen -->
-    <div *ngIf="cargandoResumen" class="spinner-container">
+    <!-- Spinner global de carga -->
+    <div *ngIf="cargandoGeneral" class="spinner-container">
       <mat-spinner diameter="60"></mat-spinner>
     </div>
 
-    <!-- Pie Chart -->
+    <!-- Pie Chart (se muestra solo cuando todo está cargado) -->
     <ngx-charts-pie-chart
-      *ngIf="!cargandoResumen"
+      *ngIf="!cargandoGeneral"
       [results]="pieData"
       [legend]="true"
       [labels]="true"
@@ -27,39 +28,41 @@
       [scheme]="colorScheme"
       [view]="[600, 300]">
     </ngx-charts-pie-chart>
+
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="recalcular()" [disabled]="!puedeReentrenar || cargando">
+    <button mat-raised-button color="primary" (click)="recalcular()" [disabled]="!puedeReentrenar || cargandoGeneral">
       <mat-progress-spinner
-        *ngIf="cargando"
+        *ngIf="cargandoGeneral"
         diameter="20"
         mode="indeterminate"
         strokeWidth="3"
-        style="margin-right: 8px">
+        style="margin-right: 8px;">
       </mat-progress-spinner>
-      <span *ngIf="!cargando">Recalcular Segmentación</span>
+      <span *ngIf="!cargandoGeneral">Recalcular Segmentación</span>
     </button>
-    <p *ngIf="!puedeReentrenar && !cargando" style="margin-top: 10px; color: #999;">
+    <p *ngIf="!puedeReentrenar && !cargandoGeneral" style="margin-top: 10px; color: #999;">
       ⚠️ No hay suficientes datos nuevos para recalcular la segmentación.
     </p>
   </mat-card-actions>
 </mat-card>
 
-<mat-card>
+<mat-card class="mt-4">
   <mat-card-header>
     <mat-card-title>Distribución por Cliente (Recencia vs Monetario)</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
-    <!-- Spinner si está cargando clientes -->
-    <div *ngIf="cargandoClientes" class="spinner-container">
+
+    <!-- Spinner global de carga -->
+    <div *ngIf="cargandoGeneral" class="spinner-container">
       <mat-spinner diameter="60"></mat-spinner>
     </div>
 
     <!-- Bubble Chart -->
     <ngx-charts-bubble-chart
-      *ngIf="!cargandoClientes"
+      *ngIf="!cargandoGeneral"
       [results]="bubbleData"
       [xAxis]="true"
       [yAxis]="true"
@@ -74,5 +77,6 @@
       [roundDomains]="true"
       [view]="[700, 400]">
     </ngx-charts-bubble-chart>
+
   </mat-card-content>
 </mat-card>
