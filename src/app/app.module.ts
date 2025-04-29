@@ -56,10 +56,14 @@ import { EgresoDetallesComponent } from './components/egresos/egreso-detalles/eg
 import { IndexReporteComponent } from './components/reporte/index-reporte/index-reporte.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AnalisisComponent } from './components/analisis/analisis.component';
+import { RegresionComponent } from './components/analisis/regresion/regresion.component';
+import { LinealComponent } from './components/analisis/lineal/lineal.component';
+import { ArbolComponent } from './components/analisis/arbol/arbol.component';
+import { SugerenciaComponent } from './components/analisis/sugerencia/sugerencia.component';
 
 @NgModule({
   declarations: [
-    
+
     AppComponent,
     SidebarComponent,
     TopbarComponent,
@@ -97,7 +101,11 @@ import { AnalisisComponent } from './components/analisis/analisis.component';
     EgresoDetallesComponent,
     IndexReporteComponent,
     AnalisisComponent,
-    IndexSegmentacionComponent
+    IndexSegmentacionComponent,
+    RegresionComponent,
+    LinealComponent,
+    ArbolComponent,
+    SugerenciaComponent
   ],
   imports: [
     BrowserModule,

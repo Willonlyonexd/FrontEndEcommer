@@ -54,9 +54,9 @@ export class EditProductoComponent {
     this._route.params.subscribe(
       params => {
         this.id = params['id'];
-        this.init_data();  // Cargar Producto
-        this.init_variaciones();  // Cargar Variaciones
-        this.init_galeria();  // Cargar Galería
+        this.init_data();
+        this.init_variaciones();
+        this.init_galeria();
 
         setTimeout(() => {
           $('#colorpicker').spectrum({
@@ -116,12 +116,11 @@ this.producto.subcategoria = this.producto.subcategorias; // 👈 alias temporal
             if (response.data != undefined) {
               this.categorias = response.data;
               setTimeout(() => {
-                this.setCategoria(); // 🔁 Aseguramos que se llama después de asignar producto.categoria
-              }, 0);  // Asignar Subcategorías
-              console.log("🎯 Categorías con sus subcategorías:", this.categorias);
+                this.setCategoria();
+              }, 0);
+
             }
-            console.log('📦 Producto cargado:', this.producto);
-    console.log('🎯 Subcategoría recibida del backend:', this.producto.subcategoria);
+
           }
         );
       }
@@ -140,23 +139,22 @@ this.producto.subcategoria = this.producto.subcategorias; // 👈 alias temporal
 
   setCategoria() {
     const categoria = this.categorias.find(item => item._id == this.producto.categoria);
-  
+
     if (categoria) {
       this.subcategorias = categoria.subcategorias;
-  
+
       const exists = this.subcategorias.includes(this.producto.subcategoria);
-  
+
       if (!exists) {
-        // 👉 Asignar la primera subcategoría disponible
+
         this.producto.subcategoria = this.subcategorias[0] || '';
       }
-  
-      console.log('📦 Subcategorías disponibles:', this.subcategorias);
-      console.log('🎯 Subcategoría actual del producto:', this.producto.subcategoria);
+
+
     }
   }
-  
-  
+
+
 
   add_variacion() {
     this.variacion.hxd = $('#colorpicker').spectrum('get').toHexString();
@@ -273,7 +271,7 @@ this.producto.subcategoria = this.producto.subcategorias; // 👈 alias temporal
         titulo: this.producto.titulo,
         clasificacion: this.producto.clasificacion,
         categoria: this.producto.categoria,
-        subcategorias: this.producto.subcategoria, 
+        subcategorias: this.producto.subcategoria,
         labels: this.etiquetas,
         descripcion: this.producto.descripcion,
       };

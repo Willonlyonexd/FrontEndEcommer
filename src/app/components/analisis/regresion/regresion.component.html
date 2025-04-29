@@ -1,0 +1,71 @@
+<div class="regresion-container">
+  <h2>Predicción de Ventas</h2>
+
+  <!-- Controles -->
+  <div class="controles">
+    <div class="form-group">
+      <label for="mesesInput">Meses a predecir:</label>
+      <input
+        type="number"
+        id="mesesInput"
+        [(ngModel)]="meses"
+        min="1"
+        max="24">
+    </div>
+
+    <div class="botones">
+      <button (click)="regresionPredecir()" [disabled]="loadingPrediccion">
+        {{ loadingPrediccion ? 'Calculando...' : 'Predecir' }}
+      </button>
+      <button (click)="actualizarMeses(2)" [class.active]="meses === 2">2 meses</button>
+      <button (click)="actualizarMeses(3)" [class.active]="meses === 3">3 meses</button>
+      <button (click)="actualizarMeses(6)" [class.active]="meses === 6">6 meses</button>
+    </div>
+  </div>
+
+  <!-- Estado de carga -->
+  <div class="loading-container" *ngIf="loadingHistorico">
+    <div class="spinner"></div>
+    <span>Cargando datos históricos...</span>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div class="error-message" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Gráfico con Chart.js -->
+  <div class="chart-container" style="height: 400px; position: relative;">
+    <canvas #chartCanvas></canvas>
+  </div>
+
+  <!-- Resumen de predicción -->
+  <div class="resumen-prediccion" *ngIf="predicciones.length > 0">
+    <h3>Resumen de Predicción ({{mesesPredichos}} meses)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Mes</th>
+          <th>Pesimista</th>
+          <th>Esperado</th>
+          <th>Optimista</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of predicciones">
+          <td>{{ item.nombre_mes }} {{ item.anio }}</td>
+          <td>{{ item.prediccion_pesimista | currency:'Bs ':'symbol':'1.0-0' }}</td>
+          <td>{{ item.prediccion_esperada | currency:'Bs ':'symbol':'1.0-0' }}</td>
+          <td>{{ item.prediccion_optimista | currency:'Bs ':'symbol':'1.0-0' }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr *ngIf="totalEsperado > 0">
+          <td><strong>Total Esperado:</strong></td>
+          <td colspan="3"><strong>{{ totalEsperado | currency:'Bs ':'symbol':'1.0-0' }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

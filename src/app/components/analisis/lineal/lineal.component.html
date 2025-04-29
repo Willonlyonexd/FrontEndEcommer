@@ -1,0 +1,136 @@
+<div class="lineal-container">
+  <h2>Predicción de Demanda por Categoría</h2>
+
+  <!-- Controles -->
+  <div class="controles">
+    <div class="form-group">
+      <label for="categoriaSelect">Categoría:</label>
+      <select
+        id="categoriaSelect"
+        [(ngModel)]="categoriaSeleccionada"
+        [disabled]="loadingCategorias || categorias.length === 0">
+        <option *ngFor="let categoria of categorias" [value]="categoria._id">
+          {{ categoria.titulo }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="mesesInput">Meses a predecir:</label>
+      <input
+        type="number"
+        id="mesesInput"
+        [(ngModel)]="meses"
+        min="1"
+        max="24">
+    </div>
+
+    <div class="botones">
+      <button (click)="linealPredecir()" [disabled]="loadingPrediccion || !categoriaSeleccionada">
+        {{ loadingPrediccion ? 'Calculando...' : 'Predecir' }}
+      </button>
+      <button (click)="actualizarMeses(2)" [class.active]="meses === 2">2 meses</button>
+      <button (click)="actualizarMeses(3)" [class.active]="meses === 3">3 meses</button>
+      <button (click)="actualizarMeses(4)" [class.active]="meses === 4">4 meses</button>
+    </div>
+  </div>
+
+  <!-- Estado de carga -->
+  <div class="loading-container" *ngIf="loadingCategorias || loadingPrediccion">
+    <div class="spinner"></div>
+    <span>{{ loadingCategorias ? 'Cargando categorías...' : 'Generando predicción...' }}</span>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div class="error-message" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Información de la predicción -->
+  <div class="info-prediccion" *ngIf="predicciones.length > 0 && !loadingPrediccion">
+    <h3>Predicción para: {{ nombreCategoria }}</h3>
+    <p>Última fecha de datos históricos: {{ ultimaFecha | date:'dd/MM/yyyy' }}</p>
+
+    <!-- Métricas -->
+    <div class="metricas-container">
+      <div class="metrica-card">
+        <div class="metrica-valor">{{ formatearNumero(metricas.mse) }}</div>
+        <div class="metrica-label">MSE (Error Cuadrático Medio)</div>
+      </div>
+      <div class="metrica-card">
+        <div class="metrica-valor">{{ formatearNumero(metricas.mae) }}</div>
+        <div class="metrica-label">MAE (Error Absoluto Medio)</div>
+      </div>
+      <div class="metrica-card">
+        <div class="metrica-valor">{{ formatearNumero(metricas.r2) }}</div>
+        <div class="metrica-label">R² (Coeficiente de Determinación)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráfico con Chart.js -->
+  <div class="chart-container" style="height: 400px; position: relative;">
+
+    <canvas #chartCanvas></canvas>
+  </div>
+
+  <!-- Resumen de predicción -->
+  <div class="resumen-prediccion" *ngIf="predicciones.length > 0 && !loadingPrediccion">
+    <h3>Resumen de Predicción</h3>
+
+    <table class="prediccion-table">
+      <thead>
+        <tr>
+          <th>Mes</th>
+          <th>Demanda Predicha</th>
+          <th>Rango Inferior</th>
+          <th>Rango Superior</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of predicciones">
+          <td>{{ item.mes_nombre }} {{ item['año'] }}</td>
+          <td>{{ item.demanda_predicha }}</td>
+          <td>{{ item.rango_inferior }}</td>
+          <td>{{ item.rango_superior }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Desglose por productos -->
+  <div class="desglose-productos" *ngIf="productosPorMes.length > 0 && !loadingPrediccion">
+    <h3>Desglose de Productos por Mes</h3>
+
+    <div class="mes-tabs">
+      <div *ngFor="let mes of productosPorMes; let i = index"
+           class="mes-tab"
+           [class.active]="i === selectedMesIndex"
+           (click)="selectedMesIndex = i">
+        {{ mes.mes_nombre }} {{ mes['año'] }}
+      </div>
+    </div>
+
+    <div class="mes-content" *ngFor="let mes of productosPorMes; let i = index"
+         [style.display]="i === selectedMesIndex ? 'block' : 'none'">
+      <h4>{{ mes.mes_nombre }} {{ mes['año'] }} - Demanda Total: {{ mes.demanda_total }} unidades</h4>
+
+      <table class="productos-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Proporción (%)</th>
+            <th>Unidades</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of mes.productos">
+            <td>{{ producto.producto }}</td>
+            <td>{{ producto.proporcion }}%</td>
+            <td>{{ producto.unidades }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
