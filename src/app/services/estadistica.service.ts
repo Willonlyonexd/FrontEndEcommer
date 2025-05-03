@@ -74,6 +74,34 @@ export class EstadisticaService {
     }
 
 
+    getArbolAnalisi(): Observable<any> {
+        const headers = new HttpHeaders({ 'Content-type': 'application/json' });
+        return this._http.get(`${this.url}/arbol/inventario/analisis`, { headers });
+    }
+
+    getArbolRecomendaciones(): Observable<any> {
+        const headers = new HttpHeaders({ 'Content-type': 'application/json' });
+        return this._http.get(`${this.url}/arbol/inventario/recomendaciones`, { headers });
+    }
+
+
+    getSegmentacionResumen(): Observable<any> {
+      const headers= new HttpHeaders({ 'Content-type': 'application/json' });
+      return this._http.get(`${this.url}/segmentacion/segmentacion-resumen`, { headers });
+    }
+
+
+    getClientesNormalizados(): Observable<any> {
+        const headers = new HttpHeaders({ 'Content-type': 'application/json' });
+        return this._http.get(`${this.url}/segmentacion/clientes-normalizados`, { headers });
+    }
+
+    getConsolidado(): Observable<any> {
+        const headers = new HttpHeaders({ 'Content-type': 'application/json' });
+        return this._http.get(`${this.url}/segmentacion/consolidado`, { headers });
+    }
+
+
 
 
 

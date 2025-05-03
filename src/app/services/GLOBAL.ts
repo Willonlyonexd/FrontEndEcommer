@@ -1,5 +1,5 @@
 export const GLOBAL = {
-    url: 'http://localhost:3000',
+    url: 'http://backendecommer-production.up.railway.app',
     tallas: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     colores: ['Azul', 'Rojo', 'Verde', 'Amarillo', 'Negro', 'Blanco', 'Naranja', 'Cafe', 'Rosado'],
     proovedores: ['ZARA', 'ARMANI', 'HERMES', 'SHEIN'],

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SegmentacionService {
-  private baseUrl = 'http://localhost:3000/segmentation'; // o tu URL externa
+  private baseUrl = 'http://localhost:3000/segmentation';
 
   constructor(private http: HttpClient) {}
 

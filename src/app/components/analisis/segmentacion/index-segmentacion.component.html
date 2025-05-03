@@ -1,82 +1,107 @@
-<mat-card class="mb-4">
-  <!-- Sidebar (normalmente debe ir FUERA de mat-card en layout real, pero aquí respetamos tu estructura) -->
-  <app-sidebar></app-sidebar>
+<div class="container-tabla">
+  <h3 class="titulo-principal">Panel de Segmentación de Clientes</h3>
 
-  <mat-card-header>
-    <mat-card-title>Resumen de Segmentación</mat-card-title>
-  </mat-card-header>
-
-  <mat-card-content>
-
-    <p><strong>Última actualización:</strong> {{ lastUpdate | date:'short' }}    </p>
-    <p><strong>Total de clientes:</strong> {{ totalClientes }}</p>
-
-    <!-- Spinner global de carga -->
-    <div *ngIf="cargandoGeneral" class="spinner-container">
-      <mat-spinner diameter="60"></mat-spinner>
+  <div class="panel-superior">
+    <div class="grafico-container">
+      <div class="grafico-wrapper">
+        <canvas #graficoSegmentos></canvas>
+      </div>
+      <div class="ultima-actualizacion" *ngIf="resumenSegmentacion">
+        Última actualización: {{ resumenSegmentacion.last_update | date:'dd/MM/yyyy HH:mm' }}
+      </div>
     </div>
+  </div>
 
-    <!-- Pie Chart (se muestra solo cuando todo está cargado) -->
-    <ngx-charts-pie-chart
-      *ngIf="!cargandoGeneral"
-      [results]="pieData"
-      [legend]="true"
-      [labels]="true"
-      [doughnut]="true"
-      [explodeSlices]="false"
-      [animations]="true"
-      [scheme]="colorScheme"
-      [view]="[600, 300]">
-    </ngx-charts-pie-chart>
-
-  </mat-card-content>
-
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="recalcular()" [disabled]="!puedeReentrenar || cargandoGeneral">
-      <mat-progress-spinner
-        *ngIf="cargandoGeneral"
-        diameter="20"
-        mode="indeterminate"
-        strokeWidth="3"
-        style="margin-right: 8px;">
-      </mat-progress-spinner>
-      <span *ngIf="!cargandoGeneral">Recalcular Segmentación</span>
-    </button>
-    <p *ngIf="!puedeReentrenar && !cargandoGeneral" style="margin-top: 10px; color: #999;">
-      ⚠️ No hay suficientes datos nuevos para recalcular la segmentación.
-    </p>
-  </mat-card-actions>
-</mat-card>
-
-<mat-card class="mt-4">
-  <mat-card-header>
-    <mat-card-title>Distribución por Cliente (Recencia vs Monetario)</mat-card-title>
-  </mat-card-header>
-
-  <mat-card-content>
-
-    <!-- Spinner global de carga -->
-    <div *ngIf="cargandoGeneral" class="spinner-container">
-      <mat-spinner diameter="60"></mat-spinner>
+  <div class="filtros">
+    <h3>Listado de Clientes</h3>
+    <div class="segmentos-filtro">
+      <span>Filtrar por segmento:</span>
+      <div class="botones-segmento">
+        <button
+          *ngFor="let segmento of segmentos"
+          [class.activo]="segmentoSeleccionado === segmento"
+          (click)="filtrarPorSegmento(segmento)"
+          [ngClass]="segmento !== 'Todos' ? getSegmentoClass(segmento) : ''"
+        >
+          {{ segmento }}
+        </button>
+      </div>
     </div>
+  </div>
 
-    <!-- Bubble Chart -->
-    <ngx-charts-bubble-chart
-      *ngIf="!cargandoGeneral"
-      [results]="bubbleData"
-      [xAxis]="true"
-      [yAxis]="true"
-      [legend]="true"
-      [showXAxisLabel]="true"
-      [showYAxisLabel]="true"
-      [xAxisLabel]="'Recencia (escalado)'"
-      [yAxisLabel]="'Monetario (escalado)'"
-      [scheme]="colorScheme"
-      [autoScale]="true"
-      [animations]="true"
-      [roundDomains]="true"
-      [view]="[700, 400]">
-    </ngx-charts-bubble-chart>
+  <div class="tabla-responsive">
+    <table class="tabla-clientes">
+      <thead>
+        <tr>
+          <th (click)="ordenarPor('nombre')">
+            Nombre
+            <i *ngIf="ordenColumna === 'nombre'" class="flecha" [class.ascendente]="ordenAscendente">↑</i>
+          </th>
+          <th (click)="ordenarPor('segmento')">
+            Segmento
+            <i *ngIf="ordenColumna === 'segmento'" class="flecha" [class.ascendente]="ordenAscendente">↑</i>
+          </th>
+          <th (click)="ordenarPor('cantidadcompra')">
+            # Compras
+            <i *ngIf="ordenColumna === 'cantidadcompra'" class="flecha" [class.ascendente]="ordenAscendente">↑</i>
+          </th>
+          <th (click)="ordenarPor('costo')">
+            Valor Total
+            <i *ngIf="ordenColumna === 'costo'" class="flecha" [class.ascendente]="ordenAscendente">↑</i>
+          </th>
+          <th (click)="ordenarPor('ultima_compra')">
+            Última Compra
+            <i *ngIf="ordenColumna === 'ultima_compra'" class="flecha" [class.ascendente]="ordenAscendente">↑</i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of obtenerElementosPagina()">
+          <td>{{ cliente.nombre }}</td>
+          <td [class]="getSegmentoClass(cliente.segmento)">{{ cliente.segmento }}</td>
+          <td>{{ cliente.cantidadcompra }}</td>
+          <td>{{ cliente.costo | currency:'USD':'symbol':'1.0-0' }}</td>
+          <td>{{ cliente.ultima_compra || 'Sin compras' }}</td>
+        </tr>
+        <tr *ngIf="clientesFiltrados.length === 0">
+          <td colspan="5" class="sin-datos">No hay clientes que coincidan con el filtro seleccionado</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  </mat-card-content>
-</mat-card>
+  <!-- Paginación -->
+  <div class="paginacion" *ngIf="clientesFiltrados.length > 0">
+    <div class="info-paginacion">
+      Mostrando {{ (paginaActual - 1) * itemsPorPagina + 1 }} a {{
+        Math.min(paginaActual * itemsPorPagina, totalItems)
+      }} de {{ totalItems }} clientes
+    </div>
+    <div class="controles-paginacion">
+      <button [disabled]="paginaActual === 1" (click)="cambiarPagina(1)">
+        &laquo; Primera
+      </button>
+      <button [disabled]="paginaActual === 1" (click)="cambiarPagina(paginaActual - 1)">
+        &lt; Anterior
+      </button>
+
+      <div class="numeros-pagina">
+        <button
+          *ngFor="let pagina of paginas"
+          [class.activa]="pagina === paginaActual"
+          [disabled]="pagina === -1"
+          (click)="pagina !== -1 && cambiarPagina(pagina)"
+        >
+          {{ pagina === -1 ? '...' : pagina }}
+        </button>
+      </div>
+
+      <button [disabled]="paginaActual === totalPaginas" (click)="cambiarPagina(paginaActual + 1)">
+        Siguiente &gt;
+      </button>
+      <button [disabled]="paginaActual === totalPaginas" (click)="cambiarPagina(totalPaginas)">
+        Última &raquo;
+      </button>
+    </div>
+  </div>
+</div>

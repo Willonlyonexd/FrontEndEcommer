@@ -1,1 +1,149 @@
-<p>arbol works!</p>
+<div class="container-fluid p-4">
+  <h2 class="mb-3">Dashboard de Inventario</h2>
+
+  <!-- Indicador de carga -->
+  <div class="alert alert-info" *ngIf="loading">
+    <i class="fas fa-spinner fa-spin me-2"></i> Cargando datos...
+  </div>
+
+  <!-- Mensaje de error -->
+  <div class="alert alert-danger" *ngIf="error">
+    <i class="fas fa-exclamation-circle me-2"></i> {{error}}
+  </div>
+
+  <!-- Contenido principal (solo visible cuando no está cargando) -->
+  <ng-container *ngIf="!loading">
+    <!-- Tarjetas de resumen -->
+    <div class="row mb-4" *ngIf="inventoryAnalysis">
+      <div class="col-md-3 mb-3">
+        <div class="card stat-card">
+          <div class="card-body text-center">
+            <h5 class="card-title">Total Productos</h5>
+            <h2>{{inventoryAnalysis.total_productos || 0}}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-3" *ngIf="getDistribucionValue('Crítico')">
+        <div class="card stat-card bg-danger text-white">
+          <div class="card-body text-center">
+            <h5 class="card-title">Productos Críticos</h5>
+            <h2>{{getDistribucionValue('Crítico')}}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-3" *ngIf="getDistribucionValue('Alto')">
+        <div class="card stat-card bg-warning">
+          <div class="card-body text-center">
+            <h5 class="card-title">Productos Alto</h5>
+            <h2>{{getDistribucionValue('Alto')}}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-3" *ngIf="getDistribucionValue('Exceso')">
+        <div class="card stat-card bg-success text-white">
+          <div class="card-body text-center">
+            <h5 class="card-title">Productos Exceso</h5>
+            <h2>{{getDistribucionValue('Exceso')}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row mb-4">
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Distribución del Inventario</h5>
+          </div>
+          <div class="card-body chart-container">
+            <canvas id="distributionChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Recomendaciones de Reposición</h5>
+          </div>
+          <div class="card-body chart-container">
+            <canvas id="recomendacionesChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tablas -->
+    <div class="row">
+      <!-- Tabla de productos críticos -->
+      <div class="col-md-6 mb-4" *ngIf="hasProductosCriticos()">
+        <div class="card">
+          <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">Productos en Estado Crítico</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Color/Talla</th>
+                    <th>Inventario</th>
+                    <th>Ventas diarias</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let producto of inventoryAnalysis.productos_criticos">
+                    <td>{{getNombreProducto(producto)}}</td>
+                    <td>{{producto.color || 'N/A'}}/{{producto.talla || 'N/A'}}</td>
+                    <td>{{producto.inventario_actual}}</td>
+                    <td>{{formatearNumero(producto.ventas_diarias_prom)}}</td>
+                    <td><span [ngClass]="getEstadoClass(producto.estado_inventario)">{{producto.estado_inventario}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de recomendaciones -->
+      <div class="col-md-6 mb-4" *ngIf="hasRecomendaciones()">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Recomendaciones de Reabastecimiento</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Inventario Actual</th>
+                    <th>Cantidad Recomendada</th>
+                    <th>Días Objetivo</th>
+                    <th>Prioridad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of recommendations">
+                    <td>{{item.nombre_completo || 'N/A'}}</td>
+                    <td>{{item.inventario_actual || 0}}</td>
+                    <td><strong class="text-success">{{item.cantidad_recomendada || 0}}</strong></td>
+                    <td>{{item.dias_stock_objetivo || 0}}</td>
+                    <td><span [ngClass]="getPrioridadClass(item.prioridad)">{{getPrioridadText(item.prioridad)}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

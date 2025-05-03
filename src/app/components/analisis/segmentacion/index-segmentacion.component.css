@@ -1,56 +1,254 @@
-mat-card {
-  background-color: #fff;
-  color: #2c2c2c;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
+.container-tabla {
+  margin: 20px;
+  font-family: Arial, sans-serif;
 }
 
-mat-card-title {
-  font-size: 22px;
-  font-weight: 600;
-  color: #1c1c1c;
-}
-
-mat-card-content p {
-  font-size: 16px;
+.titulo-principal {
+  text-align: center;
+  margin-bottom: 20px;
   color: #333;
+  font-size: 24px;
 }
 
-mat-card-actions {
-  margin-top: 20px;
+/* Estilos para el panel superior con el gráfico */
+.panel-superior {
   display: flex;
-  justify-content: flex-end;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.grafico-container {
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.grafico-wrapper {
+  height: 400px;
+  position: relative;
+}
+
+.ultima-actualizacion {
+  text-align: right;
+  font-size: 12px;
+  color: #777;
+  margin-top: 10px;
+}
+
+/* Estilos para filtros */
+.filtros {
+  margin-bottom: 20px;
+}
+
+.segmentos-filtro {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.segmentos-filtro span {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.botones-segmento {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.botones-segmento button {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.botones-segmento button.activo {
+  font-weight: bold;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Estilos para la tabla */
+.tabla-responsive {
+  width: 100%;
+  overflow-y: auto;
+  max-height: 500px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabla-clientes {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-clientes thead {
+  position: sticky;
+  top: 0;
+  background-color: #f5f5f5;
+  z-index: 1;
+}
+
+.tabla-clientes th, .tabla-clientes td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabla-clientes thead tr {
+  background-color: #f5f5f5;
+  text-align: left;
+}
+
+.tabla-clientes th {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.tabla-clientes th:hover {
+  background-color: #e9e9e9;
+}
+
+.flecha {
+  margin-left: 5px;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.flecha.ascendente {
+  transform: rotate(180deg);
+}
+
+.tabla-clientes tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.sin-datos {
+  text-align: center;
+  padding: 30px !important;
+  font-style: italic;
+  color: #777;
+}
+
+/* Estilos para los segmentos */
+.segmento-vip {
+  color: #1e88e5;
+  font-weight: bold;
+}
+
+.segmento-fieles {
+  color: #43a047;
+  font-weight: bold;
+}
+
+.segmento-ocasionales {
+  color: #fb8c00;
+}
+
+.segmento-dormidos {
+  color: #e53935;
+}
+
+.segmento-sin {
+  color: #757575;
+}
+
+/* Estilos para botones de segmentos */
+button.segmento-vip {
+  color: #1e88e5;
+  border-color: #1e88e5;
+}
+
+button.segmento-fieles {
+  color: #43a047;
+  border-color: #43a047;
+}
+
+button.segmento-ocasionales {
+  color: #fb8c00;
+  border-color: #fb8c00;
+}
+
+button.segmento-dormidos {
+  color: #e53935;
+  border-color: #e53935;
+}
+
+button.segmento-sin {
+  color: #757575;
+  border-color: #757575;
+}
+
+/* Estilos para paginación */
+.paginacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-button[mat-raised-button] {
-  font-weight: 600;
-  padding: 10px 24px;
-  text-transform: none;
+.info-paginacion {
+  color: #666;
+  font-size: 14px;
 }
 
-/* Centrar y controlar tamaño máximo del gráfico */
-apx-chart, ngx-charts-pie-chart, ngx-charts-bubble-chart {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  width: 600px;
-}
-
-/* Spinner de carga centrado en la sección */
-.spinner-container {
+.controles-paginacion {
   display: flex;
-  justify-content: center;
+  gap: 5px;
   align-items: center;
-  height: 250px; /* un poco más alto para verse mejor */
-  width: 100%;
 }
 
-/* Opcional: espaciado extra cuando hay sidebar */
-app-sidebar {
-  margin-bottom: 20px;
+.controles-paginacion button {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.controles-paginacion button:hover:not([disabled]) {
+  background-color: #f5f5f5;
+}
+
+.controles-paginacion button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.numeros-pagina {
+  display: flex;
+  gap: 5px;
+}
+
+.numeros-pagina button.activa {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .paginacion {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .botones-segmento {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .grafico-wrapper {
+    height: 300px;
+  }
 }

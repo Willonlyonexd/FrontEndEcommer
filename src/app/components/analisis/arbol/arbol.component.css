@@ -1,0 +1,76 @@
+/* Estilos para las tarjetas */
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+/* Estilos específicos para las cards estadísticas */
+.stat-card {
+  border-radius: 8px;
+}
+
+.stat-card h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.stat-card h5 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+/* Estilos críticos para los contenedores de gráficos */
+.chart-container {
+  position: relative;
+  height: 300px !important;
+  width: 100%;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+canvas {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Estilos para las tablas */
+.table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.4em 0.6em;
+}
+
+/* Estilos para estados de carga */
+.fa-spinner {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .stat-card h2 {
+    font-size: 2rem;
+  }
+
+  .chart-container {
+    height: 250px !important;
+  }
+}
