@@ -1,31 +1,47 @@
-/* Estilos personalizados para tabs sin uso de ::ng-deep */
-.custom-tabs .mat-mdc-tab .mdc-tab__text-label {
-  font-size: 15px;
+<style>
+.custom-tabs {
+  border-bottom: 1px solid #e4e6ef;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.custom-tabs .nav-item {
+  margin-bottom: -1px;
+}
+
+.custom-tabs .nav-link {
+  margin-right: 0.5rem;
+  color: #5e6278;
   font-weight: 500;
-  color: #333;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 6px 6px 0 0;
+  transition: all 0.3s ease;
 }
 
-.custom-tabs .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
-  color: #673ab7;
-  font-weight: 600;
+.custom-tabs .nav-link:hover {
+  color: #009ef7;
+  background-color: rgba(0, 158, 247, 0.05);
+  border-color: transparent;
 }
 
-.custom-tabs .mat-mdc-tab-header {
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 16px;
-}
-
-.custom-tabs .mat-mdc-tab-body-content {
-  padding: 20px;
+.custom-tabs .nav-link.active {
+  color: #009ef7;
   background-color: #fff;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-bottom: 3px solid #009ef7;
 }
 
-/* Para mejor contraste en el contenido */
-.custom-tabs h2,
-.custom-tabs h3 {
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: 500;
+@media (max-width: 991.98px) {
+  .custom-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .custom-tabs .nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
 }
+</style>

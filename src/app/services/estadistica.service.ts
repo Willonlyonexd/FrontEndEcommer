@@ -9,8 +9,9 @@ import { data } from 'jquery';
 })
 export class EstadisticaService {
     public url = GLOBAL.url;
-    public entrenarRegresionURl="https://modeloregresionfastapi.onrender.com/train";
-    public extraerDatosURL="https://modeloregresionfastapi.onrender.com/refresh-data";
+
+    public entrenarRegresionURl="https://plankton-app-z3kke.ondigitalocean.app/train";
+    public extraerDatosURL="https://plankton-app-z3kke.ondigitalocean.app/refresh-data";
 
     constructor(private _http: HttpClient) { }
 

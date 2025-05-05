@@ -1,76 +1,120 @@
-/* Estilos para las tarjetas */
-.card {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  margin-bottom: 20px;
+.inventario-dashboard {
+  background: #f4f6fb;
+  min-height: 100vh;
 }
 
-.card:hover {
-  transform: translateY(-3px);
+.main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #22223b;
 }
 
-.card-header {
-  font-weight: bold;
+.main-subtitle {
+  font-size: 1.1rem;
+  color: #8d99ae;
 }
 
-/* Estilos específicos para las cards estadísticas */
 .stat-card {
-  border-radius: 8px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.2rem 0.5rem;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: none;
+  border: 1px solid #e9ecef;
 }
 
-.stat-card h2 {
-  font-size: 2.5rem;
-  font-weight: bold;
+.stat-shadow {
+  box-shadow: 0 2px 14px 0 rgba(60,72,88,0.08);
+}
+
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 0.2rem;
+}
+
+.stat-label {
+  font-size: 1.05rem;
+  color: #8d99ae;
+}
+
+.stat-blue { color: #2563eb; }
+.stat-red { color: #ef4444; }
+.stat-green { color: #10b981; }
+.stat-yellow { color: #fbbf24; }
+
+.main-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 14px 0 rgba(60,72,88,0.08);
+}
+
+.main-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #22223b;
   margin: 0;
 }
 
-.stat-card h5 {
-  font-size: 1rem;
-  margin-bottom: 10px;
-}
-
-/* Estilos críticos para los contenedores de gráficos */
 .chart-container {
   position: relative;
-  height: 300px !important;
+  height: 320px !important;
   width: 100%;
-  padding: 10px;
+  padding: 16px 6px 6px 6px;
   margin: 0 auto;
+  background: #fafbfe;
+  border-radius: 10px;
+  box-shadow: none;
 }
 
-canvas {
-  height: 100% !important;
-  width: 100% !important;
+.table-container {
+  padding: 0;
 }
 
-/* Estilos para las tablas */
-.table th {
-  background-color: #f8f9fa;
-  font-weight: bold;
+.table th,
+.table thead th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #2d3748;
+  border-top: none;
+  font-size: 1rem;
 }
 
-.badge {
-  font-size: 0.85rem;
-  padding: 0.4em 0.6em;
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: #f6f9fc;
 }
 
-/* Estilos para estados de carga */
+.estado-badge,
+.prioridad-badge {
+  font-size: 0.93rem;
+  padding: 0.35em 0.7em;
+  border-radius: 0.7em;
+  font-weight: 500;
+}
+
 .fa-spinner {
-  animation: spin 1s infinite linear;
+  animation: spin 0.8s infinite linear;
+  font-size: 1.1em;
 }
-
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
 }
 
-/* Estilos responsivos */
-@media (max-width: 768px) {
-  .stat-card h2 {
-    font-size: 2rem;
-  }
-
-  .chart-container {
-    height: 250px !important;
-  }
+/* Responsive */
+@media (max-width: 991px) {
+  .main-card, .stat-card { margin-bottom: 1.5rem; }
+  .chart-container { height: 220px !important; }
+}
+@media (max-width: 480px) {
+  .stat-card, .main-card { padding: 0.6rem 0.2rem;}
+  .stat-value { font-size: 1.2rem; }
+  .main-title { font-size: 1.35rem;}
+  .chart-container { height: 140px !important; }
 }

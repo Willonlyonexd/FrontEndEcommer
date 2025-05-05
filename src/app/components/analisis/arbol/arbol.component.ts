@@ -28,7 +28,7 @@ export class ArbolComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Si ya tenemos los datos cuando se inicializa la vista, intentamos crear los gráficos
+
     if (!this.loading && !this.chartsInitialized) {
       this.inicializarGraficos();
     }

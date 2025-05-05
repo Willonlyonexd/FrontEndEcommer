@@ -2,3 +2,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  --mdc-tab-indicator-active-indicator-color: #4e54c8;
+  --mdc-tab-label-text-color: #8f94fb;
+  --mdc-tab-label-text-color-active: #4e54c8;
+  --mat-tab-header-container-background-color: #f4f6fb;
+}

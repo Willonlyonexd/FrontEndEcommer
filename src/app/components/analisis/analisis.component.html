@@ -45,20 +45,41 @@
           <!--begin::Container-->
           <div id="kt_content_container" class="container-xxl">
 
-              <mat-tab-group class="custom-tabs">
-                  <mat-tab  label="Segmentación Clientes">
-                    <app-index-segmentacion></app-index-segmentacion>
-                  </mat-tab>
-                  <mat-tab label="Predicion de Ventas">
-                    <app-regresion></app-regresion>
-                  </mat-tab>
-                  <mat-tab label="Prediccion de productos mas vendidos por categorias">
-                    <app-lineal></app-lineal>
-                  </mat-tab>
-                  <mat-tab label="Prediccion de los dias restantes de stcok de inventario">
-                    <app-arbol></app-arbol>
-                  </mat-tab>
-                </mat-tab-group>
+
+
+            <ul  class="nav nav-tabs custom-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                  type="button" role="tab" aria-controls="home" aria-selected="true">Segmentación Clientes</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="sales-tab" data-bs-toggle="tab" data-bs-target="#sales"
+                  type="button" role="tab" aria-controls="sales" aria-selected="false">Predicion de Ventas</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="products-tab" data-bs-toggle="tab" data-bs-target="#products"
+                  type="button" role="tab" aria-controls="products" aria-selected="false">Prediccion de productos mas vendidos por categorias</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory"
+                  type="button" role="tab" aria-controls="inventory" aria-selected="false">Prediccion de los dias restantes de stock de inventario</button>
+              </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <app-index-segmentacion></app-index-segmentacion>
+              </div>
+              <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
+                <app-regresion></app-regresion>
+              </div>
+              <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
+                <app-lineal></app-lineal>
+              </div>
+              <div class="tab-pane fade" id="inventory" role="tabpanel" aria-labelledby="inventory-tab">
+                <app-arbol></app-arbol>
+              </div>
+            </div>
 
           </div>
           <!--end::Container-->

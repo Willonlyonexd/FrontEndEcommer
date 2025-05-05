@@ -121,9 +121,9 @@ import { SugerenciaComponent } from './components/analisis/sugerencia/sugerencia
     MatProgressSpinnerModule
   ],
   providers: [
-   // provideClientHydration(),
+
     { provide: HttpClient, useClass: HttpClient },
-    //provideAnimationsAsync() // Usa HttpClient directamente y proporciona la clase HttpClient
+
   ],
   bootstrap: [AppComponent]
 })

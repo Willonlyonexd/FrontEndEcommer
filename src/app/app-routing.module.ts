@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'crear/:tipo', component: CreateTenentComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
-  { path: 'analisis', component: AnalisisComponent },
+  { path: 'analisis', component: AnalisisComponent, canActivate: [AuthGuard] },
 
 
   { path: 'colaborador', component: IndexUsuarioComponent, canActivate: [AuthGuard] },
