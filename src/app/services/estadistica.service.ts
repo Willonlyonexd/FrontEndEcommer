@@ -102,12 +102,10 @@ export class EstadisticaService {
         return this._http.get(`${this.url}/segmentacion/consolidado`, { headers });
     }
 
-
-
-
-
-
-
+   predecirSerieTemporal(data: any): Observable<any> {
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  return this._http.post('https://prediccion-pgouq.ondigitalocean.app/predict_general_timeseries/', data, { headers });
+}
 
 
 }

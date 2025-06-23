@@ -1,0 +1,258 @@
+<div class="row gy-4">
+  <!-- KPIs Principales -->
+  <div class="col-12">
+    <div class="row">
+      <!-- Total Clientes -->
+      <div class="col-md-3">
+        <div class="card shadow-sm card-kpi">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h6 class="card-subtitle mb-2 text-muted">Total Clientes</h6>
+                <h2 class="card-title mb-0">{{ totalClientes }}</h2>
+              </div>
+              <div class="kpi-icon">
+                <i class="fas fa-users fa-2x text-primary"></i>
+              </div>
+            </div>
+            <div class="mt-3">
+              <small class="text-muted">Base de clientes completa</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Clientes Activos -->
+      <div class="col-md-3">
+        <div class="card shadow-sm card-kpi">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h6 class="card-subtitle mb-2 text-muted">Clientes Activos</h6>
+                <h2 class="card-title mb-0">{{ clientesActivos }}</h2>
+              </div>
+              <div class="kpi-icon">
+                <i class="fas fa-user-check fa-2x text-success"></i>
+              </div>
+            </div>
+            <div class="mt-3">
+              <small class="text-success">Tasa de retención: {{ tasaRetencion }}%</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Clientes Inactivos -->
+      <div class="col-md-3">
+        <div class="card shadow-sm card-kpi">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h6 class="card-subtitle mb-2 text-muted">Clientes Inactivos</h6>
+                <h2 class="card-title mb-0">{{ clientesInactivosTotal }}</h2>
+              </div>
+              <div class="kpi-icon">
+                <i class="fas fa-user-clock fa-2x text-danger"></i>
+              </div>
+            </div>
+            <div class="mt-3">
+              <small class="text-danger">Sin compras recientes</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Nuevos Clientes este Mes -->
+      <div class="col-md-3">
+        <div class="card shadow-sm card-kpi">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h6 class="card-subtitle mb-2 text-muted">Nuevos este Mes</h6>
+                <h2 class="card-title mb-0">{{ nuevosClientesMesActual }}</h2>
+              </div>
+              <div class="kpi-icon">
+                <i class="fas fa-user-plus fa-2x text-info"></i>
+              </div>
+            </div>
+            <div class="mt-3">
+              <small class="text-info">Clientes recién registrados</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Evolución de Nuevos Clientes -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Evolución de Nuevos Clientes</h5>
+        <div *ngIf="loading.nuevos" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.nuevos" class="chart-container" style="height: 350px;">
+          <div *ngIf="clientesNuevosPorMes.length === 0" class="alert alert-warning">
+            No se encontraron datos de nuevos clientes para mostrar.
+          </div>
+          <canvas *ngIf="clientesNuevosPorMes.length > 0" id="nuevosClientesChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Clientes Activos vs Inactivos -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Clientes Activos vs Inactivos</h5>
+        <div *ngIf="loading.activosInactivos" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.activosInactivos" class="chart-container" style="height: 350px;">
+          <div *ngIf="clientesActivosInactivos.length === 0" class="alert alert-warning">
+            No se encontraron datos de actividad de clientes para mostrar.
+          </div>
+          <canvas *ngIf="clientesActivosInactivos.length > 0" id="activosInactivosChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Top Clientes -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Top 10 Clientes por Volumen de Compras</h5>
+        <div *ngIf="loading.top" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.top" class="chart-container" style="height: 400px;">
+          <div *ngIf="topClientes.length === 0" class="alert alert-warning">
+            No se encontraron datos de top clientes para mostrar.
+          </div>
+          <canvas *ngIf="topClientes.length > 0" id="topClientesChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Clientes Inactivos -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title mb-0">Clientes Inactivos (sin compras recientes)</h5>
+          <div class="d-flex align-items-center">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="number" class="form-control" [(ngModel)]="diasInactividad" min="1" max="365">
+              <span class="input-group-text">días</span>
+              <button class="btn btn-outline-primary" type="button" (click)="actualizarPeriodoInactividad()">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="loading.inactivos" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.inactivos" class="table-responsive" style="height: 400px;">
+          <div *ngIf="clientesInactivos.length === 0" class="alert alert-success">
+            ¡No hay clientes inactivos por más de {{ diasInactividad }} días! 🎉
+          </div>
+          
+          <table *ngIf="clientesInactivos.length > 0" class="table table-striped table-hover">
+            <thead class="sticky-top bg-white">
+              <tr>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Última Compra</th>
+                <th class="text-center">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cliente of clientesInactivos; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td [ngClass]="getClaseFecha(cliente.ultima_compra)">
+                  {{ formatFecha(cliente.ultima_compra) }}
+                </td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-outline-primary" [id]="generateMailtoId(cliente._id)">
+                    <i class="fas fa-envelope me-1"></i> Contactar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tabla de Frecuencia de Compra -->
+  <div class="col-md-12">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title mb-0">Frecuencia de Compra por Cliente</h5>
+          <div class="d-flex align-items-center">
+            <div class="input-group input-group-sm" style="width: 250px;">
+              <input type="text" class="form-control" [(ngModel)]="filtroFrecuencia" 
+                     placeholder="Buscar por nombre..." (input)="filtrarClientes()">
+              <button class="btn btn-outline-secondary" type="button">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="loading.frecuencia" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.frecuencia" class="table-responsive" style="height: 400px;">
+          <table class="table table-striped table-hover">
+            <thead class="sticky-top bg-light">
+              <tr>
+                <th>#</th>
+                <th (click)="ordenarPor('nombre')" style="cursor: pointer;">
+                  Cliente <i class="fas fa-sort"></i>
+                </th>
+                <th (click)="ordenarPor('num_compras')" style="cursor: pointer;" class="text-end">
+                  Compras <i class="fas fa-sort"></i>
+                </th>
+                <th (click)="ordenarPor('primera_compra')" style="cursor: pointer;">
+                  Primera Compra <i class="fas fa-sort"></i>
+                </th>
+                <th (click)="ordenarPor('ultima_compra')" style="cursor: pointer;">
+                  Última Compra <i class="fas fa-sort"></i>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cliente of clientesFiltrados; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td class="text-end">{{ cliente.num_compras }}</td>
+                <td>{{ formatFecha(cliente.primera_compra) }}</td>
+                <td [ngClass]="getClaseFecha(cliente.ultima_compra)">
+                  {{ formatFecha(cliente.ultima_compra) }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

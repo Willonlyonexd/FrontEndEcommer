@@ -1,0 +1,242 @@
+<div class="row gy-4">
+  <!-- KPIs de Ventas -->
+  <div class="col-md-4" *ngIf="ventasPorMes.length > 0">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Total Ventas (Último Mes)</h5>
+        <p class="kpi-value">{{ formatMonto(ventasPorMes[ventasPorMes.length - 1].total_ventas) }}</p>
+        <p class="text-muted">{{ ventasPorMes[ventasPorMes.length - 1].num_pedidos }} pedidos</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4" *ngIf="ventasPorMes.length > 0">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Ticket Promedio (Último Mes)</h5>
+        <p class="kpi-value">{{ formatMonto(ventasPorMes[ventasPorMes.length - 1].ticket_promedio) }}</p>
+        <p class="text-muted">Promedio por pedido</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4" *ngIf="topProductos.length > 0">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Producto Más Vendido</h5>
+        <p class="kpi-value">{{ topProductos[0].producto_nombre }}</p>
+        <p class="text-muted">{{ topProductos[0].unidades }} unidades ({{ formatMonto(topProductos[0].monto) }})</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Ventas Diarias con filtros -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title mb-0">Evolución de Ventas por Día</h5>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-sm" 
+                    [ngClass]="{'btn-primary': filtroDiario === 'mes', 'btn-outline-primary': filtroDiario !== 'mes'}"
+                    (click)="aplicarFiltroDiario('mes')">Este Mes</button>
+            <button type="button" class="btn btn-sm" 
+                    [ngClass]="{'btn-primary': filtroDiario === 'trimestre', 'btn-outline-primary': filtroDiario !== 'trimestre'}"
+                    (click)="aplicarFiltroDiario('trimestre')">3 Meses</button>
+            <button type="button" class="btn btn-sm" 
+                    [ngClass]="{'btn-primary': filtroDiario === 'anio', 'btn-outline-primary': filtroDiario !== 'anio'}"
+                    (click)="aplicarFiltroDiario('anio')">Este Año</button>
+            <button type="button" class="btn btn-sm" 
+                    [ngClass]="{'btn-primary': filtroDiario === 'todos', 'btn-outline-primary': filtroDiario !== 'todos'}"
+                    (click)="aplicarFiltroDiario('todos')">Todos</button>
+          </div>
+        </div>
+        <div *ngIf="loading.ventasDiarias" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.ventasDiarias" class="chart-container" style="height: 300px;">
+          <canvas id="ventasDiariasChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Ventas Mensuales con filtros -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title mb-0">Evolución de Ventas por Mes</h5>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-sm" 
+                    [ngClass]="{'btn-primary': filtroMensual === 'anio', 'btn-outline-primary': filtroMensual !== 'anio'}"
+                    (click)="aplicarFiltroMensual('anio')">Este Año</button>
+            <button type="button" class="btn btn-sm" 
+                    [ngClass]="{'btn-primary': filtroMensual === 'todos', 'btn-outline-primary': filtroMensual !== 'todos'}"
+                    (click)="aplicarFiltroMensual('todos')">Todos</button>
+          </div>
+        </div>
+        <div *ngIf="loading.ventasMensuales" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.ventasMensuales" class="chart-container" style="height: 300px;">
+          <canvas id="ventasMensualesChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Top Productos Unidades -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Top Productos - Unidades Vendidas</h5>
+        <div *ngIf="loading.topProductos" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.topProductos && topProductos.length > 0" class="chart-container" style="height: 280px;">
+          <canvas id="topProductosChart"></canvas>
+        </div>
+        <div *ngIf="!loading.topProductos && topProductos.length === 0" class="alert alert-warning">
+          No se encontraron datos para mostrar el gráfico de productos.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Top Productos Montos -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Top Productos - Monto de Venta</h5>
+        <div *ngIf="loading.topProductos" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.topProductos && topProductos.length > 0" class="chart-container" style="height: 280px;">
+          <canvas id="topProductosMontosChart"></canvas>
+        </div>
+        <div *ngIf="!loading.topProductos && topProductos.length === 0" class="alert alert-warning">
+          No se encontraron datos para mostrar el gráfico de productos.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Top Categorías (Distribución) -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Distribución por Categoría</h5>
+        <div *ngIf="loading.topCategorias" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.topCategorias && topCategorias.length > 0" class="chart-container" style="height: 350px;">
+          <canvas id="topCategoriasChart"></canvas>
+        </div>
+        <div *ngIf="!loading.topCategorias && topCategorias.length === 0" class="alert alert-warning">
+          No se encontraron datos para mostrar el gráfico de distribución por categoría.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Ventas por Categoría (Gráfico de Barras) -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Top 5 Categorías por Venta</h5>
+        <div *ngIf="loading.ventasPorCategoria" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.ventasPorCategoria && ventasPorCategoria.length > 0" class="chart-container" style="height: 350px;">
+          <canvas id="ventasPorCategoriaChart"></canvas>
+        </div>
+        <div *ngIf="!loading.ventasPorCategoria && ventasPorCategoria.length === 0" class="alert alert-warning">
+          No se encontraron datos para mostrar el gráfico de top categorías por venta.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tabla de Top Productos -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Detalle de Top Productos</h5>
+        <div *ngIf="loading.topProductos" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.topProductos" class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Producto</th>
+                <th class="text-end">Unidades</th>
+                <th class="text-end">Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of topProductos; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ producto.producto_nombre }}</td>
+                <td class="text-end">{{ producto.unidades }}</td>
+                <td class="text-end">{{ formatMonto(producto.monto) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla de Ventas por Categoría -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Detalle de Ventas por Categoría</h5>
+        <div *ngIf="loading.ventasPorCategoria" class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading.ventasPorCategoria" class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Categoría</th>
+                <th class="text-end">Unidades</th>
+                <th class="text-end">Total Ventas</th>
+                <th class="text-end">% del Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let categoria of ventasPorCategoria; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ categoria.categoria_nombre }}</td>
+                <td class="text-end">{{ categoria.unidades }}</td>
+                <td class="text-end">{{ formatMonto(categoria.total_ventas) }}</td>
+                <td class="text-end">{{ calcularPorcentaje(categoria.total_ventas) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

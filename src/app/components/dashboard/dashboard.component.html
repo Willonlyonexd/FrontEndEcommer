@@ -4,19 +4,20 @@
     <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
       <app-topbar></app-topbar>
       <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-
         <!-- Barra de herramientas -->
         <div class="toolbar" id="kt_toolbar">
           <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
             <div class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-              <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                Dashboard
-                <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
-                <small class="text-muted fs-7 fw-bold my-1 ms-1">#XRS-45670</small>
+              <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Dashboard
+                <span class="h-20px border-gray-400 border-start ms-3 mx-2"></span>
+                <ol class="breadcrumb text-muted fs-6 fw-semibold">
+                  <li class="breadcrumb-item pe-3">Ecommerce</li>
+                </ol>
               </h1>
             </div>
             <div class="d-flex align-items-center py-1">
-              <a href="#" class="btn btn-sm btn-primary">Crear</a>
+              <div class="text-muted me-2">{{ userName }} | {{ currentDate }}</div>
+              <a href="#" class="btn btn-sm btn-primary ms-2">Crear</a>
             </div>
           </div>
         </div>
@@ -24,53 +25,33 @@
         <!-- Contenido principal -->
         <div class="post d-flex flex-column-fluid" id="kt_post">
           <div id="kt_content_container" class="container-xxl">
-            <div class="row gy-4"> <!-- Espaciado vertical entre tarjetas -->
+            
+            <!-- Tabs Bootstrap -->
+            <ul class="nav nav-tabs custom-tabs" id="dashboardTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" [class.active]="activeTab === 'ventas'"
+                        (click)="setActiveTab('ventas')" id="ventas-tab">Ventas</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" [class.active]="activeTab === 'productos'"
+                        (click)="setActiveTab('productos')" id="productos-tab">Productos</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" [class.active]="activeTab === 'clientes'"
+                        (click)="setActiveTab('clientes')" id="clientes-tab">Clientes</button>
+              </li>
+            </ul>
 
-              <!-- Total Ventas -->
-              <div class="col-md-6">
-                <div class="card shadow-sm p-4 h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">Total Ventas</h5>
-                    <canvas id="totalVentasChart" style="height: 300px;"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Ingresos Generados -->
-              <div class="col-md-6">
-                <div class="card shadow-sm p-4 h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">Ingresos Generados</h5>
-                    <canvas id="ingresosGeneradosChart" style="height: 300px;"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Cantidad de Ventas -->
-              <div class="col-md-6">
-                <div class="card shadow-sm p-4 h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">Cantidad de Ventas</h5>
-                    <canvas id="cantidadVentasChart" style="height: 300px;"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Productos Más Vendidos -->
-              <div class="col-md-6">
-                <div class="card shadow-sm p-4 h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">Productos Más Vendidos</h5>
-                    <canvas id="productosMasVendidosChart" style="height: 300px;"></canvas>
-                  </div>
-                </div>
-              </div>
-
-            </div> <!-- Fin de fila -->
-          </div> <!-- Fin de contenedor -->
-        </div> <!-- Fin de post -->
-
-      </div> <!-- Fin de content -->
-    </div> <!-- Fin de wrapper -->
-  </div> <!-- Fin de page -->
+            <!-- Contenido de tabs -->
+            <div class="tab-content" id="dashboardTabsContent">
+              <!-- Carga condicional de componentes según el tab activo -->
+              <app-ventas-dashboard *ngIf="activeTab === 'ventas'"></app-ventas-dashboard>
+              <app-productos-dashboard *ngIf="activeTab === 'productos'"></app-productos-dashboard>
+              <app-clientes-dashboard *ngIf="activeTab === 'clientes'"></app-clientes-dashboard>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

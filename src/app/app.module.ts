@@ -65,7 +65,9 @@ import { PagoComponent } from './components/pago/pago.component';
 import { TerminosComponent } from './components/landing/terminos/terminos.component';
 import { PoliticaComponent } from './components/landing/politica/politica.component';
 import { ConfiguracionTiendaComponent } from './components/configuracion-tienda/configuracion-tienda.component';
-
+import { VentasDashboardComponent } from './components/dashboard/ventas/ventas-dashboard.component';
+import { ProductosDashboardComponent} from './components/dashboard/productos/productos-dashboard.component';
+import { ClientesDashboardComponent } from './components/dashboard/clientes/clientes-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +118,10 @@ import { ConfiguracionTiendaComponent } from './components/configuracion-tienda/
     PagoComponent,
     TerminosComponent,
     PoliticaComponent,
-    ConfiguracionTiendaComponent
+    ConfiguracionTiendaComponent,
+    VentasDashboardComponent,
+    ProductosDashboardComponent,
+    ClientesDashboardComponent
   ],
   imports: [
     BrowserModule,

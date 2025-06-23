@@ -1,193 +1,95 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { EstadisticaService } from '../../../services/estadistica.service';
 import Chart from 'chart.js/auto';
-import { ChartDataset } from 'chart.js';
 
 @Component({
   selector: 'app-regresion',
   templateUrl: './regresion.component.html',
-  styleUrl: './regresion.component.css'
+  styleUrls: ['./regresion.component.css']
 })
 export class RegresionComponent implements OnInit {
   @ViewChild('chartCanvas') chartCanvas: ElementRef | undefined;
   chart: any;
 
-  public meses: number = 2;
-  public datosHistoricos: any[] = [];
+  public tenantId: string = '6852dbf5c4a6f8d1a81074f6';
+  public historial: any[] = [];
   public predicciones: any[] = [];
-  public totalEsperado: number = 0;
-  public mesesPredichos: number = 0;
+  public diasPrediccion: number = 7;
 
-  loadingHistorico: boolean = false;
-  loadingPrediccion: boolean = false;
-  error: string | null = null;
-
-  constructor(private regresionService: EstadisticaService) {}
+  constructor(private estadisticaService: EstadisticaService) {}
 
   ngOnInit(): void {
-    this.extraerDatosRegresion();
+    this.obtenerPredicciones();
   }
 
-  ngAfterViewInit() {
-    // Inicializar el canvas después de que el DOM esté listo
-    setTimeout(() => {
-      if (this.chartCanvas && this.chartCanvas.nativeElement) {
-        this.inicializarGraficoVacio();
-      }
-    }, 100);
-  }
-
-  inicializarGraficoVacio() {
-    const ctx = this.chartCanvas?.nativeElement?.getContext('2d');
-    if (!ctx) {
-      console.error('No se pudo obtener el contexto del canvas.');
-      return;
-    }
-
-    this.chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: [],
-        datasets: []
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Ventas (Bs)'
-            }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'Mes'
-            }
-          }
-        }
-      }
-    });
-  }
-
-  extraerDatosRegresion() {
-    this.loadingHistorico = true;
-    this.error = null;
-
-    this.regresionService.extraerDatosRegresion().subscribe({
-      next: (response) => {
-        console.log('Datos de regresión extraídos:', response);
-        this.loadingHistorico = false;
-        this.entrenarRegresion();
-      },
-      error: (error) => {
-        console.error('Error al extraer los datos de regresión:', error);
-        this.error = 'Error al extraer los datos de regresión';
-        this.loadingHistorico = false;
-      }
-    });
-  }
-
-  entrenarRegresion() {
-    this.loadingHistorico = true;
-    this.error = null;
-
-    this.regresionService.extraerDatosRegresion().subscribe({
-      next: (response) => {
-        console.log('Datos de regresión entrenados:', response);
-        this.loadingHistorico = false;
-        this.getRegresionHistorica();
-      },
-      error: (error) => {
-        console.error('Error al entrenar la regresión:', error);
-        this.error = 'Error al entrenar la regresión';
-        this.loadingHistorico = false;
-      }
-    });
-  }
-
-  getRegresionHistorica() {
-    this.loadingHistorico = true;
-    this.error = null;
-
-    this.regresionService.getRegresionHistorica().subscribe({
-      next: (response) => {
-        this.datosHistoricos = response.historical_data || [];
-        this.actualizarGraficoHistorico();
-        this.loadingHistorico = false;
-      },
-      error: (error) => {
-        console.error('Error al obtener los datos de regresión histórica:', error);
-        this.error = 'Error al cargar datos históricos';
-        this.loadingHistorico = false;
-      }
-    });
-  }
-
-  regresionPredecir() {
-    this.loadingPrediccion = true;
-    this.error = null;
-
+  obtenerPredicciones(): void {
     const data = {
-      meses: this.meses
+      tenant_id: this.tenantId,
+      dias_historial: 30,
+      dias_prediccion: this.diasPrediccion
     };
 
-    this.regresionService.regresionPredecir(data).subscribe({
-      next: (response) => {
-        this.predicciones = response.predicciones || [];
-        this.totalEsperado = response.total_esperado || 0;
-        this.mesesPredichos = response.meses_predichos || 0;
-
-        this.actualizarGraficoConPredicciones();
-        this.loadingPrediccion = false;
+    this.estadisticaService.predecirSerieTemporal(data).subscribe({
+      next: (resp) => {
+        this.historial = (resp.historial || []).filter((item: any) => item.venta_total > 0);
+        this.predicciones = resp.predicciones || [];
+        this.dibujarGrafico();
       },
-      error: (error) => {
-        console.error('Error al predecir con regresión:', error);
-        this.error = 'Error al generar predicciones';
-        this.loadingPrediccion = false;
+      error: (err) => {
+        console.error('Error obteniendo predicciones:', err);
       }
     });
   }
 
-  actualizarMeses(nuevoValor: number) {
-    this.meses = nuevoValor;
-    this.regresionPredecir();
+  cambiarDias(dias: number): void {
+    this.diasPrediccion = dias;
+    this.obtenerPredicciones();
   }
 
-  actualizarGraficoHistorico() {
-    if (!this.chartCanvas || !this.chartCanvas.nativeElement) {
-      console.error('El canvas no está disponible');
-      return;
-    }
-
-    // Si ya existe un gráfico, destruirlo
+  dibujarGrafico(): void {
     if (this.chart) {
       this.chart.destroy();
     }
 
-    const ctx = this.chartCanvas.nativeElement.getContext('2d');
-    if (!ctx) {
-      console.error('No se puede obtener el contexto 2D del canvas');
-      return;
-    }
+    const ctx = this.chartCanvas?.nativeElement.getContext('2d');
 
-    const labels = this.datosHistoricos.map(item => `${item.nombre_mes} ${item.año}`);
-    const datos = this.datosHistoricos.map(item => item.ventas);
+    // Filtrar historial de los últimos 60 días
+    const hace60dias = new Date();
+    hace60dias.setDate(hace60dias.getDate() - 60);
+
+    const historialFiltrado = this.historial.filter(item => {
+      const fecha = new Date(item.fecha);
+      return fecha >= hace60dias;
+    });
+
+    const labelsHistorial = historialFiltrado.map(item => item.fecha);
+    const datosHistorial = historialFiltrado.map(item => item.venta_total);
+
+    const labelsPrediccion = this.predicciones.map(item => item.fecha);
+    const datosPrediccion = this.predicciones.map(item => Math.max(item.venta_total_predicho, 0));
+
+    const ultimoValor = datosHistorial[datosHistorial.length - 1];
+    const datosPrediccionConUnion = [ultimoValor, ...datosPrediccion];
 
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: labels,
+        labels: [...labelsHistorial, ...labelsPrediccion],
         datasets: [
           {
-            label: 'Histórico',
-            data: datos,
-            borderColor: 'rgba(51, 102, 204, 1)',
-            backgroundColor: 'rgba(51, 102, 204, 0.1)',
-            tension: 0.4,
-            fill: false
+            label: 'Historial',
+            data: [...datosHistorial, ...Array(labelsPrediccion.length).fill(null)],
+            borderColor: 'blue',
+            fill: false,
+            tension: 0.4
+          },
+          {
+            label: 'Predicción',
+            data: [...Array(datosHistorial.length - 1).fill(null), ...datosPrediccionConUnion],
+            borderColor: 'orange',
+            borderDash: [5, 5],
+            fill: false,
+            tension: 0.4
           }
         ]
       },
@@ -197,138 +99,13 @@ export class RegresionComponent implements OnInit {
         scales: {
           y: {
             beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Ventas (Bs)'
-            }
+            title: { display: true, text: 'Ventas (Bs)' }
           },
           x: {
-            title: {
-              display: true,
-              text: 'Mes'
-            }
+            title: { display: true, text: 'Fecha' }
           }
         }
       }
     });
-  }
-
-  actualizarGraficoConPredicciones() {
-    if (!this.chartCanvas || !this.chartCanvas.nativeElement || !this.chart) {
-      console.error('Canvas o gráfico no disponible');
-      return;
-    }
-
-    // Destruir el gráfico anterior
-    this.chart.destroy();
-
-    const ctx = this.chartCanvas.nativeElement.getContext('2d');
-
-    // Unir datos históricos y predicciones para el eje X
-    const labelsHistoricos = this.datosHistoricos.map(item => `${item.nombre_mes} ${item.año}`);
-    const labelsPredicciones = this.predicciones.map(item => `${item.nombre_mes} ${item.anio}`);
-
-    // Obtener el último punto de datos históricos para unir con las predicciones
-    const ultimoDatoHistorico = this.datosHistoricos.length > 0
-      ? this.datosHistoricos[this.datosHistoricos.length - 1]
-      : null;
-    // Crear datasets
-    const datasets: ChartDataset<'line'>[] = [
-
-      {
-        label: 'Histórico',
-        data: [...this.datosHistoricos.map(item => item.ventas), ...Array(labelsPredicciones.length).fill(null)],
-        borderColor: 'rgba(51, 102, 204, 1)',
-        backgroundColor: 'rgba(51, 102, 204, 0.1)',
-        tension: 0.4,
-        spanGaps: true
-      }
-    ];
-
-    // Añadir predicciones solo si hay datos
-    if (this.predicciones.length > 0) {
-      // Datos pesimistas
-      const datosPesimistas = Array(labelsHistoricos.length).fill(null);
-      // Si hay un punto de unión, añadirlo
-      if (ultimoDatoHistorico) {
-        datosPesimistas[datosPesimistas.length - 1] = ultimoDatoHistorico.ventas;
-      }
-      datasets.push({
-        label: 'Pesimista',
-        data: [...datosPesimistas, ...this.predicciones.map(item => item.prediccion_pesimista)],
-        borderColor: 'rgba(220, 57, 18, 1)',
-        borderDash: [5, 5] as number[],
-        tension: 0.4,
-        spanGaps: true
-      });
-
-      // Datos esperados
-      const datosEsperados = Array(labelsHistoricos.length).fill(null);
-      if (ultimoDatoHistorico) {
-        datosEsperados[datosEsperados.length - 1] = ultimoDatoHistorico.ventas;
-      }
-      datasets.push({
-        label: 'Esperado',
-        data: [...datosEsperados, ...this.predicciones.map(item => item.prediccion_esperada)],
-        borderColor: 'rgba(255, 153, 0, 1)',
-        tension: 0.4,
-        spanGaps: true
-      });
-
-      // Datos optimistas
-      const datosOptimistas = Array(labelsHistoricos.length).fill(null);
-      if (ultimoDatoHistorico) {
-        datosOptimistas[datosOptimistas.length - 1] = ultimoDatoHistorico.ventas;
-      }
-      datasets.push({
-        label: 'Optimista',
-        data: [...datosOptimistas, ...this.predicciones.map(item => item.prediccion_optimista)],
-        borderColor: 'rgba(16, 150, 24, 1)',
-        borderDash: [6, 3],
-        tension: 0.4,
-        spanGaps: true
-      });
-    }
-
-    // Crear nuevo gráfico
-    this.chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: [...labelsHistoricos, ...labelsPredicciones],
-        datasets: datasets
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Ventas (Bs)'
-            }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'Mes'
-            }
-          }
-        }
-      }
-    });
-  }
-
-  // Para debugging
-  onSelect(data: any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  }
-
-  onActivate(data: any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate(data: any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 }

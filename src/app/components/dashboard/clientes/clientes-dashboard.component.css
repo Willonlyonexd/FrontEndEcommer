@@ -1,0 +1,185 @@
+/* Estilos para indicadores de carga */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+/* Estilos para las tarjetas */
+.card {
+  height: 100%;
+  border: none;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  border-radius: 8px;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #181c32;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para las alertas */
+.alert-info {
+  background-color: rgba(0, 158, 247, 0.1);
+  border-color: rgba(0, 158, 247, 0.2);
+  color: #0095e8;
+}
+
+.alert-warning {
+  background-color: rgba(255, 206, 86, 0.1);
+  border-color: rgba(255, 206, 86, 0.2);
+  color: #ffc107;
+}/* Estilos para indicadores de carga */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+/* Estilos para KPIs */
+.card-kpi {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.card-kpi:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.card-kpi .card-title {
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 0;
+}
+
+.card-kpi .card-subtitle {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.kpi-icon {
+  background-color: rgba(0, 123, 255, 0.1);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpi-icon .fa-user-check {
+  color: #28a745;
+}
+
+.kpi-icon .fa-user-clock {
+  color: #dc3545;
+}
+
+.kpi-icon .fa-user-plus {
+  color: #17a2b8;
+}
+
+.kpi-icon .fa-users {
+  color: #007bff;
+}
+
+/* Estilos para las tarjetas */
+.card {
+  border: none;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #181c32;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para gráficos */
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Estilos para tablas */
+.table-responsive {
+  scrollbar-width: thin;
+  scrollbar-color: #adb5bd #f8f9fa;
+}
+
+.table-responsive::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #adb5bd;
+  border-radius: 10px;
+}
+
+.table th {
+  font-weight: 600;
+  color: #181c32;
+  background-color: #f5f8fa;
+  white-space: nowrap;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table thead.sticky-top {
+  z-index: 100;
+}
+
+/* Estilos para los estados de alerta */
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.fw-bold {
+  font-weight: 600 !important;
+}
+
+/* Estilos para alertas */
+.alert {
+  border-radius: 6px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 991.98px) {
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-kpi .card-title {
+    font-size: 1.5rem;
+  }
+  
+  .kpi-icon {
+    width: 40px;
+    height: 40px;
+  }
+}

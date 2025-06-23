@@ -1,0 +1,102 @@
+/* Estilos para indicadores de carga */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+/* Estilos para KPIs */
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #181c32;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos para tablas */
+.table-responsive {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Estilos para el contenedor de gráficos */
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Estilos para los botones de filtro */
+.btn-group .btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.76rem;
+}
+
+.btn-outline-primary {
+  color: #009ef7;
+  border-color: #009ef7;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #009ef7;
+  border-color: #009ef7;
+}
+
+.btn-primary {
+  background-color: #009ef7;
+  border-color: #009ef7;
+}
+
+.btn-primary:hover {
+  background-color: #0095e8;
+  border-color: #0095e8;
+}
+
+/* Estilos para las tarjetas */
+.card {
+  height: 100%;
+  border: none;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  border-radius: 8px;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #181c32;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para alertas */
+.alert-warning {
+  background-color: rgba(255, 206, 86, 0.1);
+  border-color: rgba(255, 206, 86, 0.2);
+  color: #ffc107;
+}
+
+/* Estilos para información de zoom */
+.zoom-info {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos responsivos */
+@media (max-width: 991.98px) {
+  .card-body .d-flex.justify-content-between {
+    flex-direction: column;
+  }
+  
+  .card-body .btn-group {
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .card-body .btn-group .btn {
+    flex: 1;
+  }
+  
+  .kpi-value {
+    font-size: 1.5rem;
+  }
+}
