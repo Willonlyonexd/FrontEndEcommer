@@ -1,0 +1,445 @@
+
+<div class="d-flex flex-column flex-root">
+    <!--begin::Page-->
+    <div class="page d-flex flex-row flex-column-fluid">
+      <!--begin::Aside-->
+      <app-sidebar></app-sidebar>
+      <!--end::Aside-->
+      <!--begin::Wrapper-->
+      <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+        <!--begin::Header-->
+        <app-topbar></app-topbar>
+        <!--end::Header-->
+        <!--begin::Content-->
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+          <!--begin::Toolbar-->
+          <div class="toolbar" id="kt_toolbar">
+            <!--begin::Container-->
+            <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+              <!--begin::Page title-->
+              <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                <!--begin::Title-->
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">dashboard
+                    <span class="h-20px border-gray-400 border-start ms-3 mx-2"></span>
+                    <ol class="breadcrumb text-muted fs-6 fw-semibold">
+
+                      <li class="breadcrumb-item pe-3 ">Configuracion</li>
+                    </ol>
+                  </h1>
+                <!--end::Title-->
+              </div>
+              <!--end::Page title-->
+              <!--begin::Actions-->
+              <div class="d-flex align-items-center py-1">
+
+
+                <!--end::Button-->
+              </div>
+              <!--end::Actions-->
+            </div>
+            <!--end::Container-->
+          </div>
+          <!--end::Toolbar-->
+          <!--begin::Post-->
+          <div class="post d-flex flex-column-fluid" id="kt_post">
+            <!--begin::Container-->
+            <div id="kt_content_container" class="container-xxl">
+
+              <div class="row gy-5 g-xl-8">
+                <div class="col-12">
+         <div class="card mb-5 mb-xl-10">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="fs-3 fw-bold">Configuracion de la tienda</h3>
+      <span class="text-muted mt-1 fw-normal">Personaliza la apariencia de tu tienda online</span>
+    </div>
+    <div class="card-toolbar">
+      <ul class="nav nav-tabs nav-line-tabs border-transparent">
+        <li class="nav-item">
+          <a class="nav-link px-4" [ngClass]="{'active': activeTab === 'logo'}" (click)="changeTab('logo')">
+            <i class="bi bi-image me-1"></i> Logo
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-4" [ngClass]="{'active': activeTab === 'banner'}" (click)="changeTab('banner')">
+            <i class="bi bi-image-fill me-1"></i> Banner
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-4" [ngClass]="{'active': activeTab === 'contacto'}" (click)="changeTab('contacto')">
+            <i class="bi bi-phone me-1"></i> Contacto
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <!-- Mensaje de alerta -->
+    <div *ngIf="mensaje" class="alert"
+      [ngClass]="{'alert-danger': tipoMensaje === 'error', 'alert-success': tipoMensaje === 'success'}">
+      {{ mensaje }}
+    </div>
+
+    <!-- Sección Logo -->
+<!-- Sección Logo -->
+<div *ngIf="activeTab === 'logo'" class="py-3">
+  <!-- Selector de logo -->
+  <div class="mb-5">
+    <label class="form-label d-block mb-2">Seleccionar logo de la tienda <i class="bi bi-info-circle fs-7 text-muted"></i></label>
+    <div class="border border-dashed border-gray-300 rounded p-7 text-center bg-light-primary" style="max-width: 100%;">
+      <div class="d-flex flex-column align-items-center" (click)="fileInput.click()" style="cursor: pointer;">
+        <i class="bi bi-image fs-3x text-primary mb-3"></i>
+        <div *ngIf="logoFile" class="fw-bold">{{ logoFile.name }}</div>
+        <div *ngIf="!logoFile" class="fw-bold">Haga clic para seleccionar un archivo</div>
+        <div class="text-muted mt-2">Formatos: JPG, PNG, GIF. Máximo 2MB</div>
+      </div>
+      <input #fileInput type="file" accept="image/jpeg,image/png,image/gif" class="d-none" (change)="onLogoChange($event)">
+    </div>
+  </div>
+
+  <!-- Logo actual y previsualización -->
+  <div class="row mb-8">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <h5 class="fw-bold mb-3">Logo Actual</h5>
+      <div class="border rounded p-6 text-center bg-light" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+        <div *ngIf="isLoading" class="spinner-border text-primary"></div>
+        <div *ngIf="!isLoading">
+          <img *ngIf="logoActual" [src]="logoActual" class="img-fluid" style="max-height: 120px; max-width: 100%;">
+          <div *ngIf="!logoActual" class="text-muted">
+            <i class="bi bi-image fs-1 d-block mb-2"></i>
+            No hay logo configurado
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h5 class="fw-bold mb-3">Previsualización</h5>
+      <div class="border rounded p-6 text-center bg-light" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+        <div *ngIf="previewLogo && previewLogo !== logoActual">
+          <img [src]="previewLogo" class="img-fluid" style="max-height: 120px; max-width: 100%;">
+        </div>
+        <div *ngIf="!previewLogo || previewLogo === logoActual" class="text-muted">
+          <i class="bi bi-eye fs-1 d-block mb-2"></i>
+          Selecciona un archivo para ver la previsualización
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Previsualización en tienda -->
+  <div class="separator my-10"></div>
+
+  <div class="mb-8">
+    <h5 class="fw-bold mb-3">
+      <i class="bi bi-shop me-2"></i>
+      Así se verá en la tienda:
+    </h5>
+
+    <div class="border rounded">
+      <div class="d-flex align-items-center justify-content-between p-4 border-bottom">
+        <div>
+          <img *ngIf="previewLogo" [src]="previewLogo" style="height: 40px; max-width: 120px;">
+          <span *ngIf="!previewLogo" class="fw-bold">Nombre de tienda</span>
+        </div>
+        <div class="d-flex gap-5">
+          <span class="fw-bold">Inicio</span>
+          <span>Productos</span>
+          <span>Contacto</span>
+        </div>
+      </div>
+      <div class="p-6 text-center text-muted" style="min-height: 100px;">
+        Contenido de la tienda
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-light btn-active-light-primary me-3" (click)="cancelarLogo()">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="guardarLogo()" [disabled]="!logoFile || isLoading">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+      Guardar cambios
+    </button>
+  </div>
+</div>
+
+<!-- Sección Banner -->
+<div *ngIf="activeTab === 'banner'" class="py-3">
+  <!-- Selector de banner -->
+  <div class="mb-5">
+    <label class="form-label d-block mb-2">Seleccionar banner de la tienda <i class="bi bi-info-circle fs-7 text-muted"></i></label>
+    <div class="border border-dashed border-gray-300 rounded p-7 text-center bg-light-primary" style="max-width: 100%;">
+      <div class="d-flex flex-column align-items-center" (click)="bannerInput.click()" style="cursor: pointer;">
+        <i class="bi bi-image-fill fs-3x text-primary mb-3"></i>
+        <div *ngIf="bannerFile" class="fw-bold">{{ bannerFile.name }}</div>
+        <div *ngIf="!bannerFile" class="fw-bold">Haga clic para seleccionar un archivo</div>
+        <div class="text-muted mt-2">Formatos: JPG, PNG, GIF. Máximo 5MB</div>
+      </div>
+      <input #bannerInput type="file" accept="image/jpeg,image/png,image/gif" class="d-none" (change)="onBannerChange($event)">
+    </div>
+  </div>
+
+  <!-- Banner actual y previsualización -->
+  <div class="row mb-8">
+    <div class="col-md-12 mb-4">
+      <h5 class="fw-bold mb-3">Banner Actual</h5>
+      <div class="border rounded p-6 text-center bg-light" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
+        <div *ngIf="isLoadingBanner" class="spinner-border text-primary"></div>
+        <div *ngIf="!isLoadingBanner" style="width: 100%;">
+          <img *ngIf="bannerActual" [src]="bannerActual" class="img-fluid rounded" style="max-height: 180px; max-width: 100%;">
+          <div *ngIf="!bannerActual" class="text-muted">
+            <i class="bi bi-image fs-1 d-block mb-2"></i>
+            No hay banner configurado
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <h5 class="fw-bold mb-3">Previsualización</h5>
+      <div class="border rounded p-6 text-center bg-light" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
+        <div *ngIf="previewBanner && previewBanner !== bannerActual" style="width: 100%;">
+          <img [src]="previewBanner" class="img-fluid rounded" style="max-height: 180px; max-width: 100%;">
+        </div>
+        <div *ngIf="!previewBanner || previewBanner === bannerActual" class="text-muted">
+          <i class="bi bi-eye fs-1 d-block mb-2"></i>
+          Selecciona un archivo para ver la previsualización
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Previsualización en tienda -->
+  <div class="separator my-10"></div>
+
+  <div class="mb-8">
+    <h5 class="fw-bold mb-3">
+      <i class="bi bi-shop me-2"></i>
+      Así se verá en la tienda:
+    </h5>
+
+    <div class="border rounded">
+      <div class="d-flex align-items-center justify-content-between p-4 border-bottom">
+        <div>
+          <img *ngIf="logoActual" [src]="logoActual" style="height: 40px; max-width: 120px;">
+          <span *ngIf="!logoActual" class="fw-bold">Nombre de tienda</span>
+        </div>
+        <div class="d-flex gap-5">
+          <span class="fw-bold">Inicio</span>
+          <span>Productos</span>
+          <span>Contacto</span>
+        </div>
+      </div>
+      <div style="width: 100%;">
+        <img *ngIf="previewBanner" [src]="previewBanner" class="img-fluid" style="width: 100%; max-height: 250px; object-fit: cover;">
+        <div *ngIf="!previewBanner" class="bg-light text-center text-muted p-6" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+          <span>No hay banner configurado</span>
+        </div>
+      </div>
+      <div class="p-6 text-center text-muted">
+        Contenido de la tienda
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-light btn-active-light-primary me-3" (click)="cancelarBanner()">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="guardarBanner()" [disabled]="!bannerFile || isLoadingBanner">
+      <span *ngIf="isLoadingBanner" class="spinner-border spinner-border-sm me-2"></span>
+      Guardar cambios
+    </button>
+  </div>
+</div>
+
+    <!-- Sección Contacto -->
+    <div *ngIf="activeTab === 'contacto'" class="py-3">
+      <div *ngIf="isLoadingContacto" class="d-flex justify-content-center py-5">
+        <div class="spinner-border text-primary"></div>
+      </div>
+
+      <div *ngIf="!isLoadingContacto">
+        <form>
+          <!-- Información de contacto -->
+          <div class="mb-8">
+            <h4 class="fw-bold mb-3">Información de contacto</h4>
+
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <label class="form-label">Teléfono</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-telephone"></i>
+                  </span>
+                  <input type="text" class="form-control" [(ngModel)]="contacto.telefono" name="telefono" placeholder="+123456789">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+                  <input type="email" class="form-control" [(ngModel)]="contacto.email" name="email" placeholder="ejemplo@tudominio.com">
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <label class="form-label">WhatsApp</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-whatsapp"></i>
+                  </span>
+                  <input type="text" class="form-control" [(ngModel)]="contacto.whatsapp" name="whatsapp" placeholder="+123456789">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Redes sociales -->
+          <div class="mb-8">
+            <h4 class="fw-bold mb-3">Redes Sociales</h4>
+
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <label class="form-label">Facebook</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-facebook"></i>
+                  </span>
+                  <input type="text" class="form-control" [(ngModel)]="contacto.facebook" name="facebook" placeholder="https://facebook.com/tu-pagina">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Instagram</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-instagram"></i>
+                  </span>
+                  <input type="text" class="form-control" [(ngModel)]="contacto.instagram" name="instagram" placeholder="https://instagram.com/tu-cuenta">
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <label class="form-label">Twitter</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-twitter"></i>
+                  </span>
+                  <input type="text" class="form-control" [(ngModel)]="contacto.twitter" name="twitter" placeholder="https://twitter.com/tu-cuenta">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">TikTok</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-tiktok"></i>
+                  </span>
+                  <input type="text" class="form-control" [(ngModel)]="contacto.tiktok" name="tiktok" placeholder="https://tiktok.com/@tu-cuenta">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Previsualización en tienda -->
+          <div class="separator my-10"></div>
+
+          <div class="mb-8">
+            <h5 class="fw-bold mb-3">
+              <i class="bi bi-shop me-2"></i>
+              Así se verá en la tienda:
+            </h5>
+
+            <div class="border rounded">
+              <div class="p-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="fw-bold mb-4">Contáctanos</h5>
+
+                    <div *ngIf="contacto.telefono" class="d-flex align-items-center mb-3">
+                      <div class="rounded-circle bg-light p-2 me-3">
+                        <i class="bi bi-telephone fs-4"></i>
+                      </div>
+                      <span>{{ contacto.telefono }}</span>
+                    </div>
+
+                    <div *ngIf="contacto.whatsapp" class="d-flex align-items-center mb-3">
+                      <div class="rounded-circle bg-light p-2 me-3">
+                        <i class="bi bi-whatsapp fs-4"></i>
+                      </div>
+                      <span>{{ contacto.whatsapp }}</span>
+                    </div>
+
+                    <div *ngIf="contacto.email" class="d-flex align-items-center mb-3">
+                      <div class="rounded-circle bg-light p-2 me-3">
+                        <i class="bi bi-envelope fs-4"></i>
+                      </div>
+                      <span>{{ contacto.email }}</span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <h5 class="fw-bold mb-4">Redes sociales</h5>
+
+                    <div class="d-flex gap-3">
+                      <a *ngIf="contacto.facebook" class="btn btn-icon btn-light btn-sm" [href]="contacto.facebook" target="_blank">
+                        <i class="bi bi-facebook"></i>
+                      </a>
+
+                      <a *ngIf="contacto.instagram" class="btn btn-icon btn-light btn-sm" [href]="contacto.instagram" target="_blank">
+                        <i class="bi bi-instagram"></i>
+                      </a>
+
+                      <a *ngIf="contacto.twitter" class="btn btn-icon btn-light btn-sm" [href]="contacto.twitter" target="_blank">
+                        <i class="bi bi-twitter"></i>
+                      </a>
+
+                      <a *ngIf="contacto.tiktok" class="btn btn-icon btn-light btn-sm" [href]="contacto.tiktok" target="_blank">
+                        <i class="bi bi-tiktok"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Acciones -->
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" (click)="guardarContacto()" [disabled]="isLoadingContacto">
+              <span *ngIf="isLoadingContacto" class="spinner-border spinner-border-sm me-2"></span>
+              Guardar cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+              </div>
+
+            </div>
+            <!--end::Container-->
+          </div>
+          <!--end::Post-->
+        </div>
+        <!--end::Content-->
+
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+  </div>

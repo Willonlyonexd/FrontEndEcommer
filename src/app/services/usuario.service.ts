@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GLOBAL } from './GLOBAL';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { StorageService } from './storage.service';
 
 
 @Injectable({
@@ -12,7 +13,8 @@ export class UsuarioService {
 
   public url=GLOBAL.url
   constructor(
-    private  _http: HttpClient
+    private  _http: HttpClient,
+    private storageService: StorageService
   ) {}
 
   createTenant(data:any):Observable<any>{
@@ -34,7 +36,7 @@ export class UsuarioService {
     return this._http.post(this.url+'/login',data,{headers:headers})
   }
 
-  
+
   cambioEstado(id:any,data:any,token:any):Observable<any>{
     let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
     return this._http.put(this.url+'/cambioEstado/'+id,data,{headers:headers})
@@ -44,8 +46,8 @@ export class UsuarioService {
     let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
     return this._http.get(this.url+'/getUsuario/'+id,{headers:headers})
   }
-  
-  
+
+
   updateUsuario(id:any,data:any,token:any):Observable<any>{
     let headers= new HttpHeaders({'Content-Type':'application/json','Autorization':token})
     return this._http.put(this.url+'/updateUsuario/'+id,data,{headers:headers})
@@ -53,10 +55,11 @@ export class UsuarioService {
   EstaAutenticado(){
     try {
       if (typeof localStorage !== 'undefined') {
-        const token:any = localStorage.getItem('token');
+        const token:any = this.storageService.getItem('token');
+        console.log("token",token);
         const helper= new JwtHelperService();
         const decode=helper.decodeToken(token);
-    
+
         console.log(decode);
         if(!token){
           localStorage.clear();
@@ -66,7 +69,7 @@ export class UsuarioService {
           localStorage.clear();
           return false;
         }
-    
+
         if(helper.isTokenExpired(token)){
           localStorage.clear();
           return false;

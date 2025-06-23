@@ -22,7 +22,7 @@
                 <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">dashboard
                     <span class="h-20px border-gray-400 border-start ms-3 mx-2"></span>
                     <ol class="breadcrumb text-muted fs-6 fw-semibold">
-                      
+
                       <li class="breadcrumb-item pe-3 ">Ventas</li>
                     </ol>
                   </h1>
@@ -31,8 +31,8 @@
               <!--end::Page title-->
               <!--begin::Actions-->
               <div class="d-flex align-items-center py-1">
-                
-             
+
+
                 <!--end::Button-->
               </div>
               <!--end::Actions-->
@@ -44,7 +44,7 @@
           <div class="post d-flex flex-column-fluid" id="kt_post">
             <!--begin::Container-->
             <div id="kt_content_container" class="container-xxl">
-                
+
               <div class="row gy-5 g-xl-8">
                 <div class="col-12">
                     <div class="card h-xl-100">
@@ -61,44 +61,44 @@
                               exportar XLS
                           </a>
                             <!--end::Title-->
-                    
+
                             <!--begin::Create campaign button-->
-                           
+
                             <!--end::Create campaign button-->
                         </div>
                         <!--end::Card header-->
-                       
+
                         <!--begin::Card body-->
                         <div class="card-body pt-4">
-                                
+
                             <div class="d-flex justify-content-between" style="    margin-bottom: 2rem !important;">
                                 <div class="input-group " style=" max-width: fit-content !important;">
                                     <input id="kt_daterangepicker_1" type="text" class="form-control form-control-solid w-350px  form-control-sm" />
-                                  
+
                                 </div>
-                                
-                    
-                             
-                                
+
+
+
+
                             </div>
-                            
-                      
-                    
+
+
+
                             <!--begin::Seprator-->
                             <div class="separator separator-dashed my-5"></div>
                             <!--end::Seprator-->
-                    
+
                             <ng-container *ngIf="ventas.length>=1" >
                                 <div class="card mb-5" style="background: #f5f8fa !important" *ngFor="let item of ventas| slice:(page-1) * pageSize: (page-1) * pageSize+pageSize ; let idx=index ">
                                     <div class="card-body">
-                                        
-    
+
+
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <span class="fw-700 fs-4 mb-3 text-gray-900"> 
+                                                <span class="fw-700 fs-4 mb-3 text-gray-900">
                                                     #{{item.createdAT| date:'YYYY'  }}
                                                  </span>
-            
+
                                                  <div class="d-flex flex-wrap fw-semibold fs-6  pe-2">
                                                     <a  class="d-flex align-items-center text-gray-500  me-5 mb-2">
                                                     {{item.cliente.nombres.split(' ')[0]}}
@@ -110,24 +110,24 @@
                                                     <a  class="d-flex align-items-center text-gray-500  mb-2 me-5">
                                                          {{item.proveedor}}
                                                     </a>
-    
+
                                                     <span class="badge " [ngClass]="{'badge-primary': item.estado=='Procesado', 'badge-danger':item.estado=='Cancelado', 'badge-success':item.estado=='Confirmado' }" style="height: 20px !important;">{{item.estado}}</span>
-                                                   
+
                                                 </div>
 
                                                 <div class="d-flex flex-wrap fw-semibold fs-6  pe-2">
                                                   <a  class="d-flex align-items-center text-gray-500  me-5 mb-2">
                                                   Transaccion Tigo: {{item.detallePago?.transaccionTigo || 'No tiene' }}
                                                   </a>
-                                                 
+
                                                 </div>
                                                 <div class="d-flex flex-wrap fw-semibold fs-6  pe-2">
                                                   <a  class="d-flex align-items-center text-gray-500  me-5 mb-2">
                                                   Estado de Transaccion: {{item.detallePago?.messageEstado || 'No tiene' }}
                                                   </a>
-                                                 
+
                                                 </div>
-    
+
                                                 <ul *ngIf="tienePermiso('detalles de venta')" style="list-style: none; padding-left: 0px; margin-bottom: 0px;  ">
                                                     <li>
                                                        <a [routerLink]="['/ventas/detalles',item._id]">
@@ -146,13 +146,13 @@
                                                     <div class="fs-2 fw-bold " >  {{item.total| currency:'BOB' }} </div>
                                                 </div>
                                                 <!--end::Number-->
-                
+
                                                 <!--begin::Label-->
                                                 <div class="fw-semibold fs-6 text-gray-500">Total</div>
                                                 <!--end::Label-->
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </ng-container>
@@ -167,7 +167,7 @@
                                             </span>
                                     </div>
                                     <!--end::Icon-->
-                                
+
                                     <!--begin::Message-->
                                     <div class="pb-15 fw-semibold">
                                         <h3 class="text-gray-600 fs-5 mb-2">no se encontraron resultados</h3>
@@ -182,7 +182,7 @@
                             <ngb-pagination [collectionSize]="ventas.length" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" aria-label="Default pagination"></ngb-pagination>
                         </div>
                     </div>
-              
+
                 </div>
               </div>
 
@@ -192,7 +192,7 @@
           <!--end::Post-->
         </div>
         <!--end::Content-->
-       
+
       </div>
       <!--end::Wrapper-->
     </div>

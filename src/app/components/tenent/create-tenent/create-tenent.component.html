@@ -1,188 +1,442 @@
-
 <div class="d-flex flex-column flex-root">
-    <!--begin::Page-->
-    <div class="page d-flex flex-row flex-column-fluid">
-      <!--begin::Aside-->
-      <!--end::Aside-->
-      <!--begin::Wrapper-->
-      <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-        <!--begin::Header-->
-     
-        <!--end::Header-->
-        <!--begin::Content-->
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-          <!--begin::Toolbar-->
-          <div class="toolbar" id="kt_toolbar">
-            <!--begin::Container-->
-            <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
-              <!--begin::Page title-->
-              <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-                <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Registro de Nuevo Cliente
-                  
-                </h1>
-                <!--end::Title-->
-              </div>
-              <!--end::Page title-->
-              <!--begin::Actions-->
-              <div class="d-flex align-items-center py-1">
-                
-               
-                <!--end::Button-->
-              </div>
-              <!--end::Actions-->
+  <!--begin::Page-->
+  <div class="page d-flex flex-row flex-column-fluid">
+    <!--begin::Wrapper-->
+    <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+      <!--begin::Header-->
+      <!--end::Header-->
+      <!--begin::Content-->
+      <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Toolbar-->
+        <div class="toolbar" id="kt_toolbar">
+          <!--begin::Container-->
+          <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+            <!--begin::Page title-->
+            <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+              <!--begin::Title-->
+              <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
+                <i class="ki-duotone ki-profile-user fs-1 text-primary me-3">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                  <span class="path4"></span>
+                </i>
+                Registro de Nuevo Cliente
+              </h1>
+              <!--end::Title-->
             </div>
-            <!--end::Container-->
+            <!--end::Page title-->
           </div>
-          <!--end::Toolbar-->
-          <!--begin::Post-->
-          <div class="post d-flex flex-column-fluid" id="kt_post">
-            <!--begin::Container-->
-            <div id="kt_content_container" class="container-xxl">
-                
-              <div class="row gy-5 g-xl-8">
-                <div class="col-12">
-                  <div class="card mb-5 mb-xl-5">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 pt-5">
-                      <!--begin::Card title-->
-                      <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label  fs-3 mb-1 fw-700">Registro</span>
-                        <span class="text-muted mt-1 fw-semibold fs-7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aspernatur.</span>
-                      </h3>
-                      <div class="card-toolbar">
-                        
+          <!--end::Container-->
+        </div>
+        <!--end::Toolbar-->
+        <!--begin::Post-->
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+          <!--begin::Container-->
+          <div id="kt_content_container" class="container-xxl">
+
+            <div class="row gy-5 g-xl-8">
+              <!-- COLUMNA IZQUIERDA: REGISTRO -->
+              <div class="col-lg-6">
+                <div class="card mb-5 mb-xl-5 shadow-lg border-0">
+                  <!--begin::Card header-->
+                  <div class="card-header border-0 pt-6 bg-light">
+                    <!--begin::Card title-->
+                    <h3 class="card-title align-items-start flex-column">
+                      <span class="card-label fs-2 mb-1 fw-bold text-gray-900">
+                        <i class="ki-duotone ki-user-edit fs-2 text-primary me-2">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                          <span class="path3"></span>
+                        </i>
+                        Registro
+                      </span>
+                      <span class="text-muted mt-1 fw-semibold fs-7">Completa tus datos para crear tu cuenta</span>
+                    </h3>
+                  </div>
+                  <!--end::Card header-->
+
+                  <div class="card-body px-9 py-6">
+                    <!--begin::Input group - Empresa-->
+                    <div class="row mb-7">
+                      <label class="col-lg-4 col-form-label required fw-bold fs-6 text-gray-900">
+                        <i class="ki-duotone ki-shop fs-5 text-primary me-1">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                          <span class="path3"></span>
+                          <span class="path4"></span>
+                          <span class="path5"></span>
+                        </i>
+                        Empresa
+                      </label>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid border-2"
+                          placeholder="Nombre de tu empresa"
+                          [(ngModel)]="empresa.nombreTienda"
+                          [class.is-invalid]="!empresa.nombreTienda && showValidation"
+                        />
+                        <div class="form-text text-muted">El nombre que aparecerá en tu tienda online</div>
                       </div>
-                      
                     </div>
-                    <!--begin::Card header-->
-                    <div class="card-body p-9">
-                         
-                      <!--begin::Input group-->
-                      <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Empresa</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-8">
-                          <!--begin::Row-->
-                          <div class="row">
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                              <input type="text" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Empresa" 
-                              [(ngModel)]="empresa.nombreTienda"/>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                           
-                            <!--end::Col-->
+
+                    <!--begin::Input group - Nombres y Apellidos-->
+                    <div class="row mb-7">
+                      <label class="col-lg-4 col-form-label required fw-bold fs-6 text-gray-900">
+                        <i class="ki-duotone ki-profile-circle fs-5 text-success me-1">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                          <span class="path3"></span>
+                        </i>
+                        Nombres y apellidos
+                      </label>
+                      <div class="col-lg-8">
+                        <div class="row">
+                          <div class="col-lg-6 fv-row mb-3">
+                            <input
+                              type="text"
+                              class="form-control form-control-lg form-control-solid border-2"
+                              placeholder="Nombres"
+                              [(ngModel)]="empresa.nombres"
+                              [class.is-invalid]="!empresa.nombres && showValidation"
+                            />
                           </div>
-                          <!--end::Row-->
-                        </div>
-                        <!--end::Col-->
-                      </div>
-                      <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nombres y apellidos</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-8">
-                          <!--begin::Row-->
-                          <div class="row">
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                              <input type="text" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Nombres" 
-                              [(ngModel)]="empresa.nombres"/>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                              <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Apellidos" 
-                              [(ngModel)]="empresa.apellidos"  />
-                            </div>
-                            <!--end::Col-->
+                          <div class="col-lg-6 fv-row">
+                            <input
+                              type="text"
+                              class="form-control form-control-lg form-control-solid border-2"
+                              placeholder="Apellidos"
+                              [(ngModel)]="empresa.apellidos"
+                              [class.is-invalid]="!empresa.apellidos && showValidation"
+                            />
                           </div>
-                          <!--end::Row-->
                         </div>
-                        <!--end::Col-->
                       </div>
-                      <!--end::Input group-->
-                      <!--begin::Input group-->
-                      <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Correo electrónico</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-8 fv-row">
-                          <!--begin::Row-->
-                          <div class="row">
-                            <!--begin::Col-->
-                            <div class="col-lg-12 fv-row">
-                              <input type="text" class="form-control form-control-lg form-control-solid" placeholder="john.doe@domain.cpm" 
-                              [(ngModel)]="empresa.email"/>
-                            </div>
-                            <!--end::Col-->
-                            
-                          </div>
-                          <!--end::Row-->
-                          
-                        </div>
-                        <!--end::Col-->
-                      </div>
-                      <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Contraseña</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-8 fv-row">
-                          <!--begin::Row-->
-                          <div class="row">
-                            <!--begin::Col-->
-                            <div class="col-lg-12 fv-row">
-                              <input type="password" class="form-control form-control-lg form-control-solid" placeholder="Contraseña" 
-                              [(ngModel)]="empresa.password"/>
-                            </div>
-                            <!--end::Col-->
-                            
-                          </div>
-                          <!--end::Row-->
-                          
-                        </div>
-                        <!--end::Col-->
-                      </div>
-                      <!--end::Input group-->
-                     
-                      
-                      
                     </div>
-                    <div class="card-footer">
-                      <button *ngIf="!btn_load" type="button" class="btn btn-dark" (click)="registrar()">
-                        <span class="svg-icon svg-icon-3 ms-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="currentColor"/>
-                          <rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="currentColor"/>
-                          </svg>
-                        </span>
-                        Crear Usuario
-                      </button >
-                      <button *ngIf="btn_load" class="btn btn-dark" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                        Procensando...
+
+                    <!--begin::Input group - Email-->
+                    <div class="row mb-7">
+                      <label class="col-lg-4 col-form-label required fw-bold fs-6 text-gray-900">
+                        <i class="ki-duotone ki-sms fs-5 text-info me-1">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        Correo electrónico
+                      </label>
+                      <div class="col-lg-8 fv-row">
+                        <input
+                          type="email"
+                          class="form-control form-control-lg form-control-solid border-2"
+                          placeholder="tu&#64;email.com"
+                          [(ngModel)]="empresa.email"
+                          [class.is-invalid]="!empresa.email && showValidation"
+                        />
+                        <div class="form-text text-muted">Usaremos este email para contactarte</div>
+                      </div>
+                    </div>
+
+                    <!--begin::Input group - Contraseña-->
+                    <div class="row mb-7">
+                      <label class="col-lg-4 col-form-label required fw-bold fs-6 text-gray-900">
+                        <i class="ki-duotone ki-security-user fs-5 text-warning me-1">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        Contraseña
+                      </label>
+                      <div class="col-lg-8 fv-row">
+                        <div class="position-relative">
+                          <input
+                            [type]="showPassword ? 'text' : 'password'"
+                            class="form-control form-control-lg form-control-solid border-2"
+                            placeholder="Mínimo 8 caracteres"
+                            [(ngModel)]="empresa.password"
+                            [class.is-invalid]="!empresa.password && showValidation"
+                          />
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-icon position-absolute end-0 top-50 translate-middle-y me-3"
+                            (click)="togglePassword()"
+                          >
+                            <i [class]="showPassword ? 'ki-duotone ki-eye-slash fs-5' : 'ki-duotone ki-eye fs-5'" class="text-muted">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                              <span class="path3"></span>
+                            </i>
+                          </button>
+                        </div>
+                        <div class="form-text text-muted">
+                          <i class="ki-duotone ki-information-5 fs-6 text-primary me-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                          </i>
+                          Mínimo 8 caracteres con mayúsculas, minúsculas y números
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--begin::Input group - Términos y Condiciones-->
+                    <div class="row mb-7">
+                      <div class="col-12">
+                        <div class="form-check form-check-custom form-check-success form-check-solid">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="kt_accept_terms"
+                            [(ngModel)]="acceptTerms"
+                            [class.is-invalid]="!acceptTerms && showValidation"
+                          />
+                          <label class="form-check-label fw-semibold text-gray-800 fs-6 ms-1" for="kt_accept_terms">
+                            He leído y acepto los
+                            <a href="/terminos" target="_blank" class="link-primary fw-bold text-decoration-underline">
+                              Términos y Condiciones
+                            </a>
+                            y la
+                            <a href="/politica" target="_blank" class="link-primary fw-bold text-decoration-underline">
+                              Política de Privacidad
+                            </a>
+                            de ShopMind
+                            <span class="text-danger">*</span>
+                          </label>
+                        </div>
+
+                        <!--begin::Terms Notice-->
+                        <div class="notice d-flex bg-light-info rounded border-info border border-dashed p-6 mt-4">
+                          <i class="ki-duotone ki-information-5 fs-2tx text-info me-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                          </i>
+                          <div class="d-flex flex-stack flex-grow-1">
+                            <div class="fw-semibold">
+                              <h6 class="text-gray-900 fw-bold mb-2">
+                                <i class="ki-duotone ki-verify fs-5 text-success me-1">
+                                  <span class="path1"></span>
+                                  <span class="path2"></span>
+                                </i>
+                                ¿Por qué necesitamos tu aceptación?
+                              </h6>
+                              <div class="fs-7 text-gray-700">
+                                <div class="d-flex align-items-center mb-1">
+                                  <i class="ki-duotone ki-check-circle fs-6 text-success me-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                  </i>
+                                  <strong>Cumplimiento legal:</strong> Requerido por ley boliviana
+                                </div>
+                                <div class="d-flex align-items-center mb-1">
+                                  <i class="ki-duotone ki-check-circle fs-6 text-success me-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                  </i>
+                                  <strong>Protección mutua:</strong> Define derechos y responsabilidades
+                                </div>
+                                <div class="d-flex align-items-center">
+                                  <i class="ki-duotone ki-check-circle fs-6 text-success me-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                  </i>
+                                  <strong>Transparencia:</strong> Sabes qué esperar de nuestro servicio
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--end::Terms Notice-->
+
+                        <!--begin::Error message-->
+                        <div *ngIf="!acceptTerms && showValidation" class="alert alert-danger d-flex align-items-center mt-4">
+                          <i class="ki-duotone ki-cross-circle fs-2 text-danger me-3">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                          <div>
+                            <strong>¡Atención!</strong>
+                            Debes aceptar los Términos y Condiciones para continuar.
+                            <div class="mt-2">
+                              <a href="/terminos" target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                                <i class="ki-duotone ki-document fs-5 me-1">
+                                  <span class="path1"></span>
+                                  <span class="path2"></span>
+                                </i>
+                                Ver Términos
+                              </a>
+                              <a href="/politica" target="_blank" class="btn btn-sm btn-outline-info">
+                                <i class="ki-duotone ki-shield-tick fs-5 me-1">
+                                  <span class="path1"></span>
+                                  <span class="path2"></span>
+                                </i>
+                                Ver Privacidad
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <!--end::Error message-->
+                      </div>
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+
+                  <!--begin::Card footer-->
+                  <div class="card-footer bg-light">
+                    <!--begin::Actions-->
+                    <div class="d-flex justify-content-center">
+                      <button
+                        *ngIf="!btn_load"
+                        type="button"
+                        class="btn btn-lg w-100 shadow-sm"
+                        [ngClass]="isFormValid() ? 'btn-primary' : 'btn-secondary'"
+                        [disabled]="!isFormValid()"
+                        (click)="registrarYPagar()"
+                      >
+                        <i class="ki-duotone ki-credit-cart fs-2 me-2">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        Crear Usuario y Pagar
+                      </button>
+
+                      <button *ngIf="btn_load" class="btn btn-primary btn-lg w-100" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        <span class="indicator-label">Procesando pago seguro...</span>
                       </button>
                     </div>
+
+
+                    <div class="text-center mt-3">
+                      <span class="text-gray-500 fs-7">
+                        ¿Ya tienes una cuenta?
+                        <a routerLink="/login" class="link-primary fw-bold">Iniciar Sesión</a>
+                      </span>
+                    </div>
+                    <!--end::Actions-->
                   </div>
-              
+                  <!--end::Card footer-->
                 </div>
               </div>
 
+              <!-- COLUMNA DERECHA: PAGO -->
+              <div class="col-lg-6">
+                <div class="card mb-5 mb-xl-5 shadow-lg border-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                  <!--begin::Card header-->
+                  <div class="card-header border-0 pt-6">
+                    <h3 class="card-title align-items-start flex-column">
+                      <span class="card-label fs-2 mb-1 fw-bold text-white">
+                        <i class="ki-duotone ki-crown fs-2 text-warning me-2">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        Plan Seleccionado
+                      </span>
+                      <span class="text-white-50 mt-1 fw-semibold fs-7">Confirma tu suscripción</span>
+                    </h3>
+                  </div>
+                  <!--end::Card header-->
+
+                  <div class="card-body px-9 py-6">
+                    <!-- Información del plan mejorada -->
+                    <div class="mb-8 p-7 bg-white rounded-4 shadow-sm border border-light">
+                      <div class="d-flex align-items-center justify-content-between mb-5">
+                        <div>
+                          <h4 class="text-primary mb-2 fw-bolder fs-1">{{ planSeleccionado?.nombre || 'Startup' }}</h4>
+                          <span class="badge badge-light-primary fs-6 px-3 py-2">{{ planSeleccionado?.descripcion }}</span>
+                        </div>
+                        <div class="text-end">
+                          <span class="fs-2x fw-bolder text-dark">${{ planSeleccionado?.precio || '99' }}</span>
+                          <div class="text-muted fs-6 fw-semibold">/ mes</div>
+                        </div>
+                      </div>
+
+                      <div class="separator separator-dashed my-5"></div>
+
+                      <ul class="list-unstyled mb-0">
+                        <li class="d-flex align-items-center mb-4" *ngFor="let caracteristica of planSeleccionado?.caracteristicas">
+                          <div class="symbol symbol-30px me-4">
+                            <div class="symbol-label bg-light-success rounded-circle">
+                              <i class="ki-duotone ki-check fs-6 text-success">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                              </i>
+                            </div>
+                          </div>
+                          <span class="text-gray-800 fw-semibold fs-6">{{ caracteristica }}</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- Formulario de pago mejorado -->
+                    <div class="mb-6">
+                      <div class="d-flex align-items-center justify-content-between mb-5">
+                        <h5 class="mb-0 text-white fw-bold">
+                          <i class="ki-duotone ki-credit-cart fs-3 me-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                          Información de Pago
+                        </h5>
+                        <div class="d-flex">
+                          <img src="assets/media/logos/visa.png" alt="Visa" class="h-50px me-2 rounded">
+                          <img src="assets/media/logos/master.png" alt="Mastercard" class="h-50px me-2 rounded">
+                          <img src="assets/media/logos/amex.png" alt="Amex" class="h-50px rounded">
+                        </div>
+                      </div>
+
+                      <!-- Card de pago elegante -->
+                      <div class="payment-card bg-white rounded-4 p-6 shadow-sm border border-light">
+                        <div class="mb-5">
+                          <label class="form-label text-dark fw-bold mb-4 fs-6">
+                            <i class="ki-duotone ki-security-user fs-5 text-primary me-2">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                            Datos de la tarjeta
+                          </label>
+                          <div id="card-element" class="stripe-element p-4 bg-light rounded border-2">
+                            <!-- Stripe Elements se montará aquí -->
+                          </div>
+                          <div id="card-errors" role="alert" class="text-danger mt-3 fs-7 fw-semibold"></div>
+                        </div>
+
+                        <!-- Información de seguridad mejorada -->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="d-flex align-items-center">
+                            <i class="ki-duotone ki-lock fs-3 text-success me-2">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                            <div>
+                              <div class="text-dark fw-semibold fs-7">Pago 100% seguro</div>
+                              <div class="text-muted fs-8">Procesado por Stripe</div>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center">
+                            <i class="ki-duotone ki-shield-tick fs-3 text-primary me-2">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                            <div>
+                              <div class="text-dark fw-semibold fs-7">Cifrado SSL</div>
+                              <div class="text-muted fs-8">Datos protegidos</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!--end::Container-->
+
           </div>
-          <!--end::Post-->
+          <!--end::Container-->
         </div>
-        <!--end::Content-->
-       
+        <!--end::Post-->
       </div>
-      <!--end::Wrapper-->
+      <!--end::Content-->
     </div>
-    <!--end::Page-->
+    <!--end::Wrapper-->
   </div>
+  <!--end::Page-->
+</div>s

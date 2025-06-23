@@ -35,9 +35,19 @@ import { EgresoCreateComponent } from './components/egresos/egreso-create/egreso
 import { EgresoDetallesComponent } from './components/egresos/egreso-detalles/egreso-detalles.component';
 import { IndexReporteComponent } from './components/reporte/index-reporte/index-reporte.component';
 import { AnalisisComponent } from './components/analisis/analisis.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { PagoComponent } from './components/pago/pago.component';
+import { TerminosComponent } from './components/landing/terminos/terminos.component';
+import { PoliticaComponent } from './components/landing/politica/politica.component';
+import { ConfiguracionTiendaComponent } from './components/configuracion-tienda/configuracion-tienda.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '',component:LandingComponent},
+  {path: 'terminos', component: TerminosComponent},
+  {path: 'politica', component:PoliticaComponent},
+
+  // Auth routes
+  { path: 'login', component: LoginComponent },
   { path: 'suscripcion', component: SuscripcionComponent },
   { path: 'crear/:tipo', component: CreateTenentComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -86,6 +96,10 @@ const routes: Routes = [
 
   { path: 'egresos/create', component: EgresoCreateComponent, canActivate: [AuthGuard] },
   { path: 'egresos/detalles/:id', component: EgresoDetallesComponent, canActivate: [AuthGuard] },
+
+  {path: 'configuracion_tienda', component: ConfiguracionTiendaComponent,},
+
+  { path: 'pago', component: PagoComponent}
 
 
 ];

@@ -1,0 +1,1183 @@
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank" data-kt-sticky-landing-header="on" data-kt-landing-header="on" data-kt-scrolltop="on">
+        <!--begin::Theme mode setup on page load-->
+<script>
+	var defaultThemeMode = "light";
+	var themeMode;
+
+	if ( document.documentElement ) {
+		if ( document.documentElement.hasAttribute("data-bs-theme-mode")) {
+			themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+		} else {
+			if ( localStorage.getItem("data-bs-theme") !== null ) {
+				themeMode = localStorage.getItem("data-bs-theme");
+			} else {
+				themeMode = defaultThemeMode;
+			}
+		}
+
+		if (themeMode === "system") {
+			themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+		}
+
+		document.documentElement.setAttribute("data-bs-theme", themeMode);
+	}
+</script>
+<!--end::Theme mode setup on page load-->
+
+        <!--begin::Root-->
+<div class="d-flex flex-column flex-root" id="kt_app_root">
+    <!--begin::Header Section-->
+<div class="mb-0" id="home">
+    <!--begin::Wrapper-->
+    <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg" style="background-image: url(/metronic8/demo1/assets/media/svg/illustrations/landing.svg)">
+        <!--begin::Header-->
+<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}" style="animation-duration: 0.3s; top: 0px;" data-kt-sticky-enabled="true">
+
+    <!--begin::Container-->
+    <div class="container">
+        <!--begin::Wrapper-->
+        <div class="d-flex align-items-center justify-content-between">
+            <!--begin::Logo-->
+            <div class="d-flex align-items-center flex-equal">
+                <!--begin::Mobile menu toggle-->
+                <button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
+                    <i class="ki-duotone ki-abstract-14 fs-2hx"><span class="path1"></span><span class="path2"></span></i>                </button>
+                <!--end::Mobile menu toggle-->
+
+                <!--begin::Logo image-->
+                <a href="/metronic8/demo1/landing.html">
+                    <img alt="Logo" src="assets/media/logos/shopmind.png" class="logo-default h-25px h-lg-80px">
+                    <img alt="Logo" src="assets/media/logos/shopmind.png" class="logo-sticky h-20px h-lg-90px">
+                </a>
+                <!--end::Logo image-->
+            </div>
+            <!--end::Logo-->
+
+            <!--begin::Menu wrapper-->
+            <div class="d-lg-block" id="kt_header_nav_wrapper">
+                <div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}">
+
+                    <!--begin::Menu-->
+                    <div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-600 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
+                                                <!--begin::Menu item-->
+                        <div class="menu-item">
+                            <!--begin::Menu link-->
+                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#kt_body" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                Inicio                            </a>
+                            <!--end::Menu link-->
+                        </div>
+                        <!--end::Menu item-->
+                                                <!--begin::Menu item-->
+                        <div class="menu-item">
+                            <!--begin::Menu link-->
+                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#how-it-works" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                Cómo Funciona                            </a>
+                            <!--end::Menu link-->
+                        </div>
+                        <!--end::Menu item-->
+                                                <!--begin::Menu item-->
+                        <div class="menu-item">
+                            <!--begin::Menu link-->
+                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#achievements" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                Características                            </a>
+                            <!--end::Menu link-->
+                        </div>
+                        <!--end::Menu item-->
+                                                <!--begin::Menu item-->
+                        <div class="menu-item">
+                            <!--begin::Menu link-->
+                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#contact" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                Contáctanos                            </a>
+                            <!--end::Menu link-->
+                        </div>
+                        <!--end::Menu item-->
+                                                <!--begin::Menu item-->
+                        <div class="menu-item">
+                            <!--begin::Menu link-->
+                            <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#pricing" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                Precios                            </a>
+                            <!--end::Menu link-->
+                        </div>
+                        <!--end::Menu item-->
+                                            </div>
+                    <!--end::Menu-->
+                </div>
+            </div>
+            <!--end::Menu wrapper-->
+
+            <!--begin::Toolbar-->
+            <div class="flex-equal text-end ms-1">
+                <a href="/login" class="btn btn-success">Iniciar Sesión</a>
+            </div>
+            <!--end::Toolbar-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Header-->
+
+
+<!--begin::Landing hero-->
+<div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
+    <!--begin::Heading-->
+    <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
+        <!--begin::Title-->
+        <h1 class="text-white lh-base fw-bold fs-2x fs-lg-3x mb-15">
+            Construye Tu Tienda Online <br>
+            con
+
+            <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                <span id="kt_landing_hero_text">ShopMind - Inteligencia Artificial</span>
+            </span>
+        </h1>
+        <!--end::Title-->
+
+        <!--begin::Action-->
+        <a href="#pricing" class="btn btn-primary" data-kt-scroll-toggle="true">Comienza Gratis</a>
+        <!--end::Action-->
+    </div>
+    <!--end::Heading-->
+
+
+</div>
+<!--end::Landing hero-->
+
+
+
+
+
+
+    </div>
+    <!--end::Wrapper-->
+
+    <!--begin::Curve bottom-->
+<div class="landing-curve landing-dark-color mb-10 mb-lg-20">
+    <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+     </svg>
+</div>
+<!--end::Curve bottom-->
+</div>
+<!--end::Header Section-->
+
+<!--begin::How It Works Section-->
+<div class="mb-n10 mb-lg-n20 z-index-2">
+    <!--begin::Container-->
+    <div class="container">
+        <!--begin::Heading-->
+        <div class="text-center mb-17">
+            <!--begin::Title-->
+            <h3 class="fs-2hx text-gray-900 mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">Cómo Funciona</h3>
+            <!--end::Title-->
+
+            <!--begin::Text-->
+            <div class="fs-5 text-muted fw-bold">
+               Ahorra miles de bolivianos utilizando una sola herramienta <br>
+                para gestionar tu tienda online de forma fácil y eficiente.
+            </div>
+            <!--end::Text-->
+        </div>
+        <!--end::Heading-->
+
+        <!--begin::Row-->
+        <div class="row w-100 gy-10 mb-md-20">
+            <!--begin::Col-->
+            <div class="col-md-4 px-5">
+                <!--begin::Story-->
+<div class="text-center mb-10 mb-md-0">
+    <!--begin::Illustration-->
+    <img src="" class="mh-125px mb-9" alt="">
+    <!--end::Illustration-->
+
+    <!--begin::Heading-->
+    <div class="d-flex flex-center mb-5">
+        <!--begin::Badge-->
+        <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">1</span>
+        <!--end::Badge-->
+
+        <!--begin::Title-->
+        <div class="fs-5 fs-lg-3 fw-bold text-gray-900">
+            Regístrate      </div>
+        <!--end::Title-->
+    </div>
+    <!--end::Heading-->
+
+    <!--begin::Description-->
+    <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+
+                            Crea tu cuenta<br>
+                            y accede a todas las funcionalidades de nuestra plataforma.
+                            </div>
+    <!--end::Description-->
+</div>
+<!--end::Story-->
+
+
+
+             </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-md-4 px-5">
+                <!--begin::Story-->
+<div class="text-center mb-10 mb-md-0">
+    <!--begin::Illustration-->
+    <img src="" class="mh-125px mb-9" alt="">
+    <!--end::Illustration-->
+
+    <!--begin::Heading-->
+    <div class="d-flex flex-center mb-5">
+        <!--begin::Badge-->
+        <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">2</span>
+        <!--end::Badge-->
+
+        <!--begin::Title-->
+        <div class="fs-5 fs-lg-3 fw-bold text-gray-900">
+            Configura tu tienda        </div>
+        <!--end::Title-->
+    </div>
+    <!--end::Heading-->
+
+    <!--begin::Description-->
+    <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+
+                            Personaliza tu tienda online en minutos <br>
+                            sube tus productos <br>
+                            y define tus preferencias.
+
+                            </div>
+    <!--end::Description-->
+</div>
+<!--end::Story-->
+
+
+
+             </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-md-4 px-5">
+                <!--begin::Story-->
+<div class="text-center mb-10 mb-md-0">
+    <!--begin::Illustration-->
+    <img src="" class="mh-125px mb-9" alt="">
+    <!--end::Illustration-->
+
+    <!--begin::Heading-->
+    <div class="d-flex flex-center mb-5">
+        <!--begin::Badge-->
+        <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">3</span>
+        <!--end::Badge-->
+
+        <!--begin::Title-->
+        <div class="fs-5 fs-lg-3 fw-bold text-gray-900">
+            Comienza a vender       </div>
+        <!--end::Title-->
+    </div>
+    <!--end::Heading-->
+
+    <!--begin::Description-->
+    <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+
+                            Disfruta de todas las herramientas para administrar <br>
+                            y hacer crecer tu negocio en línea. <br>
+
+                            </div>
+    <!--end::Description-->
+</div>
+<!--end::Story-->
+
+
+
+             </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+
+
+<!--begin::Product slider-->
+<div class="tns tns-default tns-initiazlied">
+    <!--begin::Slider-->
+    <div class="tns-outer" id="tns1-ow"><div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">diapositiva <span class="current">4</span>  de 4</div><div id="tns1-mw" class="tns-ovh"><div class="tns-inner" id="tns1-iw"><div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000" data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true" data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false" data-tns-prev-button="#kt_team_slider_prev1" data-tns-next-button="#kt_team_slider_next1" class="  tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal" id="tns1" data-kt-initialized="1" style="transform: translate3d(-50%, 0px, 0px);"><div class="text-center px-5 pt-5 pt-lg-10 px-lg-10 tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
+                <img src="assets/media/logos/landing.png" class="card-rounded shadow mh-lg-650px mw-100" alt="">
+            </div>
+
+                    <!--begin::Item-->
+            <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10 tns-item" id="tns1-item0" aria-hidden="true" tabindex="-1">
+                <img src="assets/media/logos/landing.png" class="card-rounded shadow mh-lg-650px mw-100" alt="">
+            </div>
+            <!--end::Item-->
+                    <!--begin::Item-->
+            <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10 tns-item" id="tns1-item1" aria-hidden="true" tabindex="-1">
+                <img src="assets/media/logos/landing.png" class="card-rounded shadow mh-lg-650px mw-100" alt="">
+            </div>
+            <!--end::Item-->
+
+
+   </div></div></div></div>
+    <!--end::Slider-->
+
+    <!--begin::Slider button-->
+    <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev1" aria-controls="tns1" tabindex="-1" data-controls="prev">
+        <i class="ki-duotone ki-left fs-2x"></i>    </button>
+    <!--end::Slider button-->
+
+    <!--begin::Slider button-->
+    <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_next1" aria-controls="tns1" tabindex="-1" data-controls="next">
+        <i class="ki-duotone ki-right fs-2x"></i>    </button>
+    <!--end::Slider button-->
+</div>
+<!--end::Product slider-->
+
+
+
+
+
+
+
+
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::How It Works Section-->
+
+
+<!--begin::Statistics Section-->
+<div class="mt-sm-n10">
+    <!--begin::Curve top-->
+<div class="landing-curve landing-dark-color ">
+    <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+    </svg>
+</div>
+<!--end::Curve top-->
+
+    <!--begin::Wrapper-->
+    <div class="pb-15 pt-18 landing-dark-bg">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            <div class="text-center mt-15 mb-18" id="achievements" data-kt-scroll-offset="{default: 100, lg: 150}">
+                <!--begin::Title-->
+                <h3 class="fs-2hx text-white fw-bold mb-5">Hacemos las Cosas Mejor</h3>
+                <!--end::Title-->
+
+                <!--begin::Description-->
+                <div class="fs-5 text-gray-700 fw-bold">
+                    Ahorra miles de bolivianos usando una sola herramienta <br>
+                    para diferentes necesidades de tu tienda online
+                </div>
+                <!--end::Description-->
+            </div>
+            <!--end::Heading-->
+
+            <!--begin::Statistics-->
+            <div class="d-flex flex-center">
+                <!--begin::Items-->
+                <div class="d-flex flex-wrap flex-center justify-content-lg-between mb-15 mx-auto w-xl-900px">
+
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('/metronic8/demo1/assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-element-11 fs-2tx text-white mb-3"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>                            <!--end::Symbol-->
+
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px counted" data-kt-countup="true" data-kt-countup-value="700" data-kt-countup-suffix="+" data-kt-initialized="1">700+</div>
+                                </div>
+                                <!--end::Value-->
+
+                                <!--begin::Label-->
+                                <span class="text-gray-600 fw-semibold fs-5 lh-0">
+                                    Tiendas Registradas                                </span>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Item-->
+
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('/metronic8/demo1/assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-chart-pie-4 fs-2tx text-white mb-3"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>                            <!--end::Symbol-->
+
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px counted" data-kt-countup="true" data-kt-countup-value="80" data-kt-countup-suffix="K+" data-kt-initialized="1">80K+</div>
+                                </div>
+                                <!--end::Value-->
+
+                                <!--begin::Label-->
+                                <span class="text-gray-600 fw-semibold fs-5 lh-0">
+                                    Reportes Estadísticos                                </span>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Item-->
+
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('/metronic8/demo1/assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-basket fs-2tx text-white mb-3"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>                            <!--end::Symbol-->
+
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px counted" data-kt-countup="true" data-kt-countup-value="35" data-kt-countup-suffix="M+" data-kt-initialized="1">35M+</div>
+                                </div>
+                                <!--end::Value-->
+
+                                <!--begin::Label-->
+                                <span class="text-gray-600 fw-semibold fs-5 lh-0">
+                                    Pagos Seguros                                </span>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Item-->
+
+                </div>
+                <!--end::Items-->
+            </div>
+            <!--end::Statistics-->
+
+            <!--begin::Testimonial-->
+            <div class="fs-2 fw-semibold text-muted text-center mb-3">
+                <span class="fs-1 lh-1 text-gray-700">"</span>
+
+                Cuando te importa tu negocio, lo desarrollarás de una manera<br><span class="text-gray-700 me-1">más poderosa</span>, emocionalmente expresiva
+
+                <span class="fs-1 lh-1 text-gray-700">"</span>
+            </div>
+            <!--end::Testimonial-->
+
+            <!--begin::Author-->
+            <div class="fs-2 fw-semibold text-muted text-center">
+                <a href="#" class="link-primary fs-4 fw-bold">junior-zamo99,</a>
+
+                <span class="fs-4 fw-bold text-gray-600">CEO ShopMind</span>
+            </div>
+            <!--end::Author-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Wrapper-->
+
+    <!--begin::Curve bottom-->
+<div class="landing-curve landing-dark-color ">
+    <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+     </svg>
+</div>
+<!--end::Curve bottom-->
+</div>
+<!--end::Statistics Section-->
+
+
+<!--begin::Contact Section-->
+<div class="mb-n10 mb-lg-n20 z-index-2">
+    <!--begin::Container-->
+    <div class="container">
+        <!--begin::Heading-->
+        <div class="text-center mb-17">
+            <!--begin::Title-->
+            <h3 class="fs-2hx text-gray-900 mb-5" id="contact" data-kt-scroll-offset="{default: 100, lg: 150}">¡Contáctanos!</h3>
+            <!--end::Title-->
+
+            <!--begin::Text-->
+            <div class="fs-5 text-muted fw-bold">
+                ¿Tienes preguntas? ¿Necesitas ayuda personalizada? <br>
+                Déjanos tus datos y nos pondremos en contacto contigo.
+            </div>
+            <!--end::Text-->
+        </div>
+        <!--end::Heading-->
+
+        <!--begin::Contact Form-->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!--begin::Form-->
+                <form id="kt_contact_form" class="form" action="#" method="post">
+                    <!--begin::Card-->
+                    <div class="card shadow-lg">
+                        <!--begin::Card body-->
+                        <div class="card-body p-10">
+                            <!--begin::Row-->
+                            <div class="row g-5">
+                                <!--begin::Col-->
+                                <div class="col-md-6">
+                                    <!--begin::Input group-->
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control form-control-solid" id="contact_name" name="name"  required>
+                                        <label for="contact_name">Nombre Completo *</label>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Col-->
+
+                                <!--begin::Col-->
+                                <div class="col-md-6">
+                                    <!--begin::Input group-->
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control form-control-solid" id="contact_email" name="email"  required>
+                                        <label for="contact_email">Correo Electrónico *</label>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row g-5 mt-5">
+                                <!--begin::Col-->
+                                <div class="col-md-6">
+                                    <!--begin::Input group-->
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control form-control-solid" id="contact_company" name="company" >
+                                        <label for="contact_company">Empresa/Tienda</label>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Col-->
+
+                                <!--begin::Col-->
+                                <div class="col-md-6">
+                                    <!--begin::Input group-->
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control form-control-solid" id="contact_phone" name="phone"  required>
+                                        <label for="contact_phone">Teléfono/WhatsApp *</label>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row g-5 mt-5">
+                                <!--begin::Col-->
+                                <div class="col-12">
+                                    <!--begin::Input group-->
+                                    <div class="form-floating">
+                                        <select class="form-select form-select-solid" id="contact_subject" name="subject" required>
+                                            <option value="">Selecciona un motivo</option>
+                                            <option value="demo">Solicitar una demostración</option>
+                                            <option value="pricing">Consulta sobre precios</option>
+                                            <option value="technical">Soporte técnico</option>
+                                            <option value="partnership">Alianza comercial</option>
+                                            <option value="other">Otro</option>
+                                        </select>
+                                        <label for="contact_subject">Motivo de Contacto *</label>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row g-5 mt-5">
+                                <!--begin::Col-->
+                                <div class="col-12">
+                                    <!--begin::Input group-->
+                                    <div class="form-floating">
+                                        <textarea class="form-control form-control-solid" id="contact_message" name="message"  style="height: 120px" required></textarea>
+                                        <label for="contact_message">Mensaje *</label>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row g-5 mt-5">
+                                <!--begin::Col-->
+                                <div class="col-12">
+                                    <!--begin::Checkbox-->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="contact_consent" name="consent" required>
+                                        <label class="form-check-label" for="contact_consent">
+                                            Acepto que ShopMind me contacte por los medios proporcionados y acepto los
+                                            <a href="/terminos" target="_blank" class="link-primary">Términos y Condiciones</a>
+                                            y la <a href="/privacidad" target="_blank" class="link-primary">Política de Privacidad</a>. *
+                                        </label>
+                                    </div>
+                                    <!--end::Checkbox-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Actions-->
+                            <div class="text-center mt-10">
+                                <!--begin::Button-->
+                                <button type="submit" id="kt_contact_submit_button" class="btn btn-primary btn-lg">
+                                    <span class="indicator-label">
+                                        <i class="ki-duotone ki-message-edit fs-2 me-2">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                        </i>
+                                        Enviar Mensaje
+                                    </span>
+                                    <span class="indicator-progress">
+                                        Enviando... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <!--end::Button-->
+                            </div>
+                            <!--end::Actions-->
+
+                            <!--begin::Notice-->
+                            <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 mt-10">
+                                <!--begin::Icon-->
+                                <i class="ki-duotone ki-information fs-2tx text-primary me-4">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                </i>
+                                <!--end::Icon-->
+
+                                <!--begin::Wrapper-->
+                                <div class="d-flex flex-stack flex-grow-1">
+                                    <!--begin::Content-->
+                                    <div class="fw-semibold">
+                                        <h4 class="text-gray-900 fw-bold">¿Prefieres contactarnos directamente?</h4>
+                                        <div class="fs-6 text-gray-700">
+                                            📧 Email: <strong>junior.zf.99&#64;gmail.com</strong><br>
+                                            📱 WhatsApp: <strong>+591 77886548</strong><br>
+                                            🕒 Horario: Lunes a Viernes 8:00 - 18:00 (GMT-4)
+                                        </div>
+                                    </div>
+                                    <!--end::Content-->
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Notice-->
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Card-->
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+        <!--end::Contact Form-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Contact Section-->
+
+
+<!--begin::Pricing Section-->
+<div class="mt-sm-n20">
+    <!--begin::Curve top-->
+<div class="landing-curve landing-dark-color ">
+    <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+    </svg>
+</div>
+<!--end::Curve top-->
+
+    <!--begin::Wrapper-->
+    <div class="py-20 landing-dark-bg ">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Plans-->
+            <div class="d-flex flex-column container pt-lg-20">
+                <!--begin::Heading-->
+                <div class="mb-13 text-center">
+                    <h1 class="fs-2hx fw-bold text-white mb-5" id="pricing" data-kt-scroll-offset="{default: 100, lg: 150}">Precios Transparentes y Sencillos</h1>
+
+                    <div class="text-gray-600 fw-semibold fs-5">
+                        Ahorra miles de bolivianos utilizando una sola herramienta para diferentes necesidades de tu negocio <br>
+                        con una administración fácil y eficiente.
+                    </div>
+                </div>
+                <!--end::Heading-->
+
+                <!--begin::Pricing-->
+                <div class="text-center" id="kt_pricing">
+                    <!--begin::Nav group-->
+                    <div class="nav-group landing-dark-bg d-inline-flex mb-15" data-kt-buttons="true" style="border: 1px dashed #2B4666;" data-kt-initialized="1">
+                        <a href="#" class="btn btn-color-gray-600 btn-active btn-active-success px-6 py-3 me-2 active" data-kt-plan="month">
+                            Mensual
+                        </a>
+
+
+                    </div>
+                    <!--end::Nav group-->
+
+                    <!--begin::Row-->
+                    <div class="row g-10">
+                                                                                    <!--begin::Col-->
+                                <div class="col-xl-4">
+                                    <div class="d-flex h-100 align-items-center">
+                                        <!--begin::Option-->
+                                        <div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-15 px-10">
+                                            <!--begin::Heading-->
+                                            <div class="mb-7 text-center">
+                                                <!--begin::Title-->
+                                                <h1 class="text-gray-900 mb-5 fw-boldest">Startup</h1>
+                                                <!--end::Title-->
+
+                                                <!--begin::Description-->
+                                                <div class="text-gray-500 fw-semibold mb-5">
+                                                    La mejor opción para startups
+                                                </div>
+                                                <!--end::Description-->
+
+                                                <!--begin::Price-->
+                                                <div class="text-center">
+                                                    <span class="mb-2 text-primary">$</span>
+
+                                                    <span class="fs-3x fw-bold text-primary" data-kt-plan-price-month="99" data-kt-plan-price-annual="999">
+                                                        99                                                    </span>
+
+                                                    <span class="fs-7 fw-semibold opacity-50" data-kt-plan-price-month="/ Mon" data-kt-plan-price-annual="/ Ann">
+                                                        / Mes                                                    </span>
+                                                </div>
+                                                <!--end::Price-->
+                                            </div>
+                                            <!--end::Heading-->
+
+                                            <!--begin::Features-->
+                                            <div class="w-100 mb-10">
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">
+                                                                Hasta 10 Usuarios Activos                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-success"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">
+                                                                Hasta 30 Integraciones de Proyectos                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-success"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800">
+                                                                Plataforma de Analytics Avanzada                                                            </span>
+                                                            <i class="ki-duotone ki-cross-circle fs-1"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800">
+                                                                Cronogramas y Archivos Avanzados                                                            </span>
+                                                            <i class="ki-duotone ki-cross-circle fs-1"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack ">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800">
+                                                                Proyectos Ilimitados                                                            </span>
+                                                            <i class="ki-duotone ki-cross-circle fs-1"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+
+                                            </div>
+                                            <!--end::Features-->
+
+                                            <!--begin::Select-->
+                                            <a [routerLink]="['/crear',1]" class="btn btn-primary">Seleccionar</a>
+                                            <!--end::Select-->
+                                        </div>
+                                        <!--end::Option-->
+                                    </div>
+                                </div>
+                                <!--end::Col-->
+                                                                                                                <!--begin::Col-->
+                                <div class="col-xl-4">
+                                    <div class="d-flex h-100 align-items-center">
+                                        <!--begin::Option-->
+                                        <div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary py-20 px-10">
+                                            <!--begin::Heading-->
+                                            <div class="mb-7 text-center">
+                                                <!--begin::Title-->
+                                                <h1 class="text-white mb-5 fw-boldest">Negocio</h1>
+                                                <!--end::Title-->
+
+                                                <!--begin::Description-->
+                                                <div class="text-white opacity-75 fw-semibold mb-5">
+                                                    La mejor opción para negocios
+                                                </div>
+                                                <!--end::Description-->
+
+                                                <!--begin::Price-->
+                                                <div class="text-center">
+                                                    <span class="mb-2 text-white">$</span>
+
+                                                    <span class="fs-3x fw-bold text-white" data-kt-plan-price-month="199" data-kt-plan-price-annual="1999">
+                                                        199                                                    </span>
+
+                                                    <span class="fs-7 fw-semibold text-white opacity-75" data-kt-plan-price-month="/ Mon" data-kt-plan-price-annual="/ Ann">
+                                                        / Mes                                                    </span>
+                                                </div>
+                                                <!--end::Price-->
+                                            </div>
+                                            <!--end::Heading-->
+
+                                            <!--begin::Features-->
+                                            <div class="w-100 mb-10">
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-white opacity-75 text-start pe-3">
+                                                                Hasta 10 Usuarios Activos                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-white"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-white opacity-75 text-start pe-3">
+                                                                Hasta 30 Integraciones de Proyectos                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-white"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-white opacity-75 text-start pe-3">
+                                                                Plataforma de Analytics Avanzada                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-white"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-white opacity-75 text-start pe-3">
+                                                                Cronogramas y Archivos Avanzados                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-white"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack ">
+                                                                                                                    <span class="fw-semibold fs-6 text-white opacity-75">
+                                                                Proyectos Ilimitados                                                            </span>
+                                                            <i class="ki-duotone ki-cross-circle fs-1 text-white"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+
+                                            </div>
+                                            <!--end::Features-->
+
+                                            <!--begin::Select-->
+                                            <a [routerLink]="['/crear',2]" class="btn btn-color-primary btn-active-light-primary btn-light">Seleccionar</a>
+                                            <!--end::Select-->
+                                        </div>
+                                        <!--end::Option-->
+                                    </div>
+                                </div>
+                                <!--end::Col-->
+                                                                                                                <!--begin::Col-->
+                                <div class="col-xl-4">
+                                    <div class="d-flex h-100 align-items-center">
+                                        <!--begin::Option-->
+                                        <div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-15 px-10">
+                                            <!--begin::Heading-->
+                                            <div class="mb-7 text-center">
+                                                <!--begin::Title-->
+                                                <h1 class="text-gray-900 mb-5 fw-boldest">Empresa</h1>
+                                                <!--end::Title-->
+
+                                                <!--begin::Description-->
+                                                <div class="text-gray-500 fw-semibold mb-5">
+                                                    La mejor opción para empresas
+                                                </div>
+                                                <!--end::Description-->
+
+                                                <!--begin::Price-->
+                                                <div class="text-center">
+                                                    <span class="mb-2 text-primary">$</span>
+
+                                                    <span class="fs-3x fw-bold text-primary" data-kt-plan-price-month="999" data-kt-plan-price-annual="9999">
+                                                        999                                                    </span>
+
+                                                    <span class="fs-7 fw-semibold opacity-50" data-kt-plan-price-month="/ Mon" data-kt-plan-price-annual="/ Ann">
+                                                        / mes                                                    </span>
+                                                </div>
+                                                <!--end::Price-->
+                                            </div>
+                                            <!--end::Heading-->
+
+                                            <!--begin::Features-->
+                                            <div class="w-100 mb-10">
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">
+                                                                Hasta 10 Usuarios Activos                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-success"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">
+                                                                Hasta 30 Integraciones de Proyectos                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-success"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">
+                                                                Plataforma de Analytics Avanzada                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-success"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack mb-5">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">
+                                                                Cronogramas y Archivos Avanzados                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-success"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+                                                                                                    <!--begin::Item-->
+                                                    <div class="d-flex flex-stack ">
+                                                                                                                    <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">
+                                                                Proyectos Ilimitados                                                            </span>
+                                                            <i class="ki-duotone ki-check-circle fs-1 text-success"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::Item-->
+
+                                            </div>
+                                            <!--end::Features-->
+
+                                            <!--begin::Select-->
+                                            <a [routerLink]="['/crear',3]" class="btn btn-primary">Seleccionar</a>
+                                            <!--end::Select-->
+                                        </div>
+                                        <!--end::Option-->
+                                    </div>
+                                </div>
+                                <!--end::Col-->
+                                                                        </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Pricing-->
+            </div>
+            <!--end::Plans-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Wrapper-->
+
+    <!--begin::Curve bottom-->
+<div class="landing-curve landing-dark-color ">
+    <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+     </svg>
+</div>
+<!--end::Curve bottom-->
+</div>
+<!--end::Pricing Section-->
+
+
+
+
+<!--begin::Footer Section-->
+<div class="mb-0">
+    <!--begin::Curve top-->
+<div class="landing-curve landing-dark-color ">
+    <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+    </svg>
+</div>
+<!--end::Curve top-->
+
+    <!--begin::Wrapper-->
+    <div class="landing-dark-bg pt-20">
+        <!--begin::Container-->
+<div class="container">
+    <!--begin::Row-->
+    <div class="row py-10 py-lg-20">
+        <!--begin::Col-->
+
+        <!--end::Col-->
+
+        <!--begin::Col-->
+        <div class="col-lg-6 ps-lg-16">
+            <!--begin::Navs-->
+            <div class="d-flex justify-content-center">
+                <!--begin::Links-->
+                <div class="d-flex fw-semibold flex-column me-20">
+                    <!--begin::Subtitle-->
+                    <h4 class="fw-bold text-gray-500 mb-6">Más sobre ShopMind</h4>
+                    <!--end::Subtitle-->
+
+                    <!--begin::Link-->
+                    <a href="/preguntas-frecuentes" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Preguntas Frecuentes</a>
+                    <!--end::Link-->
+
+                    <!--begin::Link-->
+                    <a href="/documentacion" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Documentación</a>
+                    <!--end::Link-->
+
+                    <!--begin::Link-->
+                    <a href="/tutoriales" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Video Tutoriales</a>
+                    <!--end::Link-->
+
+                    <!--begin::Link-->
+                    <a href="/changelog" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Registro de Cambios</a>
+                    <!--end::Link-->
+
+                    <!--begin::Link-->
+                    <a href="/soporte" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Foro de Soporte</a>
+                    <!--end::Link-->
+
+                    <!--begin::Link-->
+                    <a href="/blog" class="text-white opacity-50 text-hover-primary fs-5">Blog</a>
+                    <!--end::Link-->
+                </div>
+                <!--end::Links-->
+
+                <!--begin::Links-->
+                <div class="d-flex fw-semibold flex-column ms-lg-20">
+                    <!--begin::Subtitle-->
+                    <h4 class="fw-bold text-gray-500 mb-6">Mantente Conectado</h4>
+                    <!--end::Subtitle-->
+
+                    <!--begin::Link-->
+                    <a href="https://www.facebook.com/shopmind" class="mb-6">
+                        <img src="assets/media/logos/facebook.png" class="h-20px me-2" alt="">
+
+                        <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Facebook</span>
+                    </a>
+                    <!--end::Link-->
+
+                    <!--begin::Link-->
+                    <a href="https://github.com/junior-zamo99" class="mb-6">
+                        <img src="assets/media/logos/git.png" class="h-20px me-2" alt="">
+
+                        <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Github</span>
+                    </a>
+                    <!--end::Link-->
+
+                    <!--begin::Link-->
+                    <a href="https://twitter.com/shopmind" class="mb-6">
+                        <img src="assets/media/logos/twitter.png" class="h-20px me-2" alt="">
+
+                        <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Twitter</span>
+                    </a>
+
+
+                    <!--begin::Link-->
+                    <a href="https://www.instagram.com/shopmind" class="mb-6">
+                        <img src="assets/media/logos/instagram.png" class="h-20px me-2" alt="">
+
+                        <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Instagram</span>
+                    </a>
+                    <!--end::Link-->
+                </div>
+                <!--end::Links-->
+            </div>
+            <!--end::Navs-->
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Row-->
+</div>
+<!--end::Container-->
+
+        <!--begin::Separator-->
+<div class="landing-dark-separator"></div>
+<!--end::Separator-->
+
+<!--begin::Container-->
+<div class="container">
+    <!--begin::Wrapper-->
+    <div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
+        <!--begin::Copyright-->
+        <div class="d-flex align-items-center order-2 order-md-1">
+            <!--begin::Logo-->
+            <a href="/metronic8/demo1/landing.html">
+                <img alt="Logo" src="assets/media/logos/shopmind.png" class="h-20px h-md-80px">
+            </a>
+            <!--end::Logo image-->
+
+            <!--begin::Logo image-->
+            <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="https://keenthemes.com">
+                © 2025 ShopMind Inc.
+            </span>
+            <!--end::Logo image-->
+        </div>
+        <!--end::Copyright-->
+
+        <!--begin::Menu-->
+        <ul class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
+            <li class="menu-item">
+                <a href="/nosotros" target="_blank" class="menu-link px-2">Nosotros</a>
+            </li>
+
+            <li class="menu-item mx-5">
+                <a href="/soporte" target="_blank" class="menu-link px-2">Soporte</a>
+            </li>
+
+            <!-- ENLACES DE TÉRMINOS Y CONDICIONES -->
+            <li class="menu-item mx-5">
+                <a href="/terminos" target="_blank" class="menu-link px-2">Términos y Condiciones</a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/privacidad" target="_blank" class="menu-link px-2">Política de Privacidad</a>
+            </li>
+        </ul>
+        <!--end::Menu-->
+    </div>
+    <!--end::Wrapper-->
+</div>
+<!--end::Container-->
+    </div>
+    <!--end::Wrapper-->
+</div>
+ <!--end::Footer Section-->
+
+<!--begin::Scrolltop-->
+<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+	<i class="ki-duotone ki-arrow-up"><span class="path1"></span><span class="path2"></span></i></div>
+<!--end::Scrolltop-->
+</div>
+<!--end::Root-->
+		<!--begin::Engage-->
+
+		<!--end::Engage-->
+
+		<!--begin::Engage modals-->
+					<!--begin::Modal - Sitemap-->
+
+<!--end::Modal - Sitemap-->				<!--end::Engage modals-->
+<!--begin::Scrolltop-->
+<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+	<i class="ki-duotone ki-arrow-up"><span class="path1"></span><span class="path2"></span></i></div>
+<!--end::Scrolltop-->
+
+
+        <!--begin::Javascript-->
+        <script>
+            var hostUrl = "/metronic8/demo1/assets/";        </script>
+
+                    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                            <script src="/metronic8/demo1/assets/plugins/global/plugins.bundle.js"></script>
+                            <script src="/metronic8/demo1/assets/js/scripts.bundle.js"></script>
+                        <!--end::Global Javascript Bundle-->
+
+                    <!--begin::Vendors Javascript(used for this page only)-->
+                            <script src="/metronic8/demo1/assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
+                            <script src="/metronic8/demo1/assets/plugins/custom/typedjs/typedjs.bundle.js"></script>
+                        <!--end::Vendors Javascript-->
+
+                    <!--begin::Custom Javascript(used for this page only)-->
+                            <script src="/metronic8/demo1/assets/js/custom/landing.js"></script>
+                            <script src="/metronic8/demo1/assets/js/custom/pages/pricing/general.js"></script>
+                        <!--end::Custom Javascript-->
+                <!--end::Javascript-->
+
+
+<svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg></body>

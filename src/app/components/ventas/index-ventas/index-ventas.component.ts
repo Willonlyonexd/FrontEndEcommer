@@ -22,7 +22,7 @@ export class IndexVentasComponent {
     public token=localStorage.getItem('token')||''
     public IniciarFecha:any=''
     public FinalFecha:any=''
-  
+
     public user = JSON.parse(localStorage.getItem('user') || '{}');
     public rolId =''
     public rol:any;
@@ -41,16 +41,16 @@ export class IndexVentasComponent {
       ngOnInit(){
         setTimeout(()=>{
           $("#kt_daterangepicker_1").daterangepicker();
-    
+
           $("#kt_daterangepicker_1").daterangepicker({
             opens: 'left'
           }, (start:any, end:any, label:any) => {
             let start_date = moment(start).format('YYYY-MM-DD')
             let end_date = moment(end).format('YYYY-MM-DD')
-    
+
             this.router.navigate(['/ventas'],{queryParams:{ IniciarFecha:start_date, FinalFecha:end_date }})
           } );
-    
+
         },50)
         this.cargarRoles()
         this.route.queryParams.subscribe((params:any)=>{
@@ -63,7 +63,7 @@ export class IndexVentasComponent {
           }
           this.setFecha()
         })
-        
+
 }
 
 cargarRoles(){
@@ -85,7 +85,7 @@ setFecha(){
     $("#kt_daterangepicker_1").data('daterangepicker').setStartDate(new Date(this.IniciarFecha+'T00:00:00'))
   $("#kt_daterangepicker_1").data('daterangepicker').setEndDate(new Date(this.FinalFecha+'T00:00:00'))
   },50)
-  
+
   this.filtroVentas()
 }
 
@@ -98,7 +98,7 @@ filtroVentas(){
     this.ventas=response.data
 
     this.ventas.forEach((venta,idx) => {
-              
+
         this.detallesExcel.push({
           cliente:venta.cliente.email,
           total:venta.total

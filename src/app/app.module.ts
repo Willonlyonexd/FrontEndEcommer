@@ -9,7 +9,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { IndexUsuarioComponent } from './components/usuarios/index-usuario/index-usuario.component';
 import { CreateUsuarioComponent } from './components/usuarios/create-usuario/create-usuario.component';
 import { EditUsuarioComponent } from './components/usuarios/edit-usuario/edit-usuario.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importa HttpClient en lugar de provideHttpClient y withFetch
 import { LoginComponent } from './components/login/login.component';
 import { IndexCategoriaComponent } from './components/categorias/index-categoria/index-categoria.component';
@@ -60,6 +60,12 @@ import { RegresionComponent } from './components/analisis/regresion/regresion.co
 import { LinealComponent } from './components/analisis/lineal/lineal.component';
 import { ArbolComponent } from './components/analisis/arbol/arbol.component';
 import { SugerenciaComponent } from './components/analisis/sugerencia/sugerencia.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { PagoComponent } from './components/pago/pago.component';
+import { TerminosComponent } from './components/landing/terminos/terminos.component';
+import { PoliticaComponent } from './components/landing/politica/politica.component';
+import { ConfiguracionTiendaComponent } from './components/configuracion-tienda/configuracion-tienda.component';
+
 
 @NgModule({
   declarations: [
@@ -105,7 +111,12 @@ import { SugerenciaComponent } from './components/analisis/sugerencia/sugerencia
     RegresionComponent,
     LinealComponent,
     ArbolComponent,
-    SugerenciaComponent
+    SugerenciaComponent,
+    LandingComponent,
+    PagoComponent,
+    TerminosComponent,
+    PoliticaComponent,
+    ConfiguracionTiendaComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +129,8 @@ import { SugerenciaComponent } from './components/analisis/sugerencia/sugerencia
     MatTabsModule,
     MatCardModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [
 

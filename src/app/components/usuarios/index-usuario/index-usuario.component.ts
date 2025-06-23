@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RolService } from '../../../services/rol.service';
+import { StorageService } from '../../../services/storage.service';
 
 
 declare var $: any;
@@ -13,8 +14,8 @@ declare var $: any;
 export class IndexUsuarioComponent  {
 
     public filtro = '';
-    public token = localStorage.getItem('token');
-    public user = JSON.parse(localStorage.getItem('user') || '{}');
+    public token = this.storageService.getItem('token') || '';
+    public user = JSON.parse(this.storageService.getItem('user') || '{}');
     public rolId =''
   public rol:any;
   public funcionalidades:any=[]
@@ -27,7 +28,8 @@ export class IndexUsuarioComponent  {
    constructor(private _usuarioService: UsuarioService,
     private rolservice: RolService,
     private _router:Router,
-    private _route:ActivatedRoute
+    private _route:ActivatedRoute,
+    private storageService: StorageService
    ) {}
 
    ngOnInit(){
@@ -41,8 +43,8 @@ export class IndexUsuarioComponent  {
         }else{
           this.init_data('Todos');
         }
-       
-      
+
+
       }
     )
   }
@@ -53,14 +55,14 @@ export class IndexUsuarioComponent  {
         response => {
           this.rol = response;
           this.funcionalidades=this.rol.funcionalidades
-  
+
           console.log(this.rol)
           console.log(this.funcionalidades)
         }
       );
     }
 
-    
+
   tienePermiso(permiso: string): boolean {
     return this.funcionalidades.some((funcionalidad: any) => funcionalidad.nombre === permiso);
   }
@@ -71,7 +73,7 @@ export class IndexUsuarioComponent  {
     this.load_data=true
     this._usuarioService.getUsuarios(filtro, this.token).subscribe(
       response => {
-       
+
         this.usuarios = response;
         this.load_data=false
       }

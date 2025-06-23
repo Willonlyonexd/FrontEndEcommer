@@ -1,0 +1,29 @@
+.card-flush {
+    box-shadow: 0 0 50px 0 rgba(82, 63, 105, 0.15);
+}
+
+.timeline-item:last-child .timeline-line {
+    display: none;
+}
+
+@media print {
+    .btn, .card-header {
+        display: none !important;
+    }
+
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* Animaciones suaves */
+.card:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--bs-primary);
+    color: white;
+}

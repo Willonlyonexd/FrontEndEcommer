@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
+import { StorageService } from '../../services/storage.service';
+
 
 declare var toastr: any
 @Component({
@@ -21,11 +23,12 @@ export class LoginComponent {
 
   constructor(
     private _usuarioServices: UsuarioService,
-    private _router: Router
+    private _router: Router,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
-    const blockStart = localStorage.getItem('blockStart');
+    const blockStart = this.storageService.getItem('blockStart');
     if (blockStart) {
       const blockTime = parseInt(blockStart, 10);
       const currentTime = new Date().getTime();
@@ -33,7 +36,7 @@ export class LoginComponent {
       if (elapsed < 3600000) {
         this.bloqueo = 3;
       } else {
-        localStorage.removeItem('blockStart');
+        this.storageService.removeItem('blockStart');
         this.bloqueo = 0;
       }
     }
@@ -42,7 +45,7 @@ export class LoginComponent {
   login() {
 
     if (this.bloqueo === 3) {
-      const blockStart = localStorage.getItem('blockStart');
+      const blockStart = this.storageService.getItem('blockStart');
       if (blockStart) {
         const blockTime = parseInt(blockStart, 10);
         const currentTime = new Date().getTime();
@@ -53,7 +56,7 @@ export class LoginComponent {
           return;
         } else {
 
-          localStorage.removeItem('blockStart');
+          this.storageService.removeItem('blockStart');
           this.bloqueo = 0;
         }
       }
@@ -79,15 +82,16 @@ export class LoginComponent {
           toastr.error('Contraseña incorrecta, intento ' + this.bloqueo + ' de 3');
 
           if (this.bloqueo === 3) {
-            localStorage.setItem('blockStart', new Date().getTime().toString());
+            this.storageService.setItem('blockStart', new Date().getTime().toString());
             toastr.error('Has alcanzado el máximo de intentos. Bloqueado por 1 hora.');
           }
 
         } else {
 
           if (response.data !== undefined) {
-            localStorage.setItem('token', response.jwt);
-            localStorage.setItem('user', JSON.stringify(response.data));
+            this.storageService.setItem('token', response.jwt);
+            this.storageService.setItem('tenant', response.data.tenant);
+            this.storageService.setObject('user', response.data);
             toastr.success('Inicio de sesión exitoso');
             this._router.navigate(['/dashboard']);
             this.bloqueo = 0;

@@ -1,0 +1,117 @@
+/* Estilos para la zona de dropzone */
+.dropzone {
+  border: 1px dashed #009ef7;
+  background: #f1faff;
+  border-radius: 0.475rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropzone:hover {
+  background-color: #e1f0ff;
+  border-color: #0095e8;
+}
+
+.dropzone .dz-message {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+/* Estilo para las tarjetas de previsualización */
+.card-flush.h-100 .card-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+}
+
+/* Estilos para los estados de carga */
+.btn-loading {
+  pointer-events: none;
+  position: relative;
+}
+
+/* Mejoras para el esquema de colores */
+.text-primary {
+  color: #009ef7 !important;
+}
+
+.btn-primary {
+  background-color: #009ef7 !important;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #0095e8 !important;
+}
+
+/* Mejoras para la previsualización de la tienda */
+.shop-logo-preview {
+  min-width: 120px;
+}
+
+/* Animación para los spinners */
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+/* Estilos para las pestañas */
+.nav-tabs .nav-link {
+  cursor: pointer;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: #5e6278;
+  transition: color 0.2s ease;
+  padding: 0.5rem 0;
+  margin-right: 1rem;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom: 2px solid #009ef7;
+  color: #009ef7;
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+  color: #009ef7;
+  border-bottom-color: #e1f0ff;
+}
+
+/* Estilos para la tabla de slides */
+.table-row-dashed tr {
+  border-bottom: 1px dashed #e4e6ef;
+}
+
+.table-row-dashed tr:last-child {
+  border-bottom: none;
+}
+
+/* Estilos responsivos */
+@media (max-width: 767.98px) {
+  .dropzone {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .dropzone .dz-message {
+    flex-direction: column;
+  }
+
+  .dropzone .dz-message .ms-4 {
+    margin-top: 1rem !important;
+    margin-left: 0 !important;
+    text-align: center;
+  }
+}

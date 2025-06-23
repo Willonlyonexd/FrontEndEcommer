@@ -1,0 +1,193 @@
+/* Estilo para el elemento de Stripe */
+.stripe-element {
+  padding: 15px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.stripe-element:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Card de pago */
+.payment-card {
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.payment-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+}
+
+/* Mejoras generales */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Iconos de tarjetas de crédito */
+.h-25px {
+  height: 25px;
+  width: auto;
+}
+
+/* Gradiente personalizado para el botón */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Animación para las características del plan */
+.list-unstyled li {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.list-unstyled li:nth-child(1) { animation-delay: 0.1s; }
+.list-unstyled li:nth-child(2) { animation-delay: 0.2s; }
+.list-unstyled li:nth-child(3) { animation-delay: 0.3s; }
+.list-unstyled li:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos mejorados para el formulario */
+.form-control-solid {
+  background-color: #f8f9fa;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.form-control-solid:focus {
+  background-color: #ffffff;
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+}
+
+.form-control.is-invalid {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+/* Checkbox de términos */
+.form-check-custom .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #d1d5db;
+  transition: all 0.3s ease;
+}
+
+.form-check-custom .form-check-input:checked {
+  background-color: #10b981;
+  border-color: #10b981;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3e%3cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3e%3c/svg%3e");
+}
+
+.form-check-custom .form-check-input:focus {
+  border-color: #667eea;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Botón deshabilitado */
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Animaciones */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Stripe Elements */
+.stripe-element {
+  min-height: 50px;
+  transition: border-color 0.3s ease;
+}
+
+.stripe-element:hover {
+  border-color: #667eea !important;
+}
+
+/* Notice personalizado */
+.notice {
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .col-lg-4 {
+    margin-bottom: 0.5rem;
+  }
+
+  .form-check-label {
+    font-size: 0.875rem;
+  }
+
+  .notice {
+    padding: 1rem !important;
+  }
+
+  .card-body {
+    padding: 1.5rem !important;
+  }
+}
+
+/* SweetAlert2 personalizado */
+.swal2-popup-custom {
+  border-radius: 1rem;
+}
+
+/* Validación visual */
+.is-invalid {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
