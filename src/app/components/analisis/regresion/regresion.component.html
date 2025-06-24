@@ -12,4 +12,91 @@
       <canvas #chartCanvas></canvas>
     </div>
   </div>
+
+  <hr>
+
+  <div class="row p-3">
+    <div class="col-md-6">
+      <h5 class="mb-3">Ventas recientes (últimos 15 días)</h5>
+      <table class="table table-sm table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>Fecha</th>
+            <th>N° Ventas</th>
+            <th>Total (Bs)</th>
+            <th>Ticket Prom.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of ventasRecientes">
+            <td>{{ v.fecha }}</td>
+            <td>{{ v.n_ventas }}</td>
+<td [ngClass]="getColorPorTotal(v.total)"><strong>{{ v.total }}</strong></td>
+            <td>{{ v.ticket_promedio }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <h5 class="mb-3">Resumen del modelo</h5>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Historial usado</span> <strong>{{ resumenModelo.historial_usado_dias }} días</strong>
+        </li>
+        
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Máximo predicho</span>
+          <strong>{{ resumenModelo.max_venta_predicha }} Bs<br><small>{{ resumenModelo.fecha_max }}</small></strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Mínimo predicho</span>
+          <strong>{{ resumenModelo.min_venta_predicha }} Bs<br><small>{{ resumenModelo.fecha_min }}</small></strong>
+        </li>
+      </ul>
+
+      <div class="alerta-inteligente mt-3 p-3" [ngClass]="{ 'alerta-activa': alertaTendencia.alerta }">
+        <div class="d-flex align-items-center">
+          <div class="icono-alerta me-3">
+            <span *ngIf="alertaTendencia.alerta">⚠️</span>
+            <span *ngIf="!alertaTendencia.alerta">✅</span>
+          </div>
+          <div>
+            <h6 class="mb-1 fw-bold">
+              {{ alertaTendencia.alerta ? 'Tendencia Negativa Detectada' : 'Tendencia Estable' }}
+            </h6>
+            <p class="mb-0 small text-muted">
+              {{ alertaTendencia.detalle }}<br />
+              <small>{{ alertaTendencia.desde }} → {{ alertaTendencia.hasta }}</small>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-6 text-center">
+          <div class="badge bg-success p-3 w-100">
+            📈 <strong>Máximo</strong><br />
+            {{ resumenModelo.max_venta_predicha }} Bs<br />
+            <small>{{ resumenModelo.fecha_max }}</small>
+          </div>
+        </div>
+        <div class="col-6 text-center">
+          <div class="badge bg-danger p-3 w-100">
+            📉 <strong>Mínimo</strong><br />
+            {{ resumenModelo.min_venta_predicha }} Bs<br />
+            <small>{{ resumenModelo.fecha_min }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recomendación flotante -->
+  <div class="recomendacion-flotante" *ngIf="mostrarRecomendacion">
+    <div class="contenido">
+      💡 {{ mensajeRecomendacion }}
+      <button class="cerrar" (click)="cerrarRecomendacion()">×</button>
+    </div>
+  </div>
 </div>

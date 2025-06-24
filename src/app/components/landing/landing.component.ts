@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef, ViewChild } from '@angular/core';
 import { ContactFormData, EmailService } from '../../services/email.service';
+import { HttpClient } from '@angular/common/http';
+import { GLOBAL } from '../../services/GLOBAL'; // Asegurate de que el path sea correcto
+
 
 @Component({
   selector: 'app-landing',
@@ -11,8 +14,52 @@ export class LandingComponent {
   showSuccessMessage = false;
   showErrorMessage = false;
   errorMessage = '';
+   mostrarChat = false;
+  mensaje = '';
+  mensajes: string[] = [];
+  @ViewChild('chatScroll') chatScroll!: ElementRef;
 
-  constructor(private emailService: EmailService) {}
+  constructor(private emailService: EmailService,
+    private http: HttpClient
+  ) {}
+
+   enviarMensaje() {
+    if (!this.mensaje.trim()) return;
+
+    this.mensajes.push('Tú: ' + this.mensaje);
+
+    this.http.post<{ respuesta: string }>(`${GLOBAL.url}/chatbot`, { mensaje: this.mensaje }).subscribe(
+      res => {
+        this.mensajes.push('Bot: ' + res.respuesta);
+      },
+      err => {
+        this.mensajes.push('Bot: Lo siento, hubo un problema al conectarme.');
+        console.error(err);
+      }
+    );
+
+    this.mensaje = '';
+  }
+  abrirChat() {
+  this.mostrarChat = true;
+  if (this.mensajes.length === 0) {
+    this.mensajes.push('Bot: 👋 ¡Hola! ¿En qué puedo ayudarte para comenzar con ShopMind?');
+  }
+}
+
+cerrarChat() {
+  this.mostrarChat = false;
+}
+
+ scrollToBottom() {
+    setTimeout(() => {
+      if (this.chatScroll) {
+        this.chatScroll.nativeElement.scrollTop = this.chatScroll.nativeElement.scrollHeight;
+      }
+    }, 100);
+  }
+
+
 
   async onSubmit(event: Event): Promise<void> {
     event.preventDefault();

@@ -1355,4 +1355,23 @@
                 <!--end::Javascript-->
 
 
-<svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg></body>
+<svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg>
+<!-- 💬 Botón flotante sin imagen externa -->
+<div id="chatbot-toggle" (click)="abrirChat()">💬</div>
+
+
+<!-- 🗨 Caja de chat -->
+<div id="chatbot-box" *ngIf="mostrarChat">
+  <div class="chat-header">
+    🤖 Asistente ShopMind
+    <span class="close-btn" (click)="cerrarChat()">×</span>
+  </div>
+  <div class="chat-content" #chatScroll>
+  <div *ngFor="let msg of mensajes" [ngClass]="{ 'user-msg': msg.startsWith('Tú:'), 'bot-msg': msg.startsWith('Bot:') }">
+    {{ msg }}
+  </div>
+</div>
+
+  <input [(ngModel)]="mensaje" (keyup.enter)="enviarMensaje()" placeholder="Escribí tu pregunta..." />
+</div>
+</body>

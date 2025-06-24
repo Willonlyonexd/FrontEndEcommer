@@ -14,12 +14,31 @@ export class RegresionComponent implements OnInit {
   public tenantId: string = '6852dbf5c4a6f8d1a81074f6';
   public historial: any[] = [];
   public predicciones: any[] = [];
+  public ventasRecientes: any[] = [];
   public diasPrediccion: number = 7;
+
+  // Simulaciones para acompañar visualmente
+  public resumenModelo = {
+    historial_usado_dias: 30,
+    dias_proyectados: this.diasPrediccion,
+    max_venta_predicha: 688.59,
+    min_venta_predicha: 26.07,
+    fecha_max: '2025-07-01',
+    fecha_min: '2025-07-16'
+  };
+
+  public alertaTendencia = {
+    alerta: true,
+    detalle: 'Tendencia en últimos 7 días: -542.7',
+    desde: '2025-07-10',
+    hasta: '2025-07-16'
+  };
 
   constructor(private estadisticaService: EstadisticaService) {}
 
   ngOnInit(): void {
     this.obtenerPredicciones();
+    this.obtenerVentasRecientes();
   }
 
   obtenerPredicciones(): void {
@@ -41,10 +60,45 @@ export class RegresionComponent implements OnInit {
     });
   }
 
+  obtenerVentasRecientes(): void {
+    const data = {
+      tenant_id: this.tenantId,
+      dias_historial: 30,
+      dias_prediccion: this.diasPrediccion
+    };
+
+    this.estadisticaService.obtenerVentasRecientes(data).subscribe({
+      next: (resp) => {
+        this.ventasRecientes = resp || [];
+      },
+      error: (err) => {
+        console.error('Error al obtener ventas recientes:', err);
+      }
+    });
+  }
+
   cambiarDias(dias: number): void {
     this.diasPrediccion = dias;
     this.obtenerPredicciones();
+    this.obtenerVentasRecientes();
   }
+public mostrarRecomendacion = true;
+public mensajeRecomendacion = 'Las ventas muestran una tendencia descendente. Considera lanzar una campaña de reactivación.';
+
+cerrarRecomendacion(): void {
+  this.mostrarRecomendacion = false;
+}
+
+getColorPorTotal(total: number): string {
+  if (total < 800) {
+    return 'total-amarillo';
+  } else if (total >= 800 && total <= 1200) {
+    return 'total-verde';
+  } else {
+    return 'total-azul';
+  }
+}
+
 
   dibujarGrafico(): void {
     if (this.chart) {
@@ -53,7 +107,6 @@ export class RegresionComponent implements OnInit {
 
     const ctx = this.chartCanvas?.nativeElement.getContext('2d');
 
-    // Filtrar historial de los últimos 60 días
     const hace60dias = new Date();
     hace60dias.setDate(hace60dias.getDate() - 60);
 
@@ -70,6 +123,8 @@ export class RegresionComponent implements OnInit {
 
     const ultimoValor = datosHistorial[datosHistorial.length - 1];
     const datosPrediccionConUnion = [ultimoValor, ...datosPrediccion];
+
+    
 
     this.chart = new Chart(ctx, {
       type: 'line',
@@ -107,5 +162,8 @@ export class RegresionComponent implements OnInit {
         }
       }
     });
+
+    
   }
+  
 }

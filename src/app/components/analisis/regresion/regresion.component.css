@@ -1,6 +1,157 @@
 .card {
   margin-top: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
+
 .card-header h3 {
   margin-bottom: 10px;
+}
+
+.table {
+  font-size: 0.9rem;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.alerta-inteligente {
+  border: 2px solid #dee2e6;
+  border-left: 5px solid transparent;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: all 0.4s ease;
+}
+
+.alerta-inteligente.alerta-activa {
+  border-left-color: #dc3545;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.5);
+  }
+  70% {
+    transform: scale(1.01);
+    box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+  }
+}
+
+.icono-alerta {
+  font-size: 2rem;
+}
+
+.badge {
+  font-size: 0.85rem;
+  border-radius: 12px;
+  line-height: 1.3;
+  transition: transform 0.3s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  cursor: default;
+}
+
+.list-group-item {
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .row.p-3 {
+    flex-direction: column;
+  }
+
+  .col-md-6 {
+    margin-bottom: 20px;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+.recomendacion-flotante {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #fff8e1;
+  color: #856404;
+  border-left: 5px solid #ffc107;
+  border-radius: 8px;
+  padding: 16px 20px;
+  max-width: 280px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  animation: entrada 0.5s ease-out;
+  z-index: 1050;
+}
+
+.recomendacion-flotante .cerrar {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  color: #555;
+  cursor: pointer;
+}
+
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Total ventas por color */
+.total-amarillo {
+  background-color: #fff3cd !important;
+  color: #856404;
+}
+
+.total-verde {
+  background-color: #d4edda !important;
+  color: #155724;
+}
+
+.total-azul {
+  background-color: #cce5ff !important;
+  color: #004085;
+  animation: pulse-azul 1.5s infinite;
+}
+
+@keyframes pulse-azul {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(0, 123, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  }
 }
