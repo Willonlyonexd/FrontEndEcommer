@@ -1,0 +1,10 @@
+# ¿Por qué .dockerignore? Reduce el tamaño del contexto de Docker
+node_modules
+dist
+.git
+.angular
+*.log
+README.md
+.env
+coverage
+.nyc_output

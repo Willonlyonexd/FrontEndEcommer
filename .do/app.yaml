@@ -1,0 +1,21 @@
+name: shopmind-app
+services:
+- name: web
+  source_dir: /
+  github:
+    repo: junior-zamo99/shopmind-frontend
+    branch: main
+  dockerfile_path: Dockerfile
+  http_port: 80
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  routes:
+  - path: /
+  envs:
+  - key: NODE_ENV
+    value: "production"
+  # ¿Por qué estas variables? Tu app las necesita para funcionar
+  - key: API_URL
+    value: "https://tu-backend.com/api"
+  - key: STRIPE_PUBLIC_KEY
+    value: "pk_live_tu_clave_aqui"
