@@ -27,42 +27,61 @@ export class CreateTenentComponent {
   public stripe: Stripe | null = null;
   public card: any = null;
 
+  // ✅ PLANES ACTUALIZADOS SEGÚN LA LANDING PAGE
   public planes = [
     {
       id: 1,
-      nombre: 'Startup',
-      precio: 99,
-      descripcion: 'La mejor opción para startups',
+      nombre: 'Starter',
+      precio: 149,
+      descripcion: 'Ideal para emprendedores que inician su tienda online',
       caracteristicas: [
-        'Hasta 10 Usuarios Activos',
-        'Hasta 30 Integraciones de Proyectos',
-        'Plataforma de Analytics Básica',
-        'Proyectos Ilimitados'
-      ]
+        'Hasta 500 productos',
+        'Tienda online personalizable',
+        'Gestión de inventario',
+        'Reportes básicos de ventas',
+        'Soporte por Email (48h)'
+      ],
+      ecommerce: [
+        'Hasta 500 productos',
+        'Tienda online personalizable',
+        'Gestión de inventario'
+      ],
+      analytics: [
+        'Reportes básicos de ventas'
+      ],
+      noIncluido: [
+        'Gestión de cupones',
+        'Dashboard analítico',
+        'Machine Learning'
+      ],
+      soporte: 'Email (48h respuesta)'
     },
     {
       id: 2,
-      nombre: 'Negocio',
-      precio: 199,
-      descripcion: 'La mejor opción para negocios',
+      nombre: 'Professional',
+      precio: 399,
+      descripcion: 'Para negocios serios que buscan inteligencia artificial',
       caracteristicas: [
-        'Hasta 50 Usuarios Activos',
-        'Hasta 100 Integraciones de Proyectos',
-        'Plataforma de Analytics Avanzada',
-        'Proyectos Ilimitados'
-      ]
-    },
-    {
-      id: 3,
-      nombre: 'Empresa',
-      precio: 999,
-      descripcion: 'La mejor opción para empresas',
-      caracteristicas: [
-        'Usuarios Ilimitados',
-        'Integraciones Ilimitadas',
-        'Plataforma de Analytics Enterprise',
-        'Soporte Prioritario 24/7'
-      ]
+        'Productos ilimitados',
+        'Tienda totalmente personalizable',
+        'Gestión completa de cupones',
+        'Dashboard analítico completo',
+        'Machine Learning + predicciones',
+        'Recomendaciones inteligentes',
+        'Soporte 24/7 multicanal'
+      ],
+      ecommerce: [
+        'Productos ilimitados',
+        'Tienda totalmente personalizable',
+        'Gestión avanzada de inventario',
+        'Gestión completa de cupones'
+      ],
+      analytics: [
+        'Dashboard analítico completo',
+        'Machine Learning + predicciones',
+        'Recomendaciones inteligentes'
+      ],
+      soporte: 'Chat + Email + WhatsApp 24/7'
     }
   ];
 
@@ -98,7 +117,6 @@ export class CreateTenentComponent {
     await this.inicializarStripeYCrearPaymentIntent();
   }
 
-
   isFormValid(): boolean {
     return !!(
       this.empresa.nombreTienda?.trim() &&
@@ -110,11 +128,9 @@ export class CreateTenentComponent {
     );
   }
 
-
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
-
 
   private recordTermsAcceptance() {
     const termsData = {
@@ -126,8 +142,6 @@ export class CreateTenentComponent {
     };
 
     console.log('Términos aceptados:', termsData);
-
-
   }
 
   async inicializarStripeYCrearPaymentIntent() {
@@ -272,11 +286,11 @@ export class CreateTenentComponent {
         if (paymentIntent && paymentIntent.status === 'succeeded') {
           console.log('¡Pago realizado correctamente!', paymentIntent);
 
-
           this.recordTermsAcceptance();
           this.empresa.terms_version = '1.0';
-          this.empresa.tipo= this.tipo;
+          this.empresa.tipo = this.tipo;
           console.log('Registrando usuario:', this.empresa);
+
           this._usuarioService.createTenant(this.empresa).subscribe(
             response => {
               console.log(response);

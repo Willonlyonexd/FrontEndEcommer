@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   activeTab: string = 'ventas'; // Tab activo por defecto
-  public userName: string = 'Willonlyonexd';
-  public currentDate: string = '2025-06-20 01:42:30';
-  
+  public userName: string = '';
+  public currentDate: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     const hours = String(now.getUTCHours()).padStart(2, '0');
     const minutes = String(now.getUTCMinutes()).padStart(2, '0');
     const seconds = String(now.getUTCSeconds()).padStart(2, '0');
-    
+
     this.currentDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 }
