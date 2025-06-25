@@ -97,7 +97,7 @@ const routes: Routes = [
   { path: 'egresos/create', component: EgresoCreateComponent, canActivate: [AuthGuard] },
   { path: 'egresos/detalles/:id', component: EgresoDetallesComponent, canActivate: [AuthGuard] },
 
-  {path: 'configuracion_tienda', component: ConfiguracionTiendaComponent,},
+  {path: 'configuracion_tienda', component: ConfiguracionTiendaComponent, canActivate: [AuthGuard]},
 
   { path: 'pago', component: PagoComponent}
 

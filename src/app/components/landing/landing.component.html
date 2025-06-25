@@ -107,7 +107,7 @@
 
             <!--begin::Toolbar-->
             <div class="flex-equal text-end ms-1">
-                <a href="/login" class="btn btn-success">Iniciar Sesión</a>
+                <a [routerLink]="['/login']" routerLinkActive="router-link-active"  class="btn btn-success">Iniciar Sesión</a>
             </div>
             <!--end::Toolbar-->
         </div>
@@ -636,8 +636,8 @@
                                 <input class="form-check-input" type="checkbox" id="contact_consent" name="consent" required [disabled]="isLoading">
                                 <label class="form-check-label" for="contact_consent">
                                     Acepto que ShopMind me contacte por los medios proporcionados y acepto los
-                                    <a href="/terminos" target="_blank" class="link-primary">Términos y Condiciones</a>
-                                    y la <a href="/privacidad" target="_blank" class="link-primary">Política de Privacidad</a>. *
+                                    <a routerLink="/terminos" target="_blank" class="link-primary">Términos y Condiciones</a>
+                                    y la <a routerLink="/politica" target="_blank" class="link-primary">Política de Privacidad</a>. *
                                 </label>
                             </div>
                             <!--end::Checkbox-->
@@ -1297,11 +1297,11 @@
 
             <!-- ENLACES DE TÉRMINOS Y CONDICIONES -->
             <li class="menu-item mx-5">
-                <a href="/terminos" target="_blank" class="menu-link px-2">Términos y Condiciones</a>
+                <a routerLink="/terminos" target="_blank" class="menu-link px-2">Términos y Condiciones</a>
             </li>
 
             <li class="menu-item">
-                <a href="/privacidad" target="_blank" class="menu-link px-2">Política de Privacidad</a>
+                <a  routerLink="/politica"  target="_blank" class="menu-link px-2">Política de Privacidad</a>
             </li>
         </ul>
         <!--end::Menu-->

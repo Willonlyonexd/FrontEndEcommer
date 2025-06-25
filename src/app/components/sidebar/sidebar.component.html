@@ -5,7 +5,7 @@
   <!--begin::Brand-->
   <div class="aside-logo flex-column-auto" id="kt_aside_logo" style="background-color: #0d0e12 !important;">
     <!--begin::Logo-->
-    <a href="/dashboard">
+    <a routerLink="/dashboard">
       <img alt="Logo" src="assets/media/logos/shopmind.png" class="h-60px w-100px  logo" />
     </a>
     <!--end::Logo-->
@@ -47,6 +47,22 @@
         </div>
 
 
+        <div class="menu-item">
+          <a class="menu-link " [routerLink]="['/dashboard']" routerLinkActive="active">
+            <span class="menu-icon">
+              <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+              <span class="svg-icon svg-icon-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                  <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                  <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                  <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                </svg>
+              </span>
+              <!--end::Svg Icon-->
+            </span>
+            <span class="menu-title">Dashboard</span>
+          </a>
 
         <div class="menu-item" *ngIf="tienePermiso('gestionar usuarios')">
           <a class="menu-link " [routerLink]="['/colaborador']" routerLinkActive="active">
@@ -292,7 +308,7 @@
   <!--end::Aside menu-->
   <!--begin::Footer-->
   <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
-    <a class="btn btn-custom btn-primary w-100">
+    <a class="btn btn-custom btn-primary w-100" (click)="cerrarSesion()">
       <span class="btn-label">Cerrar sesión</span>
       <!--begin::Svg Icon | path: icons/duotune/general/gen005.svg-->
       <span class="svg-icon btn-icon svg-icon-2">

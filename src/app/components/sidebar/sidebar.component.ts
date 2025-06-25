@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { RolService } from '../../services/rol.service';
+import { StorageService } from '../../services/storage.service';
+import { Router } from '@angular/router';
+
 declare var KTApp:any;
 declare var KTLayoutAside:any;
 declare var KTUtil:any;
@@ -21,6 +24,8 @@ export class SidebarComponent {
   public funcionalidades:any=[]
   constructor(
     private rolservice: RolService,
+    private  storage: StorageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +48,16 @@ export class SidebarComponent {
         console.log(this.funcionalidades)
       }
     );
-    
+
+  }
+
+
+  cerrarSesion() {
+    this.storage.removeItem('token');
+    this.storage.removeItem('user');
+    this.storage.clear();
+
+    this.router.navigate(['/login']);
   }
 
   tienePermiso(permiso: string): boolean {
