@@ -190,11 +190,11 @@
                           />
                           <label class="form-check-label fw-semibold text-gray-800 fs-6 ms-1" for="kt_accept_terms">
                             He leído y acepto los
-                            <a routerLink="/terminos" target="_blank" class="link-primary fw-bold text-decoration-underline">
+                            <a [routerLink]="['/terminos']"    class="link-primary fw-bold text-decoration-underline">
                               Términos y Condiciones
                             </a>
                             y la
-                            <a routerLink="/politica" target="_blank" class="link-primary fw-bold text-decoration-underline">
+                            <a [routerLink]="['/politica']"  class="link-primary fw-bold text-decoration-underline">
                               Política de Privacidad
                             </a>
                             de ShopMind
@@ -256,14 +256,14 @@
                             <strong>¡Atención!</strong>
                             Debes aceptar los Términos y Condiciones para continuar.
                             <div class="mt-2">
-                              <a routerLink="/terminos" target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                              <a [routerLink]="['/terminos']" class="btn btn-sm btn-outline-primary me-2">
                                 <i class="ki-duotone ki-document fs-5 me-1">
                                   <span class="path1"></span>
                                   <span class="path2"></span>
                                 </i>
                                 Ver Términos
                               </a>
-                              <a routerLink="/politica" target="_blank" class="btn btn-sm btn-outline-info">
+                              <a [routerLink]="['/politica']"  class="btn btn-sm btn-outline-info">
                                 <i class="ki-duotone ki-shield-tick fs-5 me-1">
                                   <span class="path1"></span>
                                   <span class="path2"></span>

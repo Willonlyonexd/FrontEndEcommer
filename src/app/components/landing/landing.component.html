@@ -636,8 +636,8 @@
                                 <input class="form-check-input" type="checkbox" id="contact_consent" name="consent" required [disabled]="isLoading">
                                 <label class="form-check-label" for="contact_consent">
                                     Acepto que ShopMind me contacte por los medios proporcionados y acepto los
-                                    <a routerLink="/terminos" target="_blank" class="link-primary">Términos y Condiciones</a>
-                                    y la <a routerLink="/politica" target="_blank" class="link-primary">Política de Privacidad</a>. *
+                                    <a [routerLink]="['/terminos']" routerLinkActive="router-link-active"  class="link-primary">Términos y Condiciones</a>
+                                    y la <a [routerLink]="['/politica']" routerLinkActive="router-link-active"   class="link-primary">Política de Privacidad</a>. *
                                 </label>
                             </div>
                             <!--end::Checkbox-->
@@ -1288,20 +1288,20 @@
         <!--begin::Menu-->
         <ul class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
             <li class="menu-item">
-                <a href="/nosotros" target="_blank" class="menu-link px-2">Nosotros</a>
+                <a href="/nosotros" class="menu-link px-2">Nosotros</a>
             </li>
 
             <li class="menu-item mx-5">
-                <a href="/soporte" target="_blank" class="menu-link px-2">Soporte</a>
+                <a href="/soporte"  class="menu-link px-2">Soporte</a>
             </li>
 
             <!-- ENLACES DE TÉRMINOS Y CONDICIONES -->
             <li class="menu-item mx-5">
-                <a routerLink="/terminos" target="_blank" class="menu-link px-2">Términos y Condiciones</a>
+                <a [routerLink]="['/terminos']" class="menu-link px-2">Términos y Condiciones</a>
             </li>
 
             <li class="menu-item">
-                <a  routerLink="/politica"  target="_blank" class="menu-link px-2">Política de Privacidad</a>
+                <a  [routerLink]="['/politica']"    class="menu-link px-2">Política de Privacidad</a>
             </li>
         </ul>
         <!--end::Menu-->
