@@ -2,13 +2,12 @@
   "name": "panel",
   "version": "0.0.0",
   "scripts": {
-  "ng": "ng",
-  "start": "node dist/panel/server/server.mjs",
+   "ng": "ng",
   "build": "ng build && ng run panel:server",
+  "start": "node dist/panel/server/main.js",
   "prod": "ng build --configuration production && ng run panel:server:production",
   "watch": "ng build --watch --configuration development",
-  "test": "ng test",
-  "serve:ssr:panel": "node dist/panel/server/server.mjs"
+  "test": "ng test"
 },
   "private": true,
   "dependencies": {
