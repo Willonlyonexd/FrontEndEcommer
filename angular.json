@@ -73,6 +73,38 @@
           },
           "defaultConfiguration": "production"
         },
+        "server": {
+  "builder": "@angular-devkit/build-angular:server",
+  "options": {
+    "outputPath": "dist/panel-server",
+    "main": "src/main.server.ts",
+    "tsConfig": "tsconfig.server.json"
+  },
+  "configurations": {
+    "production": {
+      "outputHashing": "media",
+      "fileReplacements": [
+        {
+          "replace": "src/environments/environment.ts",
+          "with": "src/environments/environment.prod.ts"
+        }
+      ]
+    }
+  }
+},
+"serve-ssr": {
+  "builder": "@nguniversal/builders:ssr-dev-server",
+  "options": {
+    "browserTarget": "panel:build",
+    "serverTarget": "panel:server"
+  },
+  "configurations": {
+    "production": {
+      "browserTarget": "panel:build:production",
+      "serverTarget": "panel:server:production"
+    }
+  }
+},
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
