@@ -191,3 +191,84 @@
   25% { transform: translateX(-5px); }
   75% { transform: translateX(5px); }
 }
+/* Reducir espaciado general del layout */
+#kt_toolbar {
+  position: static !important;
+  padding: 0.75rem 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#kt_toolbar_container {
+  padding: 0.5rem 0 !important;
+}
+
+.page-title {
+  margin-bottom: 0.5rem !important;
+}
+
+#kt_content {
+  padding-top: 0.5rem !important;
+}
+
+#kt_post {
+  padding-top: 0 !important;
+}
+
+#kt_content_container {
+  padding-top: 1rem !important;
+}
+
+/* Mejorar espaciado entre columnas */
+.row.gy-5.g-xl-8 {
+  --bs-gutter-y: 1.5rem !important;
+  --bs-gutter-x: 1.5rem !important;
+  margin-top: 0 !important;
+}
+
+/* Optimizar cards */
+.card {
+  margin-bottom: 1rem !important;
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem 0.75rem 1.5rem !important;
+}
+
+.card-body {
+  padding: 1.25rem 1.5rem !important;
+}
+
+.card-footer {
+  padding: 1rem 1.5rem !important;
+}
+
+/* Ajustar formularios */
+.row.mb-7 {
+  margin-bottom: 1.25rem !important;
+}
+
+.form-text {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0 !important;
+}
+
+.notice {
+  margin-top: 1rem !important;
+  padding: 1rem !important;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+  #kt_toolbar {
+    padding: 0.5rem 0 !important;
+  }
+
+  .card-body {
+    padding: 1rem !important;
+  }
+
+  .row.mb-7 {
+    margin-bottom: 1rem !important;
+  }
+}
+
