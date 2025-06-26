@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { EstadisticaService } from '../../../services/estadistica.service';
 import Chart from 'chart.js/auto';
+import { StorageService } from '../../../services/storage.service';
 
 @Component({
   selector: 'app-regresion',
@@ -11,11 +12,13 @@ export class RegresionComponent implements OnInit {
   @ViewChild('chartCanvas') chartCanvas: ElementRef | undefined;
   chart: any;
 
-  public tenantId: string = '6852dbf5c4a6f8d1a81074f6';
+  public tenantId= this._storage.getItem('tenant') || ''; // ID del tenant por defecto
   public historial: any[] = [];
   public predicciones: any[] = [];
   public ventasRecientes: any[] = [];
   public diasPrediccion: number = 7;
+   tenant='6852dbf5c4a6f8d1a81074f6'
+   mostrarMensajeDeNoDatos: boolean = false;
 
   // Simulaciones para acompañar visualmente
   public resumenModelo = {
@@ -34,11 +37,19 @@ export class RegresionComponent implements OnInit {
     hasta: '2025-07-16'
   };
 
-  constructor(private estadisticaService: EstadisticaService) {}
+  constructor(private estadisticaService: EstadisticaService,
+    private _storage: StorageService
+  ) {}
 
   ngOnInit(): void {
-    this.obtenerPredicciones();
+     if(this.tenantId== this.tenant){
+         this.obtenerPredicciones();
     this.obtenerVentasRecientes();
+    }else{
+      this.mostrarMensajeDeNoDatos = true;
+      console.warn('El tenant no es válido o no tiene datos disponibles.');
+    }
+
   }
 
   obtenerPredicciones(): void {
@@ -124,7 +135,7 @@ getColorPorTotal(total: number): string {
     const ultimoValor = datosHistorial[datosHistorial.length - 1];
     const datosPrediccionConUnion = [ultimoValor, ...datosPrediccion];
 
-    
+
 
     this.chart = new Chart(ctx, {
       type: 'line',
@@ -163,7 +174,7 @@ getColorPorTotal(total: number): string {
       }
     });
 
-    
+
   }
-  
+
 }

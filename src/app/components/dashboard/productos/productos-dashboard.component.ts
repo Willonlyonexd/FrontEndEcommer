@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ChangeDetectorRef, Inject, PLATFORM_I
 import { isPlatformBrowser } from '@angular/common';
 import { DashboardService } from '../dashboard.service';
 import { Chart, registerables } from 'chart.js/auto';
+import { GLOBAL } from '../../../services/GLOBAL';
 
 // Registrar componentes de Chart.js
 Chart.register(...registerables);
@@ -14,20 +15,21 @@ Chart.register(...registerables);
 export class ProductosDashboardComponent implements OnInit, AfterViewInit {
   // Flag para verificar si estamos en navegador
   private isBrowser: boolean;
-  
+
   // Variables para almacenar datos
   distribucionPorCategoria: any[] = [];
   stockPorCategoria: any[] = [];
   productosSinStock: any[] = [];
   productosRecienAgregados: any[] = [];
   productosConSobrestock: any[] = [];
-  
+
+  public url= GLOBAL.url;
   // Estadísticas generales
   totalProductos: number = 0;
   totalSinStock: number = 0;
   totalSobrestock: number = 0;
   totalCategorias: number = 0;
-  
+
   // Estados de carga
   loading = {
     distribucion: false,
@@ -36,12 +38,12 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
     recienAgregados: false,
     sobrestock: false
   };
-  
+
   // Gráficos
   distribucionChart: any;
   stockChart: any;
   sobrestockChart: any;
-  
+
   // Filtros
   filtroCategoria: string = 'todas';
   categorias: string[] = [];
@@ -58,42 +60,42 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.cargarDatosProductos();
   }
-  
+
   ngAfterViewInit(): void {
     if (!this.isBrowser) return;
-    
+
     // Verificamos periódicamente si los elementos del DOM están listos
     const checkInterval = setInterval(() => {
       let allReady = true;
-      
+
       if (this.distribucionPorCategoria.length > 0 && document.getElementById('distribucionChart')) {
         this.crearGraficoDistribucion();
       } else if (this.distribucionPorCategoria.length > 0) {
         allReady = false;
       }
-      
+
       if (this.stockPorCategoria.length > 0 && document.getElementById('stockChart')) {
         this.crearGraficoStock();
       } else if (this.stockPorCategoria.length > 0) {
         allReady = false;
       }
-      
+
       if (this.productosConSobrestock.length > 0 && document.getElementById('sobrestockChart')) {
         this.crearGraficoSobrestock();
       } else if (this.productosConSobrestock.length > 0) {
         allReady = false;
       }
-      
+
       if (allReady) {
         clearInterval(checkInterval);
       }
     }, 200);
-    
+
     setTimeout(() => {
       clearInterval(checkInterval);
     }, 10000);
   }
-  
+
   // Método para cargar todos los datos de productos
   cargarDatosProductos(): void {
     // 1. Cargar distribución por categoría
@@ -114,7 +116,7 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
         this.loading.distribucion = false;
       }
     });
-    
+
     // 2. Cargar stock por categoría
     this.loading.stock = true;
     this.dashboardService.getStockPorCategoria().subscribe({
@@ -130,7 +132,7 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
         this.loading.stock = false;
       }
     });
-    
+
     // 3. Cargar productos sin stock
     this.loading.sinStock = true;
     this.dashboardService.getProductosSinStock().subscribe({
@@ -144,7 +146,7 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
         this.loading.sinStock = false;
       }
     });
-    
+
     // 4. Cargar productos recién agregados
     this.loading.recienAgregados = true;
     this.dashboardService.getProductosRecienAgregados(10).subscribe({
@@ -157,7 +159,7 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
         this.loading.recienAgregados = false;
       }
     });
-    
+
     // 5. Cargar productos con sobrestock
     this.loading.sobrestock = true;
     this.dashboardService.getProductosConSobrestock(this.umbralSobrestock).subscribe({
@@ -175,7 +177,7 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
+
   // Método para aplicar filtros
   aplicarFiltro(): void {
     if (this.isBrowser) {
@@ -185,13 +187,13 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
       this.crearGraficoSobrestock();
     }
   }
-  
+
   // Método para actualizar umbral de sobrestock
   actualizarUmbralSobrestock(): void {
     if (this.umbralSobrestock < 1) {
       this.umbralSobrestock = 1;
     }
-    
+
     this.loading.sobrestock = true;
     this.dashboardService.getProductosConSobrestock(this.umbralSobrestock).subscribe({
       next: (data) => {
@@ -208,42 +210,42 @@ export class ProductosDashboardComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
+
   // MÉTODOS PARA CREAR GRÁFICOS
-  
+
   crearGraficoDistribucion(): void {
     if (!this.isBrowser || !this.distribucionPorCategoria || this.distribucionPorCategoria.length === 0) return;
-    
+
     const ctx = document.getElementById('distribucionChart') as HTMLCanvasElement;
     if (!ctx) {
       console.error("No se encontró el canvas para el gráfico de distribución");
       return;
     }
-    
+
     if (this.distribucionChart) {
       this.distribucionChart.destroy();
     }
-    
+
     try {
       // Filtrar por categoría si es necesario
       let datosFiltrados = this.distribucionPorCategoria;
       if (this.filtroCategoria !== 'todas') {
-        datosFiltrados = this.distribucionPorCategoria.filter(item => 
+        datosFiltrados = this.distribucionPorCategoria.filter(item =>
           item.categoria === this.filtroCategoria
         );
       }
-      
+
       // Ordenar de mayor a menor
       datosFiltrados = datosFiltrados.sort((a, b) => b.cantidad - a.cantidad);
-      
+
       // Limitar a 15 categorías si hay más para mejor visualización
       if (datosFiltrados.length > 15) {
         datosFiltrados = datosFiltrados.slice(0, 15);
       }
-      
+
       const labels = datosFiltrados.map(item => this.acortarNombre(item.categoria, 25));
       const datos = datosFiltrados.map(item => item.cantidad);
-      
+
       // Generar colores distintos para cada barra
       // Usar colores fijos para garantizar colores diferentes
 const fixedColors = [
@@ -266,7 +268,7 @@ const fixedColors = [
 
 // Asegurar que hay suficientes colores para todos los datos
 const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length]);
-      
+
       this.distribucionChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -318,52 +320,52 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
           }
         }
       });
-      
+
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error al crear el gráfico de distribución:', error);
     }
   }
-  
+
   crearGraficoStock(): void {
     if (!this.isBrowser || !this.stockPorCategoria || this.stockPorCategoria.length === 0) return;
-    
+
     const ctx = document.getElementById('stockChart') as HTMLCanvasElement;
     if (!ctx) {
       console.error("No se encontró el canvas para el gráfico de stock");
       return;
     }
-    
+
     if (this.stockChart) {
       this.stockChart.destroy();
     }
-    
+
     try {
       // Filtrar por categoría si es necesario
       let datosFiltrados = this.stockPorCategoria;
       if (this.filtroCategoria !== 'todas') {
-        datosFiltrados = this.stockPorCategoria.filter(item => 
+        datosFiltrados = this.stockPorCategoria.filter(item =>
           item.categoria === this.filtroCategoria
         );
       }
-      
+
       // Separar categorías con stock positivo y negativo
       const categoriasPositivas = datosFiltrados.filter(item => item.stock_total >= 0);
       const categoriasNegativas = datosFiltrados.filter(item => item.stock_total < 0);
-      
+
       // Ordenar de mayor a menor (en valor absoluto para negativos)
       categoriasPositivas.sort((a, b) => b.stock_total - a.stock_total);
       categoriasNegativas.sort((a, b) => a.stock_total - b.stock_total);
-      
+
       // Tomar las top 10 categorías positivas para el gráfico de pie
       const topCategoriasPositivas = categoriasPositivas.slice(0, 10);
-      
+
       // Si hay más de 10, agrupar el resto en "Otras"
       if (categoriasPositivas.length > 10) {
         const otrasCategoriasStock = categoriasPositivas.slice(10).reduce(
           (sum, item) => sum + item.stock_total, 0
         );
-        
+
         if (otrasCategoriasStock > 0) {
           topCategoriasPositivas.push({
             categoria: 'Otras Categorías',
@@ -371,10 +373,10 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
           });
         }
       }
-      
+
       const labels = topCategoriasPositivas.map(item => this.acortarNombre(item.categoria, 20));
       const datos = topCategoriasPositivas.map(item => item.stock_total);
-      
+
       // Crear colores para cada segmento del pie
       // Usar colores fijos para garantizar colores diferentes
 const fixedColors = [
@@ -397,7 +399,7 @@ const fixedColors = [
 
 // Asegurar que hay suficientes colores para todos los datos
 const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length]);
-      
+
       this.stockChart = new Chart(ctx, {
         type: 'pie', // Cambiado a pie como solicitado
         data: {
@@ -446,7 +448,7 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
           }
         }
       });
-      
+
       // Si hay categorías con stock negativo, mostrar una alerta
       if (categoriasNegativas.length > 0) {
         const alertElement = document.getElementById('stockNegativoAlert');
@@ -455,39 +457,39 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
           alertElement.textContent = `¡Atención! Hay ${categoriasNegativas.length} categorías con stock negativo.`;
         }
       }
-      
+
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error al crear el gráfico de stock:', error);
     }
   }
-  
+
   crearGraficoSobrestock(): void {
     if (!this.isBrowser || !this.productosConSobrestock || this.productosConSobrestock.length === 0) return;
-    
+
     const ctx = document.getElementById('sobrestockChart') as HTMLCanvasElement;
     if (!ctx) {
       console.error("No se encontró el canvas para el gráfico de productos con sobrestock");
       return;
     }
-    
+
     if (this.sobrestockChart) {
       this.sobrestockChart.destroy();
     }
-    
+
     try {
       // Ordenar por stock (de mayor a menor)
       let datosFiltrados = [...this.productosConSobrestock].sort((a, b) => b.stock_total - a.stock_total);
-      
+
       // Tomar los 10 productos con más stock
       datosFiltrados = datosFiltrados.slice(0, 10);
-      
+
       const labels = datosFiltrados.map(item => this.acortarNombre(item.producto, 20));
       const datos = datosFiltrados.map(item => item.stock_total);
-      
+
       // Generar tonos de azul
       const backgroundColors = this.generateColorGradient(datos.length, 'blue');
-      
+
       this.sobrestockChart = new Chart(ctx, {
         type: 'bar', // Gráfico vertical como solicitado
         data: {
@@ -540,22 +542,22 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
           }
         }
       });
-      
+
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error al crear el gráfico de productos con sobrestock:', error);
     }
   }
-  
+
   // Método auxiliar para acortar nombres largos
   acortarNombre(nombre: string, maxLength: number): string {
     return nombre.length > maxLength ? nombre.substring(0, maxLength) + '...' : nombre;
   }
-  
+
   // Método para generar degradados de colores para las gráficas
   generateColorGradient(steps: number, baseColor: string): string[] {
     const colors: string[] = [];
-    
+
     // Si se solicita múltiples colores
     if (baseColor === 'multi') {
       const baseColors = [
@@ -570,24 +572,24 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
         [255, 99, 255],   // Rosa
         [138, 220, 118]   // Verde lima
       ];
-      
+
       for (let i = 0; i < steps; i++) {
         const colorIndex = i % baseColors.length;
         const [r, g, b] = baseColors[colorIndex];
         // Agregar variación para evitar colores exactamente iguales
         const variacion = i >= baseColors.length ? 0.7 + (i / steps) * 0.3 : 1;
-        
+
         colors.push(`rgba(${Math.min(255, Math.round(r * variacion))}, ${Math.min(255, Math.round(g * variacion))}, ${Math.min(255, Math.round(b * variacion))}, 0.7)`);
       }
-      
+
       return colors;
     }
-    
+
     // Si se solicita un solo color base con variaciones
     let baseRed = 0;
-    let baseGreen = 0; 
+    let baseGreen = 0;
     let baseBlue = 0;
-    
+
     // Definir el color base
     switch (baseColor) {
       case 'blue':
@@ -610,25 +612,25 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
         baseGreen = 162;
         baseBlue = 235;
     }
-    
+
     for (let i = 0; i < steps; i++) {
       // Variar ligeramente el color base para cada elemento
       const factor = 0.7 + (i / steps) * 0.3; // Factor de variación entre 0.7 y 1.0
-      
+
       const red = Math.min(255, Math.round(baseRed * factor));
       const green = Math.min(255, Math.round(baseGreen * factor));
       const blue = Math.min(255, Math.round(baseBlue * factor));
-      
+
       colors.push(`rgba(${red}, ${green}, ${blue}, 0.7)`);
     }
-    
+
     return colors;
   }
-  
+
   // Formato para fechas
   formatDate(dateStr: string): string {
     if (!dateStr) return '';
-    
+
     const date = new Date(dateStr);
     return date.toLocaleDateString('es-MX', {
       year: 'numeric',
@@ -636,16 +638,16 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
       day: 'numeric'
     });
   }
-  
+
   // Generador de ID única para imagenes
   generateImageId(productId: string): string {
     return `img_${productId.substring(productId.length - 6)}`;
   }
-  
+
   // Método para decidir el color de la etiqueta
   getBadgeClass(label: string): string {
     if (!label) return 'badge bg-secondary';
-    
+
     switch (label.toLowerCase()) {
       case 'nuevo':
         return 'badge bg-success';
@@ -659,7 +661,7 @@ const backgroundColors = labels.map((_, i) => fixedColors[i % fixedColors.length
         return 'badge bg-secondary';
     }
   }
-  
+
   // Método para decidir el nivel de alerta según el stock
   getStockAlertLevel(stock: number): string {
     if (stock < -500) return 'text-danger fw-bold';

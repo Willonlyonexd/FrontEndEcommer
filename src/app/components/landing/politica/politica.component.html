@@ -1,528 +1,397 @@
 <div class="d-flex flex-column flex-root" id="kt_app_root">
-    <!--begin::Page bg image-->
-    <style>
-        body {
-            background-image: url('assets/media/auth/bg4.jpg');
-        }
-        [data-bs-theme="dark"] body {
-            background-image: url('assets/media/auth/bg4-dark.jpg');
-        }
-    </style>
-    <!--end::Page bg image-->
+  <!--begin::Page bg image-->
+  <style>
+    body {
+      background-image: url('assets/media/auth/bg4.jpg');
+    }
+    [data-bs-theme="dark"] body {
+      background-image: url('assets/media/auth/bg4-dark.jpg');
+    }
+  </style>
+  <!--end::Page bg image-->
 
-    <!--begin::Authentication - Sign-up -->
-    <div class="d-flex flex-column flex-center flex-column-fluid">
-        <!--begin::Content-->
-        <div class="d-flex flex-column flex-center text-center p-10">
-            <!--begin::Wrapper-->
-            <div class="card card-flush w-lg-1000px py-5">
-                <!--begin::Header-->
-                <div class="card-header pt-10 pb-5">
-                    <!--begin::Logo-->
-                    <div class="d-flex flex-center mb-10">
-                        <a href="/">
-                            <img alt="Logo" src="assets/media/logos/shopmind.png" class="h-40px h-lg-50px"/>
-                        </a>
-                    </div>
-                    <!--end::Logo-->
-
-                    <!--begin::Title-->
-                    <h1 class="fw-bolder text-gray-900 mb-5">
-                        <i class="ki-duotone ki-shield-tick fs-2x text-success me-3">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                        Política de Privacidad
-                    </h1>
-                    <!--end::Title-->
-
-                    <!--begin::Notice-->
-                    <div class="notice d-flex bg-light-success rounded border-success border border-dashed mb-10 p-6">
-                        <i class="ki-duotone ki-information fs-2tx text-success me-4">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                            <span class="path3"></span>
-                        </i>
-                        <div class="d-flex flex-stack flex-grow-1">
-                            <div class="fw-semibold">
-                                <div class="fs-6 text-gray-700">
-                                    <strong>Última actualización:</strong> 21 de junio de 2025<br>
-                                    <strong>Tu privacidad es importante para nosotros</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Notice-->
+  <!--begin::Authentication - Privacy Policy-->
+  <div class="d-flex flex-column flex-center flex-column-fluid">
+    <div class="d-flex flex-column flex-center text-center p-10">
+      <div class="card card-flush w-lg-1000px py-5">
+        <!--begin::Header-->
+        <div class="card-header pt-10 pb-5">
+          <div class="d-flex flex-center mb-10">
+            <a href="/">
+              <img alt="Logo" src="assets/media/logos/shopmind.png" class="h-40px h-lg-50px"/>
+            </a>
+          </div>
+          <h1 class="fw-bolder text-gray-900 mb-5">
+            <i class="ki-duotone ki-shield-tick fs-2x text-success me-3">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+            Política de Privacidad
+          </h1>
+          <div class="notice d-flex bg-light-success rounded border-success border border-dashed mb-10 p-6">
+            <i class="ki-duotone ki-information fs-2tx text-success me-4">
+              <span class="path1"></span>
+              <span class="path2"></span>
+              <span class="path3"></span>
+            </i>
+            <div class="d-flex flex-stack flex-grow-1">
+              <div class="fw-semibold">
+                <div class="fs-6 text-gray-700">
+                  <strong>Última actualización:</strong> 26 de junio de 2025<br>
+                  <strong>Versión:</strong> 2.0 – Tu privacidad, nuestra prioridad.
                 </div>
-                <!--end::Header-->
-
-                <!--begin::Body-->
-                <div class="card-body pt-0">
-                    <!--begin::Content-->
-                    <div class="text-start">
-
-                        <!--begin::Section-->
-                        <div class="mb-10">
-                            <h3 class="fw-bold text-gray-900 mb-5">
-                                <i class="ki-duotone ki-profile-circle fs-2 text-primary me-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                </i>
-                                1. Información que Recopilamos
-                            </h3>
-
-                            <div class="row g-5">
-                                <div class="col-lg-6">
-                                    <div class="card border border-primary h-100">
-                                        <div class="card-header bg-light-primary">
-                                            <h4 class="card-title text-primary mb-0">
-                                                <i class="ki-duotone ki-user fs-2 me-2">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                                Información de Registro
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="mb-2">
-                                                    <i class="ki-duotone ki-check-circle fs-5 text-success me-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                    Nombre de empresa y datos comerciales
-                                                </li>
-                                                <li class="mb-2">
-                                                    <i class="ki-duotone ki-check-circle fs-5 text-success me-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                    Correo electrónico y teléfono
-                                                </li>
-                                                <li class="mb-2">
-                                                    <i class="ki-duotone ki-check-circle fs-5 text-success me-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                    Información de facturación
-                                                </li>
-                                                <li class="mb-0">
-                                                    <i class="ki-duotone ki-check-circle fs-5 text-success me-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                    Datos de tarjeta (procesados por terceros)
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="card border border-info h-100">
-                                        <div class="card-header bg-light-info">
-                                            <h4 class="card-title text-info mb-0">
-                                                <i class="ki-duotone ki-chart-line fs-2 me-2">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                                Información de Uso
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="mb-2">
-                                                    <i class="ki-duotone ki-check-circle fs-5 text-success me-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                    Datos de navegación en la plataforma
-                                                </li>
-                                                <li class="mb-2">
-                                                    <i class="ki-duotone ki-check-circle fs-5 text-success me-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                    Estadísticas de uso de funciones
-                                                </li>
-                                                <li class="mb-0">
-                                                    <i class="ki-duotone ki-check-circle fs-5 text-success me-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                    Logs de sistema para soporte técnico
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Section-->
-
-                        <!--begin::Section-->
-                        <div class="mb-10">
-                            <h3 class="fw-bold text-gray-900 mb-5">
-                                <i class="ki-duotone ki-gear fs-2 text-warning me-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                2. Cómo Usamos su Información
-                            </h3>
-
-                            <div class="bg-light-warning p-6 rounded">
-                                <div class="row g-5">
-                                    <div class="col-md-6">
-                                        <div class="d-flex align-items-start mb-4">
-                                            <div class="symbol symbol-40px me-4">
-                                                <div class="symbol-label bg-warning">
-                                                    <i class="ki-duotone ki-toolbox fs-2 text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="fw-bold text-gray-900">Prestar el servicio contratado</div>
-                                                <div class="text-gray-700">Mantener y operar tu tienda online</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="d-flex align-items-start mb-4">
-                                            <div class="symbol symbol-40px me-4">
-                                                <div class="symbol-label bg-warning">
-                                                    <i class="ki-duotone ki-bill fs-2 text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                        <span class="path4"></span>
-                                                        <span class="path5"></span>
-                                                        <span class="path6"></span>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="fw-bold text-gray-900">Facturación y cobros</div>
-                                                <div class="text-gray-700">Procesar pagos de suscripciones</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="d-flex align-items-start mb-4">
-                                            <div class="symbol symbol-40px me-4">
-                                                <div class="symbol-label bg-warning">
-                                                    <i class="ki-duotone ki-questionnaire-tablet fs-2 text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="fw-bold text-gray-900">Soporte técnico</div>
-                                                <div class="text-gray-700">Resolver problemas y dudas</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="d-flex align-items-start mb-4">
-                                            <div class="symbol symbol-40px me-4">
-                                                <div class="symbol-label bg-warning">
-                                                    <i class="ki-duotone ki-rocket fs-2 text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="fw-bold text-gray-900">Mejoras del producto</div>
-                                                <div class="text-gray-700">Desarrollar nuevas funcionalidades</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Section-->
-
-                        <!--begin::Section-->
-                        <div class="mb-10">
-                            <h3 class="fw-bold text-gray-900 mb-5">
-                                <i class="ki-duotone ki-share fs-2 text-danger me-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                3. Compartir Información
-                            </h3>
-
-                            <div class="alert alert-dismissible bg-light-danger border border-danger border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-5">
-                                <i class="ki-duotone ki-information-5 fs-2hx text-danger me-4 mb-5 mb-sm-0">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                </i>
-                                <div class="d-flex flex-column pe-0 pe-sm-10">
-                                    <h5 class="mb-1">Solo compartimos con terceros necesarios</h5>
-                                    <span>Mantenemos tu información privada y segura en todo momento.</span>
-                                </div>
-                            </div>
-
-                            <div class="row g-5">
-                                <div class="col-md-4">
-                                    <div class="card border border-dashed border-primary h-100">
-                                        <div class="card-body text-center">
-                                            <i class="ki-duotone ki-credit-cart fs-3x text-primary mb-5">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <h5 class="text-primary mb-3">Procesadores de Pago</h5>
-                                            <p class="text-gray-700 mb-0">Datos encriptados para transacciones seguras</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="card border border-dashed border-info h-100">
-                                        <div class="card-body text-center">
-                                            <i class="ki-duotone ki-cloud fs-3x text-info mb-5">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <h5 class="text-info mb-3">Servicios de Hosting</h5>
-                                            <p class="text-gray-700 mb-0">Servidores seguros en la nube</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="card border border-dashed border-warning h-100">
-                                        <div class="card-body text-center">
-                                            <i class="ki-duotone ki-abstract-39 fs-3x text-warning mb-5">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <h5 class="text-warning mb-3">Autoridades</h5>
-                                            <p class="text-gray-700 mb-0">Solo si es requerido por ley</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Section-->
-
-                        <!--begin::Section-->
-                        <div class="mb-10">
-                            <h3 class="fw-bold text-gray-900 mb-5">
-                                <i class="ki-duotone ki-verify fs-2 text-success me-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                4. Sus Derechos
-                            </h3>
-
-                            <div class="bg-light-success p-6 rounded">
-                                <div class="row g-5">
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="text-center">
-                                            <div class="symbol symbol-60px symbol-circle mb-4 mx-auto">
-                                                <div class="symbol-label bg-success">
-                                                    <i class="ki-duotone ki-eye fs-2x text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <h6 class="fw-bold text-gray-900">Acceso</h6>
-                                            <p class="text-gray-700 fs-7 mb-0">Ver tus datos personales</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="text-center">
-                                            <div class="symbol symbol-60px symbol-circle mb-4 mx-auto">
-                                                <div class="symbol-label bg-success">
-                                                    <i class="ki-duotone ki-pencil fs-2x text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <h6 class="fw-bold text-gray-900">Corrección</h6>
-                                            <p class="text-gray-700 fs-7 mb-0">Actualizar información incorrecta</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="text-center">
-                                            <div class="symbol symbol-60px symbol-circle mb-4 mx-auto">
-                                                <div class="symbol-label bg-success">
-                                                    <i class="ki-duotone ki-trash fs-2x text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                        <span class="path4"></span>
-                                                        <span class="path5"></span>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <h6 class="fw-bold text-gray-900">Eliminación</h6>
-                                            <p class="text-gray-700 fs-7 mb-0">Borrar datos (sujeto a obligaciones)</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="text-center">
-                                            <div class="symbol symbol-60px symbol-circle mb-4 mx-auto">
-                                                <div class="symbol-label bg-success">
-                                                    <i class="ki-duotone ki-delivery-2 fs-2x text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                        <span class="path4"></span>
-                                                        <span class="path5"></span>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <h6 class="fw-bold text-gray-900">Portabilidad</h6>
-                                            <p class="text-gray-700 fs-7 mb-0">Exportar tus datos</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Section-->
-
-                        <!--begin::Section-->
-                        <div class="mb-10">
-                            <h3 class="fw-bold text-gray-900 mb-5">
-                                <i class="ki-duotone ki-shield-cross fs-2 text-primary me-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                5. Seguridad
-                            </h3>
-
-                            <div class="row g-5">
-                                <div class="col-md-6">
-                                    <div class="card bg-light-primary border border-primary">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center mb-3">
-                                                <i class="ki-duotone ki-security-user fs-2x text-primary me-3">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                                <h5 class="text-primary mb-0">Protección Técnica</h5>
-                                            </div>
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="mb-2">🔒 Encriptación SSL/TLS</li>
-                                                <li class="mb-2">🏛️ Servidores certificados</li>
-                                                <li class="mb-0">👥 Acceso restringido</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card bg-light-success border border-success">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center mb-3">
-                                                <i class="ki-duotone ki-monitor fs-2x text-success me-3">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                                <h5 class="text-success mb-0">Monitoreo 24/7</h5>
-                                            </div>
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="mb-2">📊 Monitoreo continuo</li>
-                                                <li class="mb-2">🚨 Alertas automáticas</li>
-                                                <li class="mb-0">🔍 Auditorías regulares</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Section-->
-
-                        <!--begin::Contact Section-->
-                        <div class="bg-light-info p-8 rounded mb-10">
-                            <div class="text-center">
-                                <i class="ki-duotone ki-message-question fs-4x text-info mb-5">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                </i>
-                                <h4 class="fw-bold text-gray-900 mb-3">¿Tienes Preguntas sobre Privacidad?</h4>
-                                <p class="text-gray-700 mb-5">Estamos aquí para ayudarte con cualquier duda sobre cómo manejamos tu información.</p>
-
-                                <div class="d-flex flex-wrap justify-content-center gap-5">
-                                    <a href="mailto:junior.zf.99@gmail.com" class="btn btn-light-primary">
-                                        <i class="ki-duotone ki-sms fs-2">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>
-                                        Enviar Email
-                                    </a>
-
-                                    <a href="https://wa.me/59177886548" class="btn btn-light-success" target="_blank">
-                                        <i class="ki-duotone ki-message-text-2 fs-2">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                        WhatsApp
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Contact Section-->
-
-                    </div>
-                    <!--end::Content-->
-
-                    <!--begin::Actions-->
-                    <div class="d-flex flex-center flex-wrap px-5">
-                        <div class="me-5">
-                            <button type="button" class="btn btn-light-primary" onclick="window.print()">
-                                <i class="ki-duotone ki-printer fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                </i>
-                                Imprimir
-                            </button>
-                        </div>
-                        <div class="me-5">
-                            <a href="/terminos" class="btn btn-light-warning">
-                                <i class="ki-duotone ki-document fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                Ver Términos y Condiciones
-                            </a>
-                        </div>
-                        <div>
-                            <a href="/" class="btn btn-primary">
-                                <i class="ki-duotone ki-arrow-left fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                Volver al Inicio
-                            </a>
-                        </div>
-                    </div>
-                    <!--end::Actions-->
-                </div>
-                <!--end::Body-->
+              </div>
             </div>
-            <!--end::Wrapper-->
+          </div>
         </div>
-        <!--end::Content-->
+        <!--end::Header-->
+
+        <!--begin::Body-->
+        <div class="card-body pt-0">
+          <div class="text-start">
+            <!-- 1. Información que Recopilamos -->
+            <div class="mb-10">
+              <h3 class="fw-bold text-gray-900 mb-5">
+                <i class="ki-duotone ki-profile-circle fs-2 text-primary me-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+                1. Información que Recopilamos
+              </h3>
+              <p class="mb-3">En ShopMind SRL, la protección de tus datos personales es fundamental. Recopilamos únicamente la información necesaria para ofrecerte una experiencia segura y personalizada. Nuestro objetivo es garantizar la transparencia y el control sobre tus datos, en cumplimiento de la Ley N° 164 de Telecomunicaciones y Tecnologías de Información y Comunicación de Bolivia.</p>
+              <div class="row g-5">
+                <div class="col-lg-6">
+                  <div class="card border border-primary h-100">
+                    <div class="card-header bg-light-primary">
+                      <h4 class="card-title text-primary mb-0">
+                        <i class="ki-duotone ki-user fs-2 me-2"></i>
+                        Información de Registro
+                      </h4>
+                    </div>
+                    <div class="card-body">
+                      <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><i class="ki-duotone ki-check-circle fs-5 text-success me-2"></i>Nombre de empresa y datos comerciales</li>
+                        <li class="mb-2"><i class="ki-duotone ki-check-circle fs-5 text-success me-2"></i>Correo electrónico y teléfono</li>
+                        <li class="mb-2"><i class="ki-duotone ki-check-circle fs-5 text-success me-2"></i>Información de facturación y NIT</li>
+                        <li class="mb-0"><i class="ki-duotone ki-check-circle fs-5 text-success me-2"></i>Datos de tarjeta (procesados por terceros certificados para mayor seguridad y cumplimiento PCI DSS)</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="card border border-info h-100">
+                    <div class="card-header bg-light-info">
+                      <h4 class="card-title text-info mb-0">
+                        <i class="ki-duotone ki-chart-line fs-2 me-2"></i>
+                        Información de Uso
+                      </h4>
+                    </div>
+                    <div class="card-body">
+                      <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><i class="ki-duotone ki-check-circle fs-5 text-success me-2"></i>Datos de navegación y actividad en la plataforma</li>
+                        <li class="mb-2"><i class="ki-duotone ki-check-circle fs-5 text-success me-2"></i>Estadísticas de uso de funciones y módulos de IA</li>
+                        <li class="mb-2"><i class="ki-duotone ki-check-circle fs-5 text-success me-2"></i>Logs de sistema para soporte, auditoría y seguridad</li>
+                        <li class="mb-0"><i class="ki-duotone ki-check-circle fs-5 text-success me-2"></i>Dirección IP, dispositivo y navegador para mejorar la protección contra fraudes</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-4 text-muted fs-7">No solicitamos ni almacenamos información sensible como datos biométricos, creencias religiosas o políticas.</p>
+            </div>
+
+            <!-- 2. Cómo Usamos tu Información -->
+            <div class="mb-10">
+              <h3 class="fw-bold text-gray-900 mb-5">
+                <i class="ki-duotone ki-gear fs-2 text-warning me-2"></i>
+                2. Cómo Usamos tu Información
+              </h3>
+              <p class="mb-3">Utilizamos tus datos personales para garantizar la operatividad, funcionalidad y mejora continua de nuestros servicios. Nos comprometemos a no utilizar tu información para fines distintos a los detallados en esta política sin tu consentimiento explícito.</p>
+              <div class="bg-light-warning p-6 rounded">
+                <div class="row g-5">
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-start mb-4">
+                      <div class="symbol symbol-40px me-4">
+                        <div class="symbol-label bg-warning">
+                          <i class="ki-duotone ki-toolbox fs-2 text-white"></i>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <div class="fw-bold text-gray-900">Prestación del servicio</div>
+                        <div class="text-gray-700">Gestionar tu cuenta, autenticar usuarios y mantener la seguridad de tu tienda online. Enviar notificaciones relevantes sobre el servicio.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-start mb-4">
+                      <div class="symbol symbol-40px me-4">
+                        <div class="symbol-label bg-warning">
+                          <i class="ki-duotone ki-bill fs-2 text-white"></i>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <div class="fw-bold text-gray-900">Facturación y cobros</div>
+                        <div class="text-gray-700">Emitir comprobantes, procesar pagos y administrar suscripciones, empleando proveedores certificados y seguros.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-start mb-4">
+                      <div class="symbol symbol-40px me-4">
+                        <div class="symbol-label bg-warning">
+                          <i class="ki-duotone ki-questionnaire-tablet fs-2 text-white"></i>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <div class="fw-bold text-gray-900">Soporte y seguridad</div>
+                        <div class="text-gray-700">Resolver consultas, brindar soporte técnico, realizar auditorías y detectar actividades inusuales o fraudulentas.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-start mb-4">
+                      <div class="symbol symbol-40px me-4">
+                        <div class="symbol-label bg-warning">
+                          <i class="ki-duotone ki-rocket fs-2 text-white"></i>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <div class="fw-bold text-gray-900">Mejoras y desarrollo</div>
+                        <div class="text-gray-700">Analizar datos de uso para perfeccionar la plataforma, desarrollar nuevas funcionalidades y personalizar la experiencia del usuario.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-muted fs-7 mt-2">Nunca vendemos ni alquilamos tus datos personales a terceros.</div>
+              </div>
+            </div>
+
+            <!-- 3. Compartir Información -->
+            <div class="mb-10">
+              <h3 class="fw-bold text-gray-900 mb-5">
+                <i class="ki-duotone ki-share fs-2 text-danger me-2"></i>
+                3. Compartir Información
+              </h3>
+              <p class="mb-3">Mantenemos tu información privada y solo la compartimos con terceros esenciales que cumplen estándares internacionales de seguridad y privacidad, como:</p>
+              <div class="alert alert-dismissible bg-light-danger border border-danger border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-5">
+                <i class="ki-duotone ki-information-5 fs-2hx text-danger me-4 mb-5 mb-sm-0"></i>
+                <div class="d-flex flex-column pe-0 pe-sm-10">
+                  <h5 class="mb-1">Solo compartimos con terceros esenciales</h5>
+                  <span>Tu información es confidencial y solo se comparte para fines estrictamente necesarios.</span>
+                </div>
+              </div>
+              <div class="row g-5">
+                <div class="col-md-4">
+                  <div class="card border border-dashed border-primary h-100">
+                    <div class="card-body text-center">
+                      <i class="ki-duotone ki-credit-cart fs-3x text-primary mb-5"></i>
+                      <h5 class="text-primary mb-3">Procesadores de Pago</h5>
+                      <p class="text-gray-700 mb-0">Transacciones seguras y cifrado de datos. Nunca almacenamos tu número de tarjeta en nuestros servidores.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card border border-dashed border-info h-100">
+                    <div class="card-body text-center">
+                      <i class="ki-duotone ki-cloud fs-3x text-info mb-5"></i>
+                      <h5 class="text-info mb-3">Servicios de Hosting</h5>
+                      <p class="text-gray-700 mb-0">Infraestructura en la nube segura, con políticas de backup y recuperación ante desastres.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card border border-dashed border-warning h-100">
+                    <div class="card-body text-center">
+                      <i class="ki-duotone ki-abstract-39 fs-3x text-warning mb-5"></i>
+                      <h5 class="text-warning mb-3">Autoridades</h5>
+                      <p class="text-gray-700 mb-0">En cumplimiento de obligaciones legales, requerimientos de autoridades competentes o mandatos judiciales.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-4 text-muted fs-7">No cedemos datos para marketing de terceros. Todos los proveedores son cuidadosamente seleccionados y auditados.</p>
+            </div>
+
+            <!-- 4. Derechos del Usuario -->
+            <div class="mb-10">
+              <h3 class="fw-bold text-gray-900 mb-5">
+                <i class="ki-duotone ki-verify fs-2 text-success me-2"></i>
+                4. Derechos de los Usuarios
+              </h3>
+              <p class="mb-3">Como titular de tus datos, tienes derechos fundamentales reconocidos por la normativa boliviana y los estándares internacionales:</p>
+              <div class="bg-light-success p-6 rounded">
+                <div class="row g-5">
+                  <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                      <div class="symbol symbol-60px symbol-circle mb-4 mx-auto">
+                        <div class="symbol-label bg-success">
+                          <i class="ki-duotone ki-eye fs-2x text-white"></i>
+                        </div>
+                      </div>
+                      <h6 class="fw-bold text-gray-900">Acceso</h6>
+                      <p class="text-gray-700 fs-7 mb-0">Solicitar copia de tus datos personales registrados en nuestra plataforma.</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                      <div class="symbol symbol-60px symbol-circle mb-4 mx-auto">
+                        <div class="symbol-label bg-success">
+                          <i class="ki-duotone ki-pencil fs-2x text-white"></i>
+                        </div>
+                      </div>
+                      <h6 class="fw-bold text-gray-900">Rectificación</h6>
+                      <p class="text-gray-700 fs-7 mb-0">Actualizar información incorrecta, incompleta o desactualizada.</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                      <div class="symbol symbol-60px symbol-circle mb-4 mx-auto">
+                        <div class="symbol-label bg-success">
+                          <i class="ki-duotone ki-trash fs-2x text-white"></i>
+                        </div>
+                      </div>
+                      <h6 class="fw-bold text-gray-900">Eliminación</h6>
+                      <p class="text-gray-700 fs-7 mb-0">Solicitar borrado de tus datos, salvo obligaciones legales o fiscales de conservación.</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                      <div class="symbol symbol-60px symbol-circle mb-4 mx-auto">
+                        <div class="symbol-label bg-success">
+                          <i class="ki-duotone ki-delivery-2 fs-2x text-white"></i>
+                        </div>
+                      </div>
+                      <h6 class="fw-bold text-gray-900">Portabilidad</h6>
+                      <p class="text-gray-700 fs-7 mb-0">Solicitar exportación de tus datos en formato digital estructurado.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-muted fs-7 mt-3">
+                  Para ejercer estos derechos, contáctanos por email o WhatsApp. Responderemos en un plazo máximo de 24 horas hábiles.
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Seguridad de la Información -->
+            <div class="mb-10">
+              <h3 class="fw-bold text-gray-900 mb-5">
+                <i class="ki-duotone ki-shield-cross fs-2 text-primary me-2"></i>
+                5. Seguridad de la Información
+              </h3>
+              <p class="mb-3">Nos comprometemos a adoptar las medidas técnicas, organizativas y legales necesarias para proteger tus datos frente a accesos no autorizados, pérdidas o alteraciones.</p>
+              <div class="row g-5">
+                <div class="col-md-6">
+                  <div class="card bg-light-primary border border-primary">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-3">
+                        <i class="ki-duotone ki-security-user fs-2x text-primary me-3"></i>
+                        <h5 class="text-primary mb-0">Protección Técnica</h5>
+                      </div>
+                      <ul class="list-unstyled mb-0">
+                        <li class="mb-2">🔒 Encriptación SSL/TLS en todas las conexiones.</li>
+                        <li class="mb-2">🏛️ Servidores certificados y monitoreados 24/7.</li>
+                        <li class="mb-2">🔑 Políticas de contraseñas robustas y autenticación de doble factor (opcional).</li>
+                        <li class="mb-0">👥 Acceso restringido a personal autorizado.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card bg-light-success border border-success">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-3">
+                        <i class="ki-duotone ki-monitor fs-2x text-success me-3"></i>
+                        <h5 class="text-success mb-0">Monitoreo y Prevención</h5>
+                      </div>
+                      <ul class="list-unstyled mb-0">
+                        <li class="mb-2">📊 Monitoreo continuo y alertas automáticas ante incidentes.</li>
+                        <li class="mb-2">🔍 Auditorías y pruebas de seguridad periódicas.</li>
+                        <li class="mb-0">⚠️ Procedimientos de respuesta ante incidentes y recuperación de datos.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-4 text-muted fs-7">Si detectamos una vulneración de seguridad que afecte tus datos, te notificaremos de inmediato y tomaremos acciones correctivas.</p>
+            </div>
+
+            <!-- 6. Almacenamiento y Transferencia Internacional -->
+            <div class="mb-10">
+              <h3 class="fw-bold text-gray-900 mb-5">
+                <i class="ki-duotone ki-cloud fs-2 text-info me-2"></i>
+                6. Almacenamiento y Transferencia Internacional
+              </h3>
+              <p>La información que recopilamos puede ser almacenada y procesada en servidores distribuidos dentro y fuera de Bolivia, siempre bajo estándares internacionales de protección de datos y contratos que garantizan la confidencialidad. Nos aseguramos de que todos los proveedores cumplan con normativas equivalentes a la boliviana en materia de privacidad.</p>
+            </div>
+
+            <!-- 7. Cambios en la Política -->
+            <div class="mb-10">
+              <h3 class="fw-bold text-gray-900 mb-5">
+                <i class="ki-duotone ki-edit fs-2 text-warning me-2"></i>
+                7. Cambios en la Política
+              </h3>
+              <div class="bg-light-warning p-6 rounded">
+                <ul>
+                  <li>ShopMind SRL puede modificar esta política en cualquier momento. Los cambios serán notificados en la plataforma y a través de los canales oficiales.</li>
+                  <li>El uso continuado del servicio implica la aceptación de la versión vigente.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 8. Contacto y Consultas -->
+            <div class="bg-light-info p-8 rounded mb-10">
+              <div class="text-center">
+                <i class="ki-duotone ki-message-question fs-4x text-info mb-5"></i>
+                <h4 class="fw-bold text-gray-900 mb-3">¿Tienes Preguntas sobre Privacidad?</h4>
+                <p class="text-gray-700 mb-5">Contáctanos para cualquier consulta, solicitud o ejercicio de tus derechos. Estamos aquí para apoyarte y brindarte la mayor transparencia posible sobre el manejo de tu información.</p>
+                <div class="d-flex flex-wrap justify-content-center gap-5">
+                  <a href="mailto:junior.zf.99@gmail.com" class="btn btn-light-primary">
+                    <i class="ki-duotone ki-sms fs-2"></i>
+                    Enviar Email
+                  </a>
+                  <a href="https://wa.me/59177886548" class="btn btn-light-success" target="_blank">
+                    <i class="ki-duotone ki-message-text-2 fs-2"></i>
+                    WhatsApp
+                  </a>
+                </div>
+                <div class="text-muted fs-7 mt-4">
+                  ShopMind SRL — La Paz, Bolivia. Todos los derechos reservados. Esta política se rige por la normativa boliviana y los estándares internacionales relevantes.
+                </div>
+              </div>
+            </div>
+            <!--end::Contact Section-->
+          </div>
+          <!--end::Content-->
+
+          <!--begin::Actions-->
+          <div class="d-flex flex-center flex-wrap px-5">
+            <div class="me-5">
+              <button type="button" class="btn btn-light-primary" onclick="window.print()">
+                <i class="ki-duotone ki-printer fs-2"></i>
+                Imprimir
+              </button>
+            </div>
+            <div class="me-5">
+              <a href="/terminos" class="btn btn-light-warning">
+                <i class="ki-duotone ki-document fs-2"></i>
+                Ver Términos y Condiciones
+              </a>
+            </div>
+            <div>
+              <a href="/" class="btn btn-primary">
+                <i class="ki-duotone ki-arrow-left fs-2"></i>
+                Volver al Inicio
+              </a>
+            </div>
+          </div>
+          <!--end::Actions-->
+        </div>
+        <!--end::Body-->
+      </div>
+      <!--end::Wrapper-->
     </div>
-    <!--end::Authentication - Sign-up -->
+    <!--end::Content-->
+  </div>
+  <!--end::Authentication - Privacy Policy-->
 </div>

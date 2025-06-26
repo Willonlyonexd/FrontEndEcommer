@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { StorageService } from '../../services/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
   private apiUrl = 'https://oyster-app-jxtab.ondigitalocean.app'; // URL de la API FastAPI
-  public tenantId = '6852dbf5c4a6f8d1a81074f6'; // ID del tenant por defecto
+  public tenantId = this._storage.getItem('tenant') || '' // ID del tenant por defecto
 
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient,
+    private _storage: StorageService
+  ) {
     console.log('API URL configurada:', this.apiUrl);
   }
 
@@ -96,7 +100,7 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // 2. Stock por categoría
   getStockPorCategoria(tenant: string = this.tenantId): Observable<any[]> {
     console.log(`Solicitando stock por categoría para tenant: ${tenant}`);
@@ -107,7 +111,7 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // 3. Productos sin stock
   getProductosSinStock(tenant: string = this.tenantId): Observable<any[]> {
     console.log(`Solicitando productos sin stock para tenant: ${tenant}`);
@@ -118,7 +122,7 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // 4. Productos recién agregados
   getProductosRecienAgregados(limit: number = 10, tenant: string = this.tenantId): Observable<any[]> {
     console.log(`Solicitando productos recién agregados para tenant: ${tenant}`);
@@ -131,7 +135,7 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // 5. Productos con sobrestock
   getProductosConSobrestock(umbral: number = 450, tenant: string = this.tenantId): Observable<any[]> {
     console.log(`Solicitando productos con sobrestock (umbral: ${umbral}) para tenant: ${tenant}`);
@@ -144,11 +148,11 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // ----- MÉTODOS PARA CLIENTES -----
-  
+
   // ----- MÉTODOS PARA CLIENTES -----
-  
+
   // 1. Clientes nuevos por mes
   getClientesNuevosPorMes(tenant: string = this.tenantId): Observable<any[]> {
     console.log(`Solicitando clientes nuevos por mes para tenant: ${tenant}`);
@@ -159,7 +163,7 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // 2. Top clientes por compras
   getTopClientes(tenant: string = this.tenantId, limit: number = 10): Observable<any[]> {
     console.log(`Solicitando top ${limit} clientes para tenant: ${tenant}`);
@@ -172,7 +176,7 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // 3. Clientes activos e inactivos por mes
   getClientesActivosInactivosPorMes(tenant: string = this.tenantId, meses: number = 12): Observable<any[]> {
     console.log(`Solicitando clientes activos e inactivos por mes para tenant: ${tenant}, últimos ${meses} meses`);
@@ -185,7 +189,7 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // 4. Frecuencia de compra por cliente
   getFrecuenciaCompraClientes(tenant: string = this.tenantId, limit: number = 200): Observable<any[]> {
     console.log(`Solicitando frecuencia de compra por cliente para tenant: ${tenant}, límite: ${limit}`);
@@ -198,7 +202,7 @@ export class DashboardService {
         catchError(this.handleError)
       );
   }
-  
+
   // 5. Clientes inactivos por tiempo
   getClientesInactivos(dias: number = 30, tenant: string = this.tenantId, limit: number = 30): Observable<any[]> {
     console.log(`Solicitando clientes inactivos por ${dias} días para tenant: ${tenant}, límite: ${limit}`);
@@ -213,5 +217,5 @@ export class DashboardService {
       );
   }
 
-  
+
 }

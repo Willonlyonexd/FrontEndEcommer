@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { EstadisticaService } from '../../../services/estadistica.service';
 import Chart from 'chart.js/auto';
+import { StorageService } from '../../../services/storage.service';
 
 interface ClienteConsolidado {
   cantidadcompra: number;
@@ -41,6 +42,11 @@ export class IndexSegmentacionComponent implements OnInit, AfterViewInit {
   totalItems: number = 0;
   Math = Math;
 
+  mostrarMensajeDeNoDatos: boolean = false;
+
+  tenant='6852dbf5c4a6f8d1a81074f6'
+  tenantId = this._storage.getItem('tenant') || ''; // ID del tenant por defecto
+
   // Colores para los segmentos (consistentes con los de la tabla)
   coloresSegmentos: {[key: string]: string} = {
     'VIP': '#1e88e5',
@@ -51,13 +57,21 @@ export class IndexSegmentacionComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private _estadisticaService: EstadisticaService
+    private _estadisticaService: EstadisticaService,
+    private _storage: StorageService
   ){}
 
   ngOnInit(): void {
-    this.getSegmentacionResumen();
-    this.getClientesNormalizado();
-    this.getConsolidado();
+   if(this.tenantId== this.tenant){
+      this.getSegmentacionResumen();
+      this.getClientesNormalizado();
+      this.getConsolidado();
+    }else{
+      this.mostrarMensajeDeNoDatos = true;
+      console.warn('El tenant no es válido o no tiene datos disponibles.');
+    }
+
+
   }
 
   ngAfterViewInit(): void {

@@ -1,4 +1,14 @@
 <div class="container-tabla">
+  <div *ngIf="mostrarMensajeDeNoDatos" class="alert alert-warning text-center my-5">
+    <i class="ki-duotone ki-information-5 fs-2x text-warning mb-3"></i>
+    <h4>No hay datos disponibles para este tenant.</h4>
+    <p>
+      Actualmente no existen registros para mostrar en este panel.<br>
+      Si crees que esto es un error, por favor verifica tu acceso o contacta al administrador.
+    </p>
+  </div>
+
+  <ng-container *ngIf="!mostrarMensajeDeNoDatos">
   <h3 class="titulo-principal">Panel de Segmentación de Clientes</h3>
 
   <div class="panel-superior">
@@ -104,4 +114,5 @@
       </button>
     </div>
   </div>
+  </ng-container>
 </div>
